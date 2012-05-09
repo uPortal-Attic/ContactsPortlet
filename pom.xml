@@ -25,22 +25,10 @@
         <filter.location>src/main/filters</filter.location>
     </properties>
 
-<!--
-    <scm>
-        <connection>scm:svn:https://scm.manchester.ac.uk/svn/portal_portlets/MAN-PORTLET-CONTACTS-CW/trunk</connection>
-        <developerConnection>scm:svn:https://scm.manchester.ac.uk/svn/portal_portlets/MAN-PORTLET-CONTACTS-CW/trunk</developerConnection>
-        <url>https://scm.manchester.ac.uk/svn/portal_portlets/MAN-PORTLET-CONTACTS-CW/trunk</url>
-    </scm>
--->
+
 
     <repositories>
-        <!--
-        <repository>
-            <id>manchester-private</id>
-            <name>The University of Manchester</name>
-            <url>http://maven.itservices.manchester.ac.uk/private</url>
-        </repository>
-        -->
+ 
         <repository>
             <id>jasig-3rd-party</id>
             <name>Jasig 3rd Party Repository</name>
