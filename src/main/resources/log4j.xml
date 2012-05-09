@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	
+    <appender name="file-appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${log4j.appender.file}"/>
+        <param name="maxFileSize" value="${log4j.appender.maxFileSize}" />
+        <param name="maxBackupIndex" value="${log4j.appender.maxBackupIndex}" />
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="${log4j.appender.layout.pattern}"/>
+        </layout>
+    </appender>
+  
+  <!-- all Spring classes -->
+    <logger name="org.springframework">
+        <level value="${log4j.logger.org.springframework}"/>
+        <appender-ref ref="file-appender"/>
+    </logger>
+
+    <logger name="org.jasig.portlet">
+        <level value="${log4j.logger.org.jasig.portlet}" />
+        <appender-ref ref="file-appender" />
+    </logger>
+
+</log4j:configuration>
+

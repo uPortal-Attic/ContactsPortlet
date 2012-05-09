@@ -1,0 +1,78 @@
+/* Autocomplete
+----------------------------------
+.ui-autocomplete {}
+.ui-autocomplete-results { overflow: hidden; z-index: 99999; padding: 1px; position: absolute; }
+.ui-autocomplete-results ul { width: 100%; list-style-position: outside; list-style: none; padding: 0; margin: 0; }
+
+.ui-autocomplete-results li { margin: 0px; padding: 2px 5px; cursor: default; display: block; font: menu; font-size: 12px; line-height: 16px; overflow: hidden; border-collapse: collapse; }
+.ui-autocomplete-results li.ui-autocomplete-even { background-color: #fff; }
+.ui-autocomplete-results li.ui-autocomplete-odd { background-color: #eee; }
+
+.ui-autocomplete-results li.ui-autocomplete-state-default { background-color: #fff; border: 1px solid #fff; color: #212121; }
+.ui-autocomplete-results li.ui-autocomplete-state-active { color: #000; background:#E6E6E6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) repeat-x; border:1px solid #D3D3D3; }
+
+.ui-autocomplete-loading { background: white url('images/ui-anim.basic.16x16.gif') right center no-repeat; }
+.ui-autocomplete-over { background-color: #0A246A; color: white; }
+*/
+
+.org-jasig-portlet-contacts .ui-autocomplete {}
+.org-jasig-portlet-contacts .ui-autocomplete li.ui-menu-item {}
+.org-jasig-portlet-contacts .ui-autocomplete li.ui-menu-item a {}
+
+.org-jasig-portlet-contacts .ui-autocomplete { 
+    overflow: auto; 
+    z-index: 99999; 
+    padding: 1px; 
+    position: absolute; 
+    width: 200px !important;
+    max-height: 200px;
+    list-style-position: outside; 
+    list-style: none; 
+    /*padding: 0; */
+    margin: 0; 
+    padding-right: 20px;
+}
+
+.org-jasig-portlet-contacts .ui-autocomplete li.ui-menu-item { 
+    margin: 0px; 
+    padding: 2px 5px; 
+    cursor: default; 
+    display: block; 
+    font: menu; 
+    font-size: 12px; 
+    line-height: 16px; 
+    overflow: hidden; 
+    border-collapse: collapse; 
+    
+    background-color: #fff; 
+    border: 1px solid #fff; 
+    color: #212121;
+    
+    width: 100% !important;
+}
+
+.org-jasig-portlet-contacts .ui-autocomplete li.ui-menu-item:nth-child(odd) { 
+    background-color: #eee;
+}
+.org-jasig-portlet-contacts .ui-autocomplete li.ui-menu-item:nth-child(even) { 
+     background-color: #fff;
+}
+
+.org-jasig-portlet-contacts .ui-autocomplete li.ui-menu-item:hover { 
+    color: #000; 
+    background:#E6E6E6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) repeat-x; 
+    border:1px solid #D3D3D3;
+}
+
+.org-jasig-portlet-contacts .ui-autocomplete li.ui-menu-item a {}
+.org-jasig-portlet-contacts .ui-autocomplete li.ui-menu-item a {
+    font-size: 0.9em;
+    color: black !important;
+    width:100%;
+}
+.org-jasig-portlet-contacts .ui-autocomplete li.ui-menu-item a:hover {
+    border: none;
+}
+.org-jasig-portlet-contacts .ui-autocomplete li.ui-menu-item span { 
+    color: green; font-size: 0.7em; float: right;
+}

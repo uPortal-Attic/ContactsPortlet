@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- documented by aaronz@vt.edu -->
+<beans>
+    
+    <bean name="JSONView" class="org.springframework.web.servlet.view.json.JsonView">
+            <property name="jsonWriter"><ref bean="jsonWriter"/></property>
+    </bean>
+
+    <bean name="jsonWriter" class="org.springframework.web.servlet.view.json.writer.sojo.SojoJsonStringWriter">
+        <property name="convertAllMapValues" value="true"/>
+    </bean>
+
+</beans>

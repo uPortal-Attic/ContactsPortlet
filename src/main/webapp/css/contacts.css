@@ -1,0 +1,55 @@
+/* Contacts CSS */
+
+.org-jasig-portlet-contacts {}
+
+.org-jasig-portlet-contacts .results-area {
+    max-height:20em; 
+    overflow:auto;
+}
+.org-jasig-portlet-contacts .results-area ol {
+    margin: 0; 
+    padding: 0;
+}
+.org-jasig-portlet-contacts .results-area li {
+    list-style-type: none;
+    margin: 3px;
+    padding: 0.4em;
+    font-size: 0.9em;
+    overflow: auto;
+}
+
+.org-jasig-portlet-contacts .ui-widget {
+    font-size: 1.0em;
+}
+
+.org-jasig-portlet-contacts .contact-photo {
+    float: left;    
+    padding-right: 0.4em;
+}
+
+.org-jasig-portlet-contacts .contact-photo img {
+    border: 1px solid gray;    
+}
+
+.org-jasig-portlet-contacts .results-area img { margin: 0 auto 0 auto; text-align: center;}
+
+.org-jasig-portlet-contacts .pagebanner { font-size: 1em; }
+
+.org-jasig-portlet-contacts ul.defined-lists li {
+    list-style-type: none;
+    float: left;
+    width: 10em;
+}
+.org-jasig-portlet-contacts div.editcontrols {
+    clear:both; 
+    float:right;
+}
+
+.org-jasig-portlet-contacts div.contact-domain div.contact:hover {
+    background-color: lightblue;
+}
+
+.org-jasig-portlet-contacts .contact .controls {
+    display: block;
+    float: right;
+}
