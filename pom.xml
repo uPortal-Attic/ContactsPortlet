@@ -273,7 +273,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <warName>${pom.artifactId}</warName>
+                    <warName>${pom.artifactId}-${pom.version}</warName>
                     <webXml>${basedir}/target/jspweb.xml</webXml>
                     <webResources>
                         <resource>
