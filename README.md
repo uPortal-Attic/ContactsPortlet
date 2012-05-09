@@ -1,0 +1,4 @@
+ContactsPortlet
+===============
+
+Contacts Portlet
