@@ -20,7 +20,7 @@
     
 
     <properties>
-        <spring.version>2.5.6</spring.version>
+        <spring.version>3.1.1.RELEASE</spring.version>
         <issues.projectKey></issues.projectKey>
         <filter.location>src/main/filters</filter.location>
     </properties>
@@ -47,7 +47,7 @@
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.1</version>
+            <version>1.1.1</version>
             <type>jar</type>
             <scope>compile</scope>
             <exclusions>
@@ -82,23 +82,27 @@
             <artifactId>spring-aop</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc-portlet</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
+<!--
         <dependency>
             <groupId>net.sf.spring-json</groupId>
             <artifactId>spring-json</artifactId>
             <version>1.3.1</version>
         </dependency>
-
+-->
         <dependency>
             <groupId>org.springframework.ldap</groupId>
-            <artifactId>spring-ldap</artifactId>
-            <version>1.2.1</version>
+            <artifactId>spring-ldap-core</artifactId>
+            <version>1.3.1.RELEASE</version>
         </dependency>
 
 
@@ -186,7 +190,7 @@
 
     <build>
         <filters>
-            <filter>${filter.location}/${pom.artifactId}-filter.properties</filter>
+            <filter>${filter.location}/${project.artifactId}-filter.properties</filter>
         </filters>
         <resources>
             <resource>
@@ -273,7 +277,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <warName>${pom.artifactId}-${pom.version}</warName>
+                    <warName>${project.artifactId}-${project.version}</warName>
                     <webXml>${basedir}/target/jspweb.xml</webXml>
                     <webResources>
                         <resource>
