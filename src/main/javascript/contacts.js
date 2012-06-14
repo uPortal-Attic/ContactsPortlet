@@ -19,7 +19,6 @@ PORTLET_JS_CONTROL = function(opts) {
     $(".accordion", opts.rootNode).accordion({ 
         change: function(event, ui) { 
             
-            //var link = ui.newContent.children("a").attr("href");
             var link = ui.newContent.attr("rel");
                     
             if(link != undefined) {
@@ -40,12 +39,13 @@ PORTLET_JS_CONTROL = function(opts) {
     $("#"+rootID+" div.contact-domain .searchBox").autocomplete( {
         appendTo: "#"+rootID,
         source: function(request, response) {
+            var URL = opts.autoCompleteURL;
+            URL  = URL.replace(escape("||TERM||"), escape(request.term));
+            URL = URL.replace(escape("||FILTER||"), escape($("input[name=filter]:radio:checked").val()));
+            
             $.getJSON( 
-                baseUrl + "autocomplete", 
-                {
-                    term: request.term,
-                    filter: $("input[name=filter]:radio:checked").val()
-                }, 
+                URL,
+                {}, 
                 function(data) {
                     var regex = new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + request.term.replace(/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi, "\\$1") + ")(?![^<>]*>)(?![^&;]+;)", "gi");
                     $.each(data.data, function(index,obj) {

@@ -222,5 +222,21 @@ public class ContactPojo implements Contact {
     public void setImageURI(String uri) {
         this.imageURI = uri;
     }
+
+    @Override
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    @Override
+    public void setEmailAddresses(List<EmailAddress> addresses) {
+        this.emailAddresses = addresses;
+    }
+
+    @Override
+    public void setPhoneNumbers(List<PhoneNumber> numbers) {
+        this.phoneNumbers = numbers;
+                
+    }
     
 }

@@ -104,12 +104,7 @@ logger.debug("FILTERS");
         SearchControls searchControls = getSearchControls();   
         logger.debug("Searching LDAP with search: "+search);
         //List<Contact> contactList = ldapTemplate.search(DistinguishedName.EMPTY_PATH, search, searchControls, attributesMapper);
-        List<Attributes> contactList = ldapTemplate.search(DistinguishedName.EMPTY_PATH, search, searchControls, new AttributesMapper() {
-
-            public Object mapFromAttributes(Attributes attributes) throws NamingException {
-                return attributes;
-            }
-        });        
+        List<Attributes> contactList = ldapTemplate.search(DistinguishedName.EMPTY_PATH, search, searchControls, attributeMapper);        
         return contactList;
     }      
 
@@ -140,5 +135,11 @@ logger.debug("FILTERS");
     public void setContactMapper(ContactMapper mapper) {
         this.mapper = mapper;
     }
+    
+    private AttributesMapper attributeMapper;
+    public void setAttributesMapper(AttributesMapper mapper) {
+        attributeMapper = mapper;
+    }
+    
     
 }

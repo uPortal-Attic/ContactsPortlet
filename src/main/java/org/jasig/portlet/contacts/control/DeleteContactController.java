@@ -2,20 +2,20 @@ package org.jasig.portlet.contacts.control;
 
 import java.io.IOException;
 import java.util.Set;
-import java.util.StringTokenizer;
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jasig.portlet.contacts.domains.ContactDomain;
+import org.jasig.portlet.contacts.model.Contact;
+import org.jasig.portlet.contacts.model.ContactSet;
 import org.jasig.web.service.AjaxPortletSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.jasig.portlet.contacts.model.Contact;
-import org.jasig.portlet.contacts.model.ContactSet;
-import org.jasig.portlet.contacts.domains.ContactDomain;
+import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
 /**
  *
@@ -28,10 +28,10 @@ public class DeleteContactController {
     
     private static Log log = LogFactory.getLog(DeleteContactController.class);
     
-    @RequestMapping(params="delete=true")
-    public void persist(
-            ActionRequest request,
-            ActionResponse response,
+    @ResourceMapping("delete")
+    public String persist(
+            ResourceRequest request,
+            ResourceResponse response,
             @RequestParam("domain") String domain,
             @RequestParam("source") String source,
             @RequestParam("contact") String contact,
@@ -82,11 +82,10 @@ public class DeleteContactController {
         model.addAttribute("STATUS", "OK");
         log.debug("DELETE :: "+removed);
         model.addAttribute("deleted", removed);
-        model.addAttribute("view", "JSONView");
         
         log.debug("PERSIST --  END");
         
-        ajaxPortletSupportService.redirectAjaxResponse("ajax/showView", model.asMap(), request, response);
+        return "JSONView";
         
     }
     

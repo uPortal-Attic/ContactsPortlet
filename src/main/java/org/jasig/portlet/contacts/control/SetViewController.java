@@ -5,9 +5,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletSession;
+import javax.portlet.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jasig.web.service.AjaxPortletSupport;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.jasig.portlet.contacts.model.Contact;
 import org.jasig.portlet.contacts.model.ContactSet;
 import org.jasig.portlet.contacts.domains.ContactDomain;
+import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
 /**
  *
@@ -40,7 +39,7 @@ public class SetViewController {
     public String setView() {
         return "setView";
     }
-
+    
     @ModelAttribute("nspace")
     public String setNspace(
             @RequestParam("nspace") String nspace) {
@@ -69,10 +68,10 @@ public class SetViewController {
         return action;
     }
 
-    @RequestMapping(params = "set")
-    public void showDomain(
-            ActionRequest request,
-            ActionResponse response,
+    @ResourceMapping("showDomain")
+    public String showDomain(
+            ResourceRequest request,
+            ResourceResponse response,
             @RequestParam("set") String setId,
             @ModelAttribute("domain") ContactDomain domainObj,
             Model model,
@@ -87,9 +86,10 @@ public class SetViewController {
         }
         log.debug(contacts.size() + " CONTACTS found for " + contacts.getTitle());
         log.debug("Contacts set for domain :: " + domainObj.getName());
+        
+        model.addAttribute("source", setId);
 
-
-
+/*
         if (domainObj.getHasPersist()) {
             Map<String, String> persistURLs = new HashMap<String, String>();
             String action = (String) session.getAttribute("PERSISTACTIONURL");
@@ -106,16 +106,16 @@ public class SetViewController {
             }
             model.addAttribute("deleteURL", deleteURLs);
         }
+*/
 
-
-        ajaxPortletSupportService.redirectAjaxResponse("ajax/showView", model.asMap(), request, response);
+        return model.asMap().get("view").toString();
 
     }
 
-    @RequestMapping(params = "term")
-    public void searchDomain(
-            ActionRequest request,
-            ActionResponse response,
+    @ResourceMapping("searchDomain")
+    public String searchDomain(
+            ResourceRequest request,
+            ResourceResponse response,
             PortletSession session,
             @RequestParam("term") String term,
             @RequestParam("filter") String filter,
@@ -129,8 +129,10 @@ public class SetViewController {
 
             model.addAttribute("domain", domainObj);
 
+            model.addAttribute("source", "search");
+            
             contacts.addAll(domainObj.search(term, filter));
-
+/*
             if (domainObj.getHasPersist()) {
                 Map<String, String> persistURLs = new HashMap<String, String>();
                 String action = (String) session.getAttribute("PERSISTACTIONURL");
@@ -147,14 +149,15 @@ public class SetViewController {
                 }
                 model.addAttribute("deleteURL", deleteURLs);
             }
-
+*/
+            
             log.debug(contacts.size() + " CONTACTS found for " + contacts.getTitle());
             log.debug("Contacts set for domain :: " + domainObj.getName());
         }
 
         model.addAttribute("contactList", contacts);
 
-        ajaxPortletSupportService.redirectAjaxResponse("ajax/showView", model.asMap(), request, response);
+        return model.asMap().get("view").toString();
 
     }
     private Set<ContactDomain> contactDomains;

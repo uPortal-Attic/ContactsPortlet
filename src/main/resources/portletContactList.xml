@@ -1,0 +1,56 @@
+<contacts serialization="custom">
+    <unserializable-parents/>
+    <sorted-set>
+        <default/>
+        <org.jasig.portlet.contacts.model.util.ContactComparator/>
+        <int>2</int>
+        <contact>
+            <id>1</id>
+            <title>Mr</title>
+            <firstname>Chris</firstname>
+            <surname>White</surname>
+            <initials>cjg</initials>
+            <organisation>University of Manchester</organisation>
+            <department>Application Support and Development</department>
+            <position>Project Lead</position>
+            <emailAddresses>
+                <emailAddress>
+                    <label>UoM</label>
+                    <type>Work</type>
+                    <address>christopher.white@manchester.ac.uk</address>
+                </emailAddress>
+            </emailAddresses>
+            <addresses/>
+            <phoneNumbers/>
+            <imageURI/>
+            <contactSource>Developera</contactSource>
+        </contact>
+        <contact>
+            <id>2</id>
+            <title>Mr</title>
+            <firstname>Anthony</firstname>
+            <surname>Colbourne</surname>
+            <initials>a</initials>
+            <organisation>University of Manchester</organisation>
+            <department>Application Support and Development</department>
+            <position>Project Lead</position>
+            <emailAddresses>
+                <emailAddress>
+                    <label>UoM</label>
+                    <type>Work</type>
+                    <address>anthony.colbourne@manchester.ac.uk</address>
+                </emailAddress>
+            </emailAddresses>
+            <addresses/>
+            <phoneNumbers/>
+            <imageURI/>
+            <contactSource>Developera</contactSource>
+        </contact>
+    </sorted-set>
+    <contacts>
+        <default>
+            <setId>Developera</setId>
+            <setTitle>Developers</setTitle>
+        </default>
+    </contacts>
+</contacts>

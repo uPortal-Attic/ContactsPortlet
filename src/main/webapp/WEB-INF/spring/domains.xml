@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
                 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
                 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
- >
+>
 
     <context:annotation-config/>
 
@@ -18,13 +18,20 @@
     <!--
         START OF DOMAIN DEFINITIONS
     -->
-
+<!--
     <bean id="LdapDomain" class="org.jasig.portlet.contacts.domains.impl.GenericContactDomain">
         <property name="searchAdapter" ref="LdapSearch"/>
         <property name="name" value="Online Directory"/>
     </bean>
-
-
+-->
+    <bean id="ContactsPortletDomain" class="org.jasig.portlet.contacts.domains.impl.GenericContactDomain">
+        <property name="pushAdapter" ref="ContactsContactsPush"/>
+        <property name="name" value="Portlet Contacts"/>
+    </bean>
+    <bean id="ContactsPortletSearchDomain" class="org.jasig.portlet.contacts.domains.impl.GenericContactDomain">
+        <property name="searchAdapter" ref="ContactsContactsSearch"/>
+        <property name="name" value="Search Portlet Contacts"/>
+    </bean>
     <!--
        END OF DOMAIN DEFINITIONS
     -->
@@ -37,7 +44,7 @@
     <!--
         START OF ADAPTER DEFINITIONS
     -->
-    
+<!--
     <bean id="LdapContactMapper" class="org.jasig.portlet.contacts.adapters.impl.ldap.ConfigurableContactAttributesMapper">
         <constructor-arg>
             <map>
@@ -80,16 +87,17 @@
                 </entry>
             </map>
         </constructor-arg>
+        <constructor-arg ref="modelFactory"/>
     </bean>
 
     <bean id="searchLdapTemplate" class="org.springframework.ldap.core.LdapTemplate">
-            <property name="contextSource" ref="searchDirLdapContext"/>
+        <property name="contextSource" ref="searchDirLdapContext"/>
     </bean>
 
     <bean id="searchDirLdapContext" class="org.springframework.ldap.core.support.LdapContextSource">
-            <property name="url" value="${search.ldap.url}"/>
-            <property name="base" value="${search.ldap.base}"/>
-            <property name="pooled" value="false"/>
+        <property name="url" value="${search.ldap.url}"/>
+        <property name="base" value="${search.ldap.base}"/>
+        <property name="pooled" value="false"/>
     </bean>
 
     <bean id="LdapSearch" class="org.jasig.portlet.contacts.adapters.impl.ldap.LdapSearchAdapter">
@@ -114,12 +122,39 @@
         </property>  
         <property name="timeLimit" value="5000"/>
         <property name="context" ref="context"/>
-        <property name="contactMapper" ref="UoMLdapContactMapper"/>
+        <property name="attributesMapper" ref="LdapContactMapper"/>
+    </bean>
+-->
+    <bean id="ContactsContactsSearch" class="org.jasig.portlet.contacts.adapters.impl.PushSearchAdapter">
+        <property name="pushAdapter" ref="ContactsContactsPush"/>
+        <property name="context" ref="context"/>
+    </bean>
+    <bean id="ContactsContactsPush" class="org.jasig.portlet.contacts.adapters.impl.xml.XMLContactAdapter">
+        <property name="dataURIs">
+            <list>
+                <value>portletContactList.xml</value>
+            </list>
+        </property>
+        <property name="unmarshaller" ref="contactMarshaller"/>
     </bean>
     
-
+    <bean id="contactMarshaller"
+          class="org.springframework.oxm.xstream.XStreamMarshaller">
+        <property name="aliases">
+            <props>
+                <prop key="contacts">org.jasig.portlet.contacts.model.ContactSet</prop>
+                <prop key="contact">org.jasig.portlet.contacts.model.impl.ContactPojo</prop>
+                <prop key="address">org.jasig.portlet.contacts.model.impl.AddressPojo</prop>
+                <prop key="emailAddress">org.jasig.portlet.contacts.model.impl.EmailAddressPojo</prop>
+                <prop key="phoneNumber">org.jasig.portlet.contacts.model.impl.PhoneNumberPojo</prop>
+            </props>
+        </property>
+    </bean>
     <!--
         END OF ADAPTER DEFINITIONS
     -->
+
+
+    
 
 </beans>

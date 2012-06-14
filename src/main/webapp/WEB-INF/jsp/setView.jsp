@@ -36,18 +36,22 @@
 
                     <div class="controls">    
                         <c:if test="${domain.hasPersist}">
-                            <c:forEach items="${persistURL}" var="entry">
-                                <c:if test="${ entry.key == contact.URN }">
-                                    <a href="${entry.value}" class="persist" title="<spring:message code="contact.save.title"/>"><img src="${addImg}"/></a>
-                                </c:if>
-                            </c:forEach>                            
+                            <portlet:resourceURL var="persistURL" id="persist">
+                                <portlet:param name="domain" value="${domain.id}"/>
+                                <portlet:param name="contact" value="${contact.urn}"/>
+                                <portlet:param name="source" value="${source}"/>
+                                <portlet:param name="persist" value="true"/>
+                            </portlet:resourceURL>
+                            <a href="${entry.value}" class="persist" title="<spring:message code="contact.save.title"/>"><img src="${addImg}"/></a>                  
                         </c:if>
                         <c:if test="${domain.hasRemove}">
-                            <c:forEach items="${deleteURL}" var="entry">
-                                <c:if test="${ entry.key == contact.URN }">
-                                <a href="${entry.value}" class="delete" title="<spring:message code="contact.delete.title"/>"><img src="${delImg}"/></a>
-                                </c:if>
-                            </c:forEach>                            
+                            <portlet:resourceURL var="persistURL" id="delete">
+                                <portlet:param name="domain" value="${domain.id}"/>
+                                <portlet:param name="contact" value="${contact.urn}"/>
+                                <portlet:param name="source" value="${source}"/>
+                                <portlet:param name="delete" value="true"/>
+                            </portlet:resourceURL>
+                            <a href="${entry.value}" class="delete" title="<spring:message code="contact.delete.title"/>"><img src="${delImg}"/></a>
                         </c:if>
                     </div>
                 </div>

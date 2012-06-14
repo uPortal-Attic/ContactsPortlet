@@ -96,6 +96,13 @@ public interface Contact extends Serializable {
      */
     public String getImageURI();
 
+    
+    /**
+     * @param the addresses
+     */
+    public void setAddresses(List<Address> addresses);
+    
+    
     /**
      * @param contactSource the contactSource to set
      */
@@ -106,6 +113,12 @@ public interface Contact extends Serializable {
      */
     public void setDepartment(String department);
 
+    /**
+     * @param the emailAddresses list
+     */
+    public void setEmailAddresses(List<EmailAddress> addresses);
+    
+    
     /**
      * @param firstname the firstname to set
      */
@@ -121,6 +134,12 @@ public interface Contact extends Serializable {
      */
     public void setOrganisation(String organisation);
 
+    
+    /**
+     * @param the phoneNumbers
+     */
+    public void setPhoneNumbers(List<PhoneNumber> numbers);
+    
     /**
      * @param position the position to set
      */

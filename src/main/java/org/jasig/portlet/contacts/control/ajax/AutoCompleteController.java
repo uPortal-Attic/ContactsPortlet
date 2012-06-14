@@ -1,9 +1,8 @@
 package org.jasig.portlet.contacts.control.ajax;
 
 import java.util.*;
-import java.util.regex.Pattern;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.MessageSource;
@@ -16,7 +15,7 @@ import org.jasig.portlet.contacts.model.ContactSet;
 import org.jasig.portlet.contacts.adapters.SearchAdapter;
 
 @Controller
-@RequestMapping("/autocomplete")
+@RequestMapping()
 public class AutoCompleteController {
 
     private static Log log = LogFactory.getLog(AutoCompleteController.class);
@@ -27,16 +26,14 @@ public class AutoCompleteController {
         this.searchAdapter = searchAdapter;
     }
 
-    @RequestMapping
+    @RequestMapping(params="action=autocomplete")
     public String showAutoComplete(
-            HttpServletRequest request, 
-            HttpServletResponse response, 
+            ResourceRequest request, 
+            ResourceResponse response, 
+            @RequestParam(value = "filter", required = false) String filter,
             Model model,
             @RequestParam("term") String query
     ) {
-        Boolean ok = (Boolean) request.getSession().getAttribute("SECURITY");
-
-        String filter = request.getParameter("filter");
 
         log.debug("filter is " + filter);
 

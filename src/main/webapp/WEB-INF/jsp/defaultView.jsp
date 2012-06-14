@@ -26,12 +26,19 @@
 
 <script type="text/javascript" src="${BASEURL}js/bootstrapper.js"></script>
 
+<portlet:resourceURL var="autocompleteURL" id="autoComplete">
+    <portlet:param name="action" value="autocomplete"/>
+    <portlet:param name="term" value="||TERM||"/>
+    <portlet:param name="filter" value="||FILTER||"/>
+</portlet:resourceURL>
+
 <script type="text/javascript">
      var ${NSPACE}CONTACTS = new PORTLET_JS_BOOTSTRAP(
             "contacts",
             {
                 baseUrl: "${BASEURL}",
                 nspace: "${NSPACE}",
+                autoCompleteURL: "${autoompleteURL}",
                 messages: {
                     "saved-success": '<spring:message code="js.contact.saved.success"/>',
                     "saved-failed": '<spring:message code="js.contact.saved.failed"/>',
@@ -62,12 +69,12 @@
 
                     <c:if test="${ domain.hasSearch }">
                         
-                        <portlet:actionURL var="searchURL">
+                        <portlet:resourceURL var="searchURL" id="searchDomain">
                             <portlet:param name="filter" value="||FILTER||"/>
                             <portlet:param name="term" value="||TERM||"/>
                             <portlet:param name="domain" value="${domain.id}"/>
                             <portlet:param name="nspace" value="${NSPACE}"/>
-                        </portlet:actionURL>
+                        </portlet:resourceURL>
                         
                         <form  action="${searchURL}" class="searchForm" method="post">
                             <p>
@@ -91,15 +98,15 @@
                             <c:forEach var="entry" items="${domain.contactGroups}">
 
 
-                                <portlet:actionURL var="setViewActionUrl">
+                                <portlet:resourceURL var="setViewResourceUrl" id="showDomain">
                                     <portlet:param name="set" value="${entry.value}"/>
                                     <portlet:param name="domain" value="${domain.id}"/>
                                     <portlet:param name="nspace" value="${NSPACE}"/>
-                                </portlet:actionURL>
+                                </portlet:resourceURL>
 
                                 <h3><a href="#">${entry.key}</a></h3>
-                                <div class="results-area" rel="${setViewActionUrl}">
-                                    <a href="${setViewActionUrl}"><spring:message code="view.details.link"/></a>
+                                <div class="results-area" rel="${setViewResourceUrl}">
+                                    <a href="${setViewResourceUrl}"><spring:message code="view.details.link"/></a>
                                 </div>
                             </c:forEach>
                         </div>
