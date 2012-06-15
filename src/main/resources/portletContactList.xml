@@ -25,27 +25,6 @@
             <imageURI/>
             <contactSource>Developera</contactSource>
         </contact>
-        <contact>
-            <id>2</id>
-            <title>Mr</title>
-            <firstname>Anthony</firstname>
-            <surname>Colbourne</surname>
-            <initials>a</initials>
-            <organisation>University of Manchester</organisation>
-            <department>Application Support and Development</department>
-            <position>Project Lead</position>
-            <emailAddresses>
-                <emailAddress>
-                    <label>UoM</label>
-                    <type>Work</type>
-                    <address>anthony.colbourne@manchester.ac.uk</address>
-                </emailAddress>
-            </emailAddresses>
-            <addresses/>
-            <phoneNumbers/>
-            <imageURI/>
-            <contactSource>Developera</contactSource>
-        </contact>
     </sorted-set>
     <contacts>
         <default>
