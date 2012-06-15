@@ -15,7 +15,6 @@
  */
 package org.jasig.portlet.contacts.adapters.impl.xml;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -24,7 +23,6 @@ import java.util.logging.Logger;
 import javax.xml.transform.stream.StreamSource;
 import org.jasig.portlet.contacts.adapters.PushAdapter;
 import org.jasig.portlet.contacts.adapters.impl.AbstractContactAdapter;
-import org.jasig.portlet.contacts.model.Contact;
 import org.jasig.portlet.contacts.model.ContactSet;
 import org.springframework.oxm.Unmarshaller;
 

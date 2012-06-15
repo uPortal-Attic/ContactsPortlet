@@ -27,7 +27,6 @@
 <script type="text/javascript" src="${BASEURL}js/bootstrapper.js"></script>
 
 <portlet:resourceURL var="autocompleteURL" id="autoComplete">
-    <portlet:param name="action" value="autocomplete"/>
     <portlet:param name="term" value="||TERM||"/>
     <portlet:param name="filter" value="||FILTER||"/>
 </portlet:resourceURL>
@@ -38,7 +37,6 @@
             {
                 baseUrl: "${BASEURL}",
                 nspace: "${NSPACE}",
-                autoCompleteURL: "${autoompleteURL}",
                 messages: {
                     "saved-success": '<spring:message code="js.contact.saved.success"/>',
                     "saved-failed": '<spring:message code="js.contact.saved.failed"/>',
@@ -69,7 +67,8 @@
 
                     <c:if test="${ domain.hasSearch }">
                         
-                        <portlet:resourceURL var="searchURL" id="searchDomain">
+                        
+                        <portlet:resourceURL var="searchURL" id="||ID||">
                             <portlet:param name="filter" value="||FILTER||"/>
                             <portlet:param name="term" value="||TERM||"/>
                             <portlet:param name="domain" value="${domain.id}"/>

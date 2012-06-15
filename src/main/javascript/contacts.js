@@ -39,7 +39,8 @@ PORTLET_JS_CONTROL = function(opts) {
     $("#"+rootID+" div.contact-domain .searchBox").autocomplete( {
         appendTo: "#"+rootID,
         source: function(request, response) {
-            var URL = opts.autoCompleteURL;
+            var URL = $(".searchForm", domain).attr("action");
+            URL  = URL.replace(escape("||ID||"), "autoComplete");
             URL  = URL.replace(escape("||TERM||"), escape(request.term));
             URL = URL.replace(escape("||FILTER||"), escape($("input[name=filter]:radio:checked").val()));
             
@@ -90,6 +91,7 @@ PORTLET_JS_CONTROL = function(opts) {
         var filter = escape($("input[name=filter]:radio:checked", domain).val());
         
         var url = $(".searchForm", domain).attr("action");
+        url  = url.replace(escape("||ID||"), "searchDomain");
         url = url.replace(escape("||FILTER||"), filter);
         url = url.replace(escape("||TERM||"), term);
         

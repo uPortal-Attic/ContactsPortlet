@@ -51,6 +51,7 @@
     <bean id="SetViewController" class="org.jasig.portlet.contacts.control.SetViewController"/>
     <bean id="SaveContactController" class="org.jasig.portlet.contacts.control.SaveContactController"/>
     <bean id="DeleteContactController" class="org.jasig.portlet.contacts.control.DeleteContactController"/>
+    <bean id="AutoCompleteContactController" class="org.jasig.portlet.contacts.control.AutoCompleteController"/>
 
 
 
