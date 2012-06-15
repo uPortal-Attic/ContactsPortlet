@@ -3,7 +3,7 @@
     <sorted-set>
         <default/>
         <org.jasig.portlet.contacts.model.util.ContactComparator/>
-        <int>2</int>
+        <int>1</int>
         <contact>
             <id>1</id>
             <title>Mr</title>
