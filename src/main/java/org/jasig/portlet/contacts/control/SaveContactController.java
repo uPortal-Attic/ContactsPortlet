@@ -2,20 +2,20 @@ package org.jasig.portlet.contacts.control;
 
 import java.io.IOException;
 import java.util.Set;
-import java.util.StringTokenizer;
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jasig.web.service.AjaxPortletSupport;
+import org.jasig.portlet.contacts.domains.ContactDomain;
+import org.jasig.portlet.contacts.model.Contact;
+import org.jasig.portlet.contacts.model.ContactSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.jasig.portlet.contacts.model.Contact;
-import org.jasig.portlet.contacts.model.ContactSet;
-import org.jasig.portlet.contacts.domains.ContactDomain;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
 /**
  *
@@ -28,10 +28,10 @@ public class SaveContactController {
     
     private static Log log = LogFactory.getLog(SaveContactController.class);
     
-    @RequestMapping(params="persist=true")
-    public void persist(
-            ActionRequest request,
-            ActionResponse response,
+    @ResourceMapping("persist")
+    public @ResponseBody Model persist(
+            ResourceRequest request,
+            ResourceResponse response,
             @RequestParam("domain") String domain,
             @RequestParam("source") String source,
             @RequestParam("contact") String contact,
@@ -82,19 +82,11 @@ public class SaveContactController {
         model.addAttribute("STATUS", "OK");
         log.debug("SAVED :: "+saved);
         model.addAttribute("saved", saved);
-        model.addAttribute("view", "JSONView");
         
         log.debug("PERSIST --  END");
         
-        ajaxPortletSupportService.redirectAjaxResponse("ajax/showView", model.asMap(), request, response);
+        return model;
         
-    }
-    
-    protected AjaxPortletSupport ajaxPortletSupportService;
-
-    @Autowired
-    public void setPortletSupport(AjaxPortletSupport support) {
-        ajaxPortletSupportService = support;
     }
     
     private Set<ContactDomain> contactDomains;

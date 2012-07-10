@@ -4,8 +4,6 @@
  */
 package org.jasig.portlet.contacts.adapters;
 
-import com.googlecode.ehcache.annotations.Cacheable;
-import com.googlecode.ehcache.annotations.KeyGenerator;
 import java.util.Map;
 import java.util.Set;
 import org.jasig.portlet.contacts.model.ContactSet;
@@ -16,19 +14,13 @@ import org.jasig.portlet.contacts.model.ContactSet;
  */
 public interface PushAdapter extends ContactAdapter {
 
-    @Cacheable(cacheName = "PushResults",
-        keyGenerator = @KeyGenerator(name = "org.jasig.portlet.contacts.cache.AdapterCacheKeyGenerator")
-    )
+    
     public Set<ContactSet> getContacts();
     
-    @Cacheable(cacheName = "PushResults",
-        keyGenerator = @KeyGenerator(name = "org.jasig.portlet.contacts.cache.AdapterCacheKeyGenerator")
-    )
+    
     public ContactSet getContacts(String id);
     
-    @Cacheable(cacheName = "PushResults",
-        keyGenerator = @KeyGenerator(name = "org.jasig.portlet.contacts.cache.AdapterCacheKeyGenerator")
-    )
+    
     public Map<String,String> getGroups();
     
 }

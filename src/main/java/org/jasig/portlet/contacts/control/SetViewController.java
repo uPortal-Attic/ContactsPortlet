@@ -5,21 +5,21 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
 import javax.portlet.PortletSession;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jasig.web.service.AjaxPortletSupport;
+import org.jasig.portlet.contacts.domains.ContactDomain;
+import org.jasig.portlet.contacts.model.Contact;
+import org.jasig.portlet.contacts.model.ContactSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.jasig.portlet.contacts.model.Contact;
-import org.jasig.portlet.contacts.model.ContactSet;
-import org.jasig.portlet.contacts.domains.ContactDomain;
+import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
 /**
  *
@@ -36,10 +36,6 @@ public class SetViewController {
         return "noDomain";
     }
 
-    @ModelAttribute("view")
-    public String setView() {
-        return "setView";
-    }
 
     @ModelAttribute("nspace")
     public String setNspace(
@@ -69,10 +65,10 @@ public class SetViewController {
         return action;
     }
 
-    @RequestMapping(params = "set")
-    public void showDomain(
-            ActionRequest request,
-            ActionResponse response,
+    @ResourceMapping("setView")
+    public String showDomain(
+            ResourceRequest request,
+            ResourceResponse response,
             @RequestParam("set") String setId,
             @ModelAttribute("domain") ContactDomain domainObj,
             Model model,
@@ -88,8 +84,10 @@ public class SetViewController {
         log.debug(contacts.size() + " CONTACTS found for " + contacts.getTitle());
         log.debug("Contacts set for domain :: " + domainObj.getName());
 
+        model.addAttribute("domain", domainObj);
+        model.addAttribute("source", setId);
 
-
+        /*
         if (domainObj.getHasPersist()) {
             Map<String, String> persistURLs = new HashMap<String, String>();
             String action = (String) session.getAttribute("PERSISTACTIONURL");
@@ -107,15 +105,16 @@ public class SetViewController {
             model.addAttribute("deleteURL", deleteURLs);
         }
 
+        */
 
-        ajaxPortletSupportService.redirectAjaxResponse("ajax/showView", model.asMap(), request, response);
+        return "setView";
 
     }
 
-    @RequestMapping(params = "term")
-    public void searchDomain(
-            ActionRequest request,
-            ActionResponse response,
+    @ResourceMapping("search")
+    public String searchDomain(
+            ResourceRequest request,
+            ResourceResponse response,
             PortletSession session,
             @RequestParam("term") String term,
             @RequestParam("filter") String filter,
@@ -128,7 +127,8 @@ public class SetViewController {
 
 
             model.addAttribute("domain", domainObj);
-
+            model.addAttribute("source", "search");
+            
             contacts.addAll(domainObj.search(term, filter));
 
             if (domainObj.getHasPersist()) {
@@ -154,7 +154,8 @@ public class SetViewController {
 
         model.addAttribute("contactList", contacts);
 
-        ajaxPortletSupportService.redirectAjaxResponse("ajax/showView", model.asMap(), request, response);
+        
+        return "setView";
 
     }
     private Set<ContactDomain> contactDomains;
@@ -163,10 +164,5 @@ public class SetViewController {
     public void setContactDomains(Set<ContactDomain> domains) {
         contactDomains = domains;
     }
-    protected AjaxPortletSupport ajaxPortletSupportService;
 
-    @Autowired
-    public void setPortletSupport(AjaxPortletSupport support) {
-        ajaxPortletSupportService = support;
-    }
 }

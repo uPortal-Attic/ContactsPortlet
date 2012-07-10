@@ -4,8 +4,10 @@ import java.util.*;
 import javax.portlet.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jasig.portlet.contacts.IViewSelector;
 import org.jasig.portlet.contacts.domains.ContactDomain;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +24,7 @@ public class PortletViewController {
 
     private static Log log = LogFactory.getLog(PortletViewController.class);
 
+    @Value("#{environment.appversion}")
     private String version;
     public void setVersionString(String v) {
         version = v;
@@ -29,6 +32,7 @@ public class PortletViewController {
     
     @ModelAttribute("domains")
     public Set<ContactDomain> getDomains(PortletPreferences prefs) {
+        log.debug("finding Domains to return");
         final List<String> domainActive = Arrays.asList(prefs.getValues("domainsActive", new String[0]));
         
         String[] defaultOn = prefs.getValues("defaultOn", new String[0]);
@@ -55,7 +59,7 @@ public class PortletViewController {
                 activeDomains.add(domain);
             }
         }
-        
+        log.debug("returning "+activeDomains.size()+ "domains");
         return activeDomains;
     }
     
@@ -71,6 +75,7 @@ public class PortletViewController {
             PortletSession session,
             Model model) {
 
+        /*
         PortletURL persistAction = response.createActionURL();
         persistAction.setParameter("domain", "||DOMAIN||");
         persistAction.setParameter("contact", "||CONTACT||");
@@ -84,7 +89,7 @@ public class PortletViewController {
         deleteAction.setParameter("source", "||SOURCE||");
         deleteAction.setParameter("delete", "true");
         session.setAttribute("DELETEACTIONURL", deleteAction.toString() );
-        
+        */
         
 	return "defaultView";
 
@@ -94,8 +99,17 @@ public class PortletViewController {
     @Autowired
     public void setContactDomains(Set<ContactDomain> domains) {
         contactDomains = domains;  
+        log.debug("*********** set contactDomains");
     }
     
+    
+    private IViewSelector viewSelector;
+    
+    @Autowired(required = true)
+    public void setViewSelector(IViewSelector viewSelector) {
+        this.viewSelector = viewSelector;
+        log.debug("********** set viewSelector");
+    }
     
 }
 

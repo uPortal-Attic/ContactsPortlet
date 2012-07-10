@@ -13,7 +13,7 @@
         timeToIdleSeconds="600"
         timeToLiveSeconds="3600"
         overflowToDisk="false">
-            <searchable/>
+            <searchable keys="false" values="false" ></searchable>
     </cache>
     <defaultCache
         maxElementsInMemory="1000"

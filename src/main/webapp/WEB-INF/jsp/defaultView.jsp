@@ -61,13 +61,14 @@
                 <div class="contact-domain" id="${NSPACE}${domainName}" <c:if test="${ domain.hasPersist }">rel="${domain.name}" persist="true"</c:if>>
 
                     <c:if test="${ domain.hasSearch }">
+
                         
-                        <portlet:actionURL var="searchURL">
+                        <portlet:resourceURL id="search" var="searchURL">
                             <portlet:param name="filter" value="||FILTER||"/>
                             <portlet:param name="term" value="||TERM||"/>
                             <portlet:param name="domain" value="${domain.id}"/>
                             <portlet:param name="nspace" value="${NSPACE}"/>
-                        </portlet:actionURL>
+                        </portlet:resourceURL>
                         
                         <form  action="${searchURL}" class="searchForm" method="post">
                             <p>
@@ -91,11 +92,11 @@
                             <c:forEach var="entry" items="${domain.contactGroups}">
 
 
-                                <portlet:actionURL var="setViewActionUrl">
+                                <portlet:resourceURL id="setView" var="setViewActionUrl">
                                     <portlet:param name="set" value="${entry.value}"/>
                                     <portlet:param name="domain" value="${domain.id}"/>
                                     <portlet:param name="nspace" value="${NSPACE}"/>
-                                </portlet:actionURL>
+                                </portlet:resourceURL>
 
                                 <h3><a href="#">${entry.key}</a></h3>
                                 <div class="results-area" rel="${setViewActionUrl}">

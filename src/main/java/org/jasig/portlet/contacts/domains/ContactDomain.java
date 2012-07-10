@@ -3,14 +3,14 @@ package org.jasig.portlet.contacts.domains;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.jasig.portlet.contacts.context.ContactContext;
-import org.jasig.portlet.contacts.model.Contact;
-import org.jasig.portlet.contacts.model.ContactSet;
 import org.jasig.portlet.contacts.adapters.PersistAdapter;
 import org.jasig.portlet.contacts.adapters.PushAdapter;
 import org.jasig.portlet.contacts.adapters.RemoveAdapter;
 import org.jasig.portlet.contacts.adapters.SearchAdapter;
+import org.jasig.portlet.contacts.context.ContactContext;
 import org.jasig.portlet.contacts.decorators.ContactDecorator;
+import org.jasig.portlet.contacts.model.Contact;
+import org.jasig.portlet.contacts.model.ContactSet;
 
 /**
  *
