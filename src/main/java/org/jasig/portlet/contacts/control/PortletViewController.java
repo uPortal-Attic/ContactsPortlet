@@ -25,7 +25,7 @@ public class PortletViewController {
 
     private static Log log = LogFactory.getLog(PortletViewController.class);
 
-    @Value("#{environment.appversion}")
+    @Value("${appversion}")
     private String version;
     public void setVersionString(String v) {
         version = v;
