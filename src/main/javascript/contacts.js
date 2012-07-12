@@ -14,8 +14,9 @@ PORTLET_JS_CONTROL = function(opts) {
     var $id = context.$id;
     var $class = context.$class;
     
-    
-    $id("contact-domains").tabs();
+    var selectedDomain = $("li", $id("contact-domains")).index("li[rel='selected']");
+    selectedDomain = selectedDomain < 0 ? 0 : selectedDomain;
+    $id("contact-domains").tabs({selected: selectedDomain});
     
     
     $(".accordion", opts.rootNode).accordion({ 

@@ -6,6 +6,7 @@ package org.jasig.portlet.contacts.adapters;
 
 import java.util.Map;
 import java.util.Set;
+import org.jasig.portlet.contacts.model.Contact;
 import org.jasig.portlet.contacts.model.ContactSet;
 
 /**
@@ -20,6 +21,7 @@ public interface PushAdapter extends ContactAdapter {
     
     public ContactSet getContacts(String id);
     
+    public Contact getByURN(String URN);
     
     public Map<String,String> getGroups();
     

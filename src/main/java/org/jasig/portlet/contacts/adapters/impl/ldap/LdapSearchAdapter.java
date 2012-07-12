@@ -20,6 +20,7 @@ import org.jasig.portlet.contacts.model.ContactSet;
 import org.jasig.portlet.contacts.model.ModelObjectFactory;
 import org.jasig.portlet.contacts.model.util.ContactMapper;
 import org.jasig.portlet.contacts.adapters.impl.AbstractSearchAdapter;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -53,6 +54,25 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         this.searchAttribute = searchAttribute;
     }
   
+    
+    public Contact getByURN(String urn) {
+        String[] attr = StringUtils.delimitedListToStringArray(urn, ":");
+        
+        String searchText = attr[2];
+        String filter = attr[3];
+        String id = attr[4];
+        
+        ContactSet contacts = search(searchText, filter);
+        
+        for (Contact contact : contacts) {
+            if (contact.getId().equals(id))
+                return contact;
+        }
+        
+        return null;
+        
+    }
+    
     public ContactSet search(String searchText) {
         return search(searchText, null);
     }

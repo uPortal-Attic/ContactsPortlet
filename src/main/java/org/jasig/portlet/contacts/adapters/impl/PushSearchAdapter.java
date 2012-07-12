@@ -52,4 +52,11 @@ public class PushSearchAdapter extends AbstractSearchAdapter {
         pushAdapter = adapter;
     }
 
+    @Override
+    public Contact getByURN(String URN) {
+        
+        return pushAdapter.getByURN(URN);
+        
+    }
+
 }

@@ -60,6 +60,8 @@ public class DeleteContactController {
                     String filter = tokens[3];
                     contacts.addAll(domainObj.search(search,filter));
 
+                } else if (source.startsWith("urn:")) {
+                    contacts.add(domainObj.getContact(source));
                 } else {
                     contacts.addAll(domainObj.getContacts(source));                    
                 }

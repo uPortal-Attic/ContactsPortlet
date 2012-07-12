@@ -7,18 +7,18 @@ package org.jasig.portlet.contacts.domains.impl;
 import java.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.jasig.portlet.contacts.context.ContactContext;
-import org.jasig.portlet.contacts.model.Contact;
-import org.jasig.portlet.contacts.model.ContactSet;
-import org.jasig.portlet.contacts.model.util.ContactSetComparator;
 import org.jasig.portlet.contacts.adapters.PersistAdapter;
 import org.jasig.portlet.contacts.adapters.PushAdapter;
 import org.jasig.portlet.contacts.adapters.RemoveAdapter;
 import org.jasig.portlet.contacts.adapters.SearchAdapter;
+import org.jasig.portlet.contacts.context.ContactContext;
 import org.jasig.portlet.contacts.decorators.ContactDecorator;
 import org.jasig.portlet.contacts.decorators.impl.PassThroughContactDecorator;
 import org.jasig.portlet.contacts.domains.ContactDomain;
+import org.jasig.portlet.contacts.model.Contact;
+import org.jasig.portlet.contacts.model.ContactSet;
+import org.jasig.portlet.contacts.model.util.ContactSetComparator;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -39,56 +39,69 @@ public class GenericContactDomain implements ContactDomain {
     private ContactContext context = null;
     private ContactDecorator decorator = new PassThroughContactDecorator();
  
+    @Override
     public void setName(String name) {
         this.name=name;
     }
 
+    @Override
     public void setId(String id) {
         this.id=id;
     }
     
+    @Override
     public void setSearchAdapter(SearchAdapter search) {
         this.searchAdapter = search;
     }
 
+    @Override
     public void setPushAdapter(PushAdapter push) {
         this.pushAdapter = push;
     }
 
+    @Override
     public void setPersistAdapter(PersistAdapter persist) {
         this.persistAdapter = persist;
     }
+    @Override
     public void setRemoveAdapter(RemoveAdapter remove) {
         this.removeAdapter = remove;
     }
     
     
     @Autowired
+    @Override
     public void setContext(ContactContext context) {
         this.context = context;
     }
 
+    @Override
     public boolean getHasSearch() {
         return (searchAdapter != null);
     }
 
+    @Override
     public boolean getHasPush() {
         return (pushAdapter != null);
     }
 
+    @Override
     public boolean getHasPersist() {
         return (persistAdapter != null);
     }
 
+    @Override
     public boolean getHasRemove() {
         return (removeAdapter != null);
     }
 
     
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public String getId() {
         if (id == null)
             return name.replace(" ", "");
@@ -96,10 +109,12 @@ public class GenericContactDomain implements ContactDomain {
             return id;
     }
     
+    @Override
     public ContactContext getContext(){
         return context;
     }
 
+    @Override
     public ContactSet search(String searchText) {
         ContactSet results;
         if (getHasSearch())
@@ -112,6 +127,7 @@ public class GenericContactDomain implements ContactDomain {
         return results;
     }
     
+    @Override
     public ContactSet search(String searchText, String filter) {
         ContactSet results;
         if (getHasSearch())
@@ -124,6 +140,7 @@ public class GenericContactDomain implements ContactDomain {
         return results;
     }
 
+    @Override
     public Set<ContactSet> getContacts() {
         
         Set<ContactSet> results;
@@ -139,6 +156,7 @@ public class GenericContactDomain implements ContactDomain {
         return results;
     }
     
+    @Override
     public ContactSet getContacts(String setId) {
         
         ContactSet result;
@@ -152,6 +170,23 @@ public class GenericContactDomain implements ContactDomain {
         
     }
     
+    @Override
+    public Contact getContact(String URN) {
+        
+        Contact contact = null;
+        
+        if (this.getHasSearch())
+            contact = searchAdapter.getByURN(URN);
+        if (contact == null && this.getHasPush())
+            contact = pushAdapter.getByURN(URN);
+        
+        decorator.decorate(contact);
+        
+        return contact;
+        
+    }
+    
+    @Override
     public Map<String,String> getContactGroups() {
         
         Map<String,String> groups = new TreeMap<String,String>();
@@ -164,6 +199,7 @@ public class GenericContactDomain implements ContactDomain {
         
     }
     
+    @Override
     public List<String> getSearchFilters() {
         List<String> filters = new ArrayList<String>();
         
@@ -173,6 +209,7 @@ public class GenericContactDomain implements ContactDomain {
         return filters;
     }
     
+    @Override
     public boolean save(Contact contact) {
         if (getHasPersist()) {
             log.debug("Passing to Persist adapter");
@@ -183,6 +220,7 @@ public class GenericContactDomain implements ContactDomain {
         }
     }
     
+    @Override
     public boolean delete(Contact contact) {
         if (getHasRemove()) {
             log.debug("Passing to Remove adapter");
@@ -193,6 +231,7 @@ public class GenericContactDomain implements ContactDomain {
         }
     }
 
+    @Override
     public void setDecorator(ContactDecorator decorator) {
         this.decorator = decorator;
     }

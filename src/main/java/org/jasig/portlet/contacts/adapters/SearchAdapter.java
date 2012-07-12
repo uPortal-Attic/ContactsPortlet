@@ -7,6 +7,7 @@ package org.jasig.portlet.contacts.adapters;
 
 
 import java.util.Map;
+import org.jasig.portlet.contacts.model.Contact;
 import org.jasig.portlet.contacts.model.ContactSet;
 
 
@@ -20,6 +21,7 @@ public interface SearchAdapter extends ContactAdapter {
     
     public ContactSet search(String searchText);
     public ContactSet search(String searchText, String filter);
+    public Contact getByURN(String URN);
     public void setFilters(Map<String,Object> filers);
     public Map<String,Object> getFilters();
     public void setFilterAttribute(String attribute);

@@ -47,6 +47,7 @@ public interface ContactDomain {
     public Set<ContactSet> getContacts();
     public ContactSet getContacts(String setId);
     public Map<String,String> getContactGroups();
+    public Contact getContact(String URN);
     public List<String> getSearchFilters();
     
     public boolean save(Contact contact);

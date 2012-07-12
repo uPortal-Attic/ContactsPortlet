@@ -83,27 +83,7 @@ public class SetViewController {
         model.addAttribute("domain", domainObj);
         model.addAttribute("source", setId);
 
-        /*
-        if (domainObj.getHasPersist()) {
-            Map<String, String> persistURLs = new HashMap<String, String>();
-            String action = (String) session.getAttribute("PERSISTACTIONURL");
-            for (Contact contact : contacts) {
-                persistURLs.put(contact.getURN(), setupUrls(setId, domainObj, contact, action));
-            }
-            model.addAttribute("persistURL", persistURLs);
-        }
-        if (domainObj.getHasRemove()) {
-            Map<String, String> deleteURLs = new HashMap<String, String>();
-            String action = "" + (String) session.getAttribute("DELETEACTIONURL");
-            for (Contact contact : contacts) {
-                deleteURLs.put(contact.getURN(), setupUrls(setId, domainObj, contact, action));
-            }
-            model.addAttribute("deleteURL", deleteURLs);
-        }
-
-        */
-
-        return "setView";
+         return "setView";
 
     }
 
@@ -128,24 +108,7 @@ public class SetViewController {
             
             contacts.addAll(domainObj.search(term, filter));
 
-/*
-            if (domainObj.getHasPersist()) {
-                Map<String, String> persistURLs = new HashMap<String, String>();
-                String action = (String) session.getAttribute("PERSISTACTIONURL");
-                for (Contact contact : contacts) {
-                    persistURLs.put(contact.getURN(), setupUrls("search", domainObj, contact, action));
-                }
-                model.addAttribute("persistURL", persistURLs);
-            }
-            if (domainObj.getHasRemove()) {
-                Map<String, String> deleteURLs = new HashMap<String, String>();
-                String action = "" + (String) session.getAttribute("DELETEACTIONURL");
-                for (Contact contact : contacts) {
-                    deleteURLs.put(contact.getURN(), setupUrls("search", domainObj, contact, action));
-                }
-                model.addAttribute("deleteURL", deleteURLs);
-            }
-*/
+
             log.debug(contacts.size() + " CONTACTS found for " + contacts.getTitle());
             log.debug("Contacts set for domain :: " + domainObj.getName());
         }

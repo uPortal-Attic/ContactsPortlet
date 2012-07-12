@@ -54,7 +54,15 @@
             <ul>
                 <c:forEach items="${domains}" var="domain">
                     <c:set var="domainName" value="${ fn:replace(domain.name,' ','') }"/>
-                    <li><a href="#${NSPACE}${domainName}">${domain.name}</a></li>
+                    <c:choose>
+                        <c:when test="${activeDomain != null && activeDomain == domain.id}">
+                            <li rel="selected"><a href="#${NSPACE}${domainName}">${domain.name}</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="#${NSPACE}${domainName}">${domain.name}</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                    
                 </c:forEach>
             </ul>
            
@@ -86,11 +94,22 @@
                                 <input type="button" value="<spring:message code="search.button.name"/>" class="searchButton"/>
                             </p>
                         </form>
-                        <div class="results-area ui-widget">
-                            <%-- results loaded here --%>
-                        </div>
+                        
                     </c:if>
 
+                    <div class="results-area ui-widget">
+                            <%-- results loaded here --%>
+                            
+                        <c:if test="${ domain.id == activeDomain && selectedContact != null }" >
+                            <c:set var="contact" value="${selectedContact}"/>
+                            <c:set var="source" value="${selectedContact.URN}"/>
+                            <div class="ui-widget-content ui-corner-all">
+                                <jsp:directive.include file="/WEB-INF/jsp/contact.jsp"/>
+                            </div>
+                        </c:if>
+
+                    </div>
+                    
                     <c:if test="${ domain.hasPush }">
                         <div class="accordion">
                             <c:forEach var="entry" items="${domain.contactGroups}">

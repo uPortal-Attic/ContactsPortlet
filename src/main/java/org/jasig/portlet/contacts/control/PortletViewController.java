@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jasig.portlet.contacts.IViewSelector;
 import org.jasig.portlet.contacts.domains.ContactDomain;
+import org.jasig.portlet.contacts.model.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -73,9 +74,29 @@ public class PortletViewController {
             PortletRequest req,
             RenderResponse response,
             PortletSession session,
+            @ModelAttribute("domains") Set<ContactDomain> domains,
             Model model) {
 
       
+        String urn = req.getParameter("urn");
+        String domain = req.getParameter("domain");
+        
+        if (domain != null && urn != null) {
+            Contact contact = null;
+            model.addAttribute("activeDomain", domain);
+            for (ContactDomain dom : domains) {
+                if (dom.getId().equals(domain)) {
+                    contact = dom.getContact(urn);
+                    break;
+                }
+            }
+            if (contact != null)
+                model.addAttribute("selectedContact", contact);
+        }
+        
+        if (urn != null)
+            log.debug(urn);
+        
 	return "defaultView";
 
     }
