@@ -33,7 +33,6 @@
   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <mvc:annotation-driven />
     <context:annotation-config />
   
   <bean id="propertyConfigurer"
@@ -57,6 +56,8 @@
 
     <bean id="viewSelector" class="org.jasig.portlet.contacts.ThemeNameViewSelectorImpl"/>
 
+    <bean name="viewResolverXml" class="org.springframework.web.servlet.view.XmlViewResolver" />
+
     <!-- Default View Resolver -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="cache" value="true"/>
@@ -65,13 +66,12 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-<!--
+
     <bean class="org.springframework.web.portlet.mvc.annotation.DefaultAnnotationHandlerMapping">
         <property name="interceptors">
             <bean class="org.jasig.portlet.contacts.MinimizedStateHandlerInterceptor"/>
         </property>
     </bean>
--->
 <!--
     <bean class="org.springframework.web.portlet.mvc.annotation.DefaultAnnotationHandlerMapping">
         <property name="order" value="10"/>

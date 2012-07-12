@@ -31,11 +31,7 @@ public class SetViewController {
 
     private static Log log = LogFactory.getLog(SetViewController.class);
 
-    @RequestMapping()
-    public String noDomain() {
-        return "noDomain";
-    }
-
+    
 
     @ModelAttribute("nspace")
     public String setNspace(
@@ -111,6 +107,7 @@ public class SetViewController {
 
     }
 
+    
     @ResourceMapping("search")
     public String searchDomain(
             ResourceRequest request,
@@ -131,6 +128,7 @@ public class SetViewController {
             
             contacts.addAll(domainObj.search(term, filter));
 
+/*
             if (domainObj.getHasPersist()) {
                 Map<String, String> persistURLs = new HashMap<String, String>();
                 String action = (String) session.getAttribute("PERSISTACTIONURL");
@@ -147,7 +145,7 @@ public class SetViewController {
                 }
                 model.addAttribute("deleteURL", deleteURLs);
             }
-
+*/
             log.debug(contacts.size() + " CONTACTS found for " + contacts.getTitle());
             log.debug("Contacts set for domain :: " + domainObj.getName());
         }

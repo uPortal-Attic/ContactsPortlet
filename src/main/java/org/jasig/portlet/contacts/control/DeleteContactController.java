@@ -1,6 +1,7 @@
 package org.jasig.portlet.contacts.control;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -29,13 +30,13 @@ public class DeleteContactController {
     private static Log log = LogFactory.getLog(DeleteContactController.class);
     
     @ResourceMapping("delete")
-    public @ResponseBody Model persist(
+    public String persist(
             ResourceRequest request,
             ResourceResponse response,
             @RequestParam("domain") String domain,
             @RequestParam("source") String source,
             @RequestParam("contact") String contact,
-            Model model
+            Map<String,Object> model
     ) throws IOException {
         
         log.debug("PERSIST --  START");
@@ -79,13 +80,13 @@ public class DeleteContactController {
                 break;
             }
         
-        model.addAttribute("STATUS", "OK");
+        model.put("STATUS", "OK");
         log.debug("DELETE :: "+removed);
-        model.addAttribute("deleted", removed);
+        model.put("deleted", removed);
         
         log.debug("PERSIST --  END");
         
-        return model;
+        return "JSONView";
         
     }
     

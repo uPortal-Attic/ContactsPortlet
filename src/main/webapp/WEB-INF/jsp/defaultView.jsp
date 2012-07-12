@@ -26,12 +26,16 @@
 
 <script type="text/javascript" src="${BASEURL}js/bootstrapper.js"></script>
 
+
+<portlet:resourceURL id="autocomplete" var="acUrl"/>
+
 <script type="text/javascript">
      var ${NSPACE}CONTACTS = new PORTLET_JS_BOOTSTRAP(
             "contacts",
             {
                 baseUrl: "${BASEURL}",
                 nspace: "${NSPACE}",
+                autocomplete: "${acUrl}",
                 messages: {
                     "saved-success": '<spring:message code="js.contact.saved.success"/>',
                     "saved-failed": '<spring:message code="js.contact.saved.failed"/>',
@@ -58,7 +62,7 @@
             <c:forEach items="${domains}" var="domain">
                 <c:set var="domainName" value="${ fn:replace(domain.name,' ','') }"/>
 
-                <div class="contact-domain" id="${NSPACE}${domainName}" <c:if test="${ domain.hasPersist }">rel="${domain.name}" persist="true"</c:if>>
+                <div class="contact-domain" id="${NSPACE}${domainName}" rel="${domain.name}" <c:if test="${ domain.hasPersist }">persist="true"</c:if>>
 
                     <c:if test="${ domain.hasSearch }">
 

@@ -4,6 +4,8 @@ PORTLET_JS_CONTROL = function(opts) {
     var baseUrl = opts.baseUrl + "ajax/";
     var rootID = opts.rootID;
     
+    var autocomplete = opts.autocomplete;
+    
     var messages = opts.messages;
     
     var context = this;
@@ -35,35 +37,54 @@ PORTLET_JS_CONTROL = function(opts) {
         active: false
     });
   
-  
+
     // set autocomplete on search box
-    $("#"+rootID+" div.contact-domain .searchBox").autocomplete( {
-        appendTo: "#"+rootID,
-        source: function(request, response) {
-            $.getJSON( 
-                baseUrl + "autocomplete", 
-                {
-                    term: request.term,
-                    filter: $("input[name=filter]:radio:checked").val()
-                }, 
-                function(data) {
-                    var regex = new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + request.term.replace(/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi, "\\$1") + ")(?![^<>]*>)(?![^&;]+;)", "gi");
-                    $.each(data.data, function(index,obj) {
-                        obj.label = obj.label.replace(regex, "<strong>$1</strong>");
-                    });
-                    
-                    response(data.data);
-                }
-            );            
-        },
-        minLength: 3,
-        autoFocus: true
-    }).data( "autocomplete" )._renderItem = function( ul, item ) {
-            return $( "<li></li>" )
+    $("#"+rootID+" div.contact-domain .searchBox").each(
+        function() {
+            var searchBox = $(this);
+            $(this).autocomplete( {
+                appendTo: "#"+rootID,
+                source: function(request, response) {
+                    var domain = $(searchBox).closest(".contact-domain");
+
+                    var term = escape(request.term);
+                    var filter = escape($("input[name=filter]:radio:checked", domain).val());
+
+                    var domainId = escape(searchBox.attr("rel"));
+
+                    var url = autocomplete;
+/*
+                    url = url.replace(escape("||FILTER||"), filter);
+                    url = url.replace(escape("||TERM||"), term);
+                    url = url.replace(escape("||DOMAIN||"), domainId);
+*/
+                    $.getJSON(
+                        url,
+                        {
+                            term: term,
+                            filter: filter,
+                            domain: domainId
+                        },
+                        function(data) {
+                            var regex = new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + request.term.replace(/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi, "\\$1") + ")(?![^<>]*>)(?![^&;]+;)", "gi");
+                            $.each(data.data, function(index,obj) {
+                                obj.label = obj.label.replace(regex, "<strong>$1</strong>");
+                            });
+                            response(data.data);
+                        }
+                    );       
+                },
+                minLength: 3,
+                autoFocus: true
+            }).data( "autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li></li>" )
                 .data( "item.autocomplete", item )
                 .append( "<a>"+ item.label + "</a>" ) //  + + "<br>" + item.desc + "</a>"
                 .appendTo( ul );
-        };
+            };
+            
+        }
+    );
         
         
     // flush autocomplete cache when filter changes
@@ -121,7 +142,7 @@ PORTLET_JS_CONTROL = function(opts) {
                     context.ErrorDialog("<p><strong>"+messages["saved-failed"]+"</strong></p>");
                 
             }
-        );
+            );
         
         
         return false;
@@ -146,7 +167,7 @@ PORTLET_JS_CONTROL = function(opts) {
                 
                 
             }
-        );
+            );
         
         
         return false;

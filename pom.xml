@@ -33,6 +33,7 @@
         <commons-lang.version>2.6</commons-lang.version>
         <commons-logging.version>1.1.1</commons-logging.version>
         <resource-server.version>1.0.25</resource-server.version>
+        <uportal-search-api.version>4.0.1</uportal-search-api.version>
     </properties>
 
 
@@ -53,6 +54,12 @@
     </repositories>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.jasig.portal</groupId>
+            <artifactId>uportal-search-api</artifactId>
+            <version>${uportal-search-api.version}</version>
+        </dependency>
 
         <!-- Jackson JSON Mapper -->
         <dependency>
@@ -204,6 +211,17 @@
             <artifactId>aspectjrt</artifactId>
             <version>1.6.12</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.spring-json</groupId>
+            <artifactId>spring-json</artifactId>
+            <version>1.3.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
