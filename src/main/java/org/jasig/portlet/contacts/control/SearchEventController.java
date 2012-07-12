@@ -88,6 +88,10 @@ public class SearchEventController {
                     searchResult.setTitle(title);
                     searchResult.setSummary(summaryText);
                     
+                    /*
+                     * Portlet URL to be added when / if portlet support for 
+                     * deep linking added.
+                     */
                     PortletUrl url = new PortletUrl();
                     url.setPortletMode("VIEW");
                     url.setWindowState(WindowState.MAXIMIZED.toString());
@@ -95,16 +99,13 @@ public class SearchEventController {
                     domainParam.setName("domain");
                     domainParam.getValue().add(domain.getId());
                     url.getParam().add(domainParam);
-                    PortletUrlParameter termParam = new PortletUrlParameter();
-                    termParam.setName("term");
-                    termParam.getValue().add(searchTerms);
-                    url.getParam().add(termParam);
-                    PortletUrlParameter filterParam = new PortletUrlParameter();
-                    filterParam.setName("filter");
-                    
-                    url.getParam().add(filterParam);
+                    PortletUrlParameter urnParam = new PortletUrlParameter();
+                    urnParam.setName("urn");
+                    urnParam.getValue().add(contact.getURN());
+                    url.getParam().add(urnParam);
                     
                     searchResult.setPortletUrl(url);
+
                     searchResult.getType().add("contact");
                     //Add the result to the results and send the event
                     searchResults.getSearchResult().add(searchResult);       

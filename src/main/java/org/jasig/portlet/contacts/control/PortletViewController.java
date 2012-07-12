@@ -75,22 +75,7 @@ public class PortletViewController {
             PortletSession session,
             Model model) {
 
-        /*
-        PortletURL persistAction = response.createActionURL();
-        persistAction.setParameter("domain", "||DOMAIN||");
-        persistAction.setParameter("contact", "||CONTACT||");
-        persistAction.setParameter("source", "||SOURCE||");
-        persistAction.setParameter("persist", "true");
-        session.setAttribute("PERSISTACTIONURL", persistAction.toString() );
-        
-        PortletURL deleteAction = response.createActionURL();
-        deleteAction.setParameter("domain", "||DOMAIN||");
-        deleteAction.setParameter("contact", "||CONTACT||");
-        deleteAction.setParameter("source", "||SOURCE||");
-        deleteAction.setParameter("delete", "true");
-        session.setAttribute("DELETEACTIONURL", deleteAction.toString() );
-        */
-        
+      
 	return "defaultView";
 
     }
@@ -99,7 +84,7 @@ public class PortletViewController {
     @Autowired
     public void setContactDomains(Set<ContactDomain> domains) {
         contactDomains = domains;  
-        log.debug("*********** set contactDomains");
+        
     }
     
     
@@ -108,7 +93,7 @@ public class PortletViewController {
     @Autowired(required = true)
     public void setViewSelector(IViewSelector viewSelector) {
         this.viewSelector = viewSelector;
-        log.debug("********** set viewSelector");
+        
     }
     
 }
