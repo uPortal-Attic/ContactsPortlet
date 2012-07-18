@@ -115,7 +115,7 @@
                             <c:forEach var="entry" items="${domain.contactGroups}">
 
 
-                                <portlet:resourceURL id="setView" var="setViewActionUrl">
+                                <portlet:resourceURL id="setView" var="setViewResourceUrl">
                                     <portlet:param name="set" value="${entry.value}"/>
                                     <portlet:param name="domain" value="${domain.id}"/>
                                     <portlet:param name="nspace" value="${NSPACE}"/>
