@@ -162,4 +162,10 @@ logger.debug("FILTERS");
         this.mapper = mapper;
     }
     
+    private AttributesMapper attributeMapper;
+    public void setAttributesMapper(AttributesMapper mapper) {
+        attributeMapper = mapper;
+    }
+    
+    
 }
