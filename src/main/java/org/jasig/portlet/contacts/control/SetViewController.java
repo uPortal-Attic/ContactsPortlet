@@ -2,8 +2,6 @@ package org.jasig.portlet.contacts.control;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import javax.portlet.PortletSession;
 import javax.portlet.ResourceRequest;
@@ -79,6 +77,8 @@ public class SetViewController {
         }
         log.debug(contacts.size() + " CONTACTS found for " + contacts.getTitle());
         log.debug("Contacts set for domain :: " + domainObj.getName());
+        
+        model.addAttribute("source", setId);
 
         model.addAttribute("domain", domainObj);
         model.addAttribute("source", setId);

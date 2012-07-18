@@ -22,7 +22,6 @@ PORTLET_JS_CONTROL = function(opts) {
     $(".accordion", opts.rootNode).accordion({ 
         change: function(event, ui) { 
             
-            //var link = ui.newContent.children("a").attr("href");
             var link = ui.newContent.attr("rel");
                     
             if(link != undefined) {
@@ -112,6 +111,7 @@ PORTLET_JS_CONTROL = function(opts) {
         var filter = escape($("input[name=filter]:radio:checked", domain).val());
         
         var url = $(".searchForm", domain).attr("action");
+        url  = url.replace(escape("||ID||"), "searchDomain");
         url = url.replace(escape("||FILTER||"), filter);
         url = url.replace(escape("||TERM||"), term);
         

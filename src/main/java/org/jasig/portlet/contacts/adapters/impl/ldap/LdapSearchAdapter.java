@@ -126,6 +126,7 @@ logger.debug("FILTERS");
         //List<Contact> contactList = ldapTemplate.search(DistinguishedName.EMPTY_PATH, search, searchControls, attributesMapper);
         List<Attributes> contactList = ldapTemplate.search(DistinguishedName.EMPTY_PATH, search, searchControls, new AttributesMapper() {
 
+            @Override
             public Object mapFromAttributes(Attributes attributes) throws NamingException {
                 return attributes;
             }

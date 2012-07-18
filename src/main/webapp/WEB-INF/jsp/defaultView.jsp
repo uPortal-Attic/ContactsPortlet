@@ -122,8 +122,8 @@
                                 </portlet:resourceURL>
 
                                 <h3><a href="#">${entry.key}</a></h3>
-                                <div class="results-area" rel="${setViewActionUrl}">
-                                    <a href="${setViewActionUrl}"><spring:message code="view.details.link"/></a>
+                                <div class="results-area" rel="${setViewResourceUrl}">
+                                    <a href="${setViewResourceUrl}"><spring:message code="view.details.link"/></a>
                                 </div>
                             </c:forEach>
                         </div>
