@@ -161,11 +161,5 @@ logger.debug("FILTERS");
     public void setContactMapper(ContactMapper mapper) {
         this.mapper = mapper;
     }
-    
-    private AttributesMapper attributeMapper;
-    public void setAttributesMapper(AttributesMapper mapper) {
-        attributeMapper = mapper;
-    }
-    
-    
+       
 }
