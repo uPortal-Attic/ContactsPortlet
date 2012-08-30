@@ -329,6 +329,38 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <excludes>
+                        <exclude>target/**</exclude>
+                        <exclude>pom.xml.*</exclude>
+                        <exclude>release.properties</exclude>
+                        <exclude>LICENSE</exclude>
+                        <exclude>NOTICE</exclude>
+                        <exclude>NOTICE.template</exclude>
+                        <exclude>src/test/resources/sampleEvents.ics</exclude>
+                        <exclude>**/src/main/webapp/rs/**</exclude>
+                        <exclude>bin/**</exclude>
+                    </excludes>
+                    <mapping>
+                        <channel>XML_STYLE</channel>
+                        <portlet>XML_STYLE</portlet>
+                        <tag>DYNASCRIPT_STYLE</tag>
+                        <xjb>XML_STYLE</xjb>
+                    </mapping>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jasig.maven</groupId>
+                <artifactId>maven-notice-plugin</artifactId>
+                <configuration>
+                    <noticeTemplate>NOTICE.template</noticeTemplate>
+                    <generateChildNotices>false</generateChildNotices>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
