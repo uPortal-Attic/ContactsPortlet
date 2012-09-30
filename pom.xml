@@ -16,7 +16,8 @@
 	<name>Contacts Portlet</name>
 	<description>Contacts Portlet</description>
 	<version>1.0.0-SNAPSHOT</version>
-	<url></url>
+	
+	<url>https://wiki.jasig.org/display/PLT/Contacts+Portlet</url>
 
 
 	<properties>
@@ -35,7 +36,11 @@
 		<uportal-search-api.version>4.0.1</uportal-search-api.version>
 	</properties>
 
-
+ 	<scm>
+        <connection>scm:git:git://github.com/Jasig/ContactsPortlet.git</connection>
+        <developerConnection>scm:git:git@github.com:Jasig/ContactsPortlet.git</developerConnection>
+        <url>https://github.com/Jasig/ContactsPortlet</url>
+    </scm>
 
 	<repositories>
 
