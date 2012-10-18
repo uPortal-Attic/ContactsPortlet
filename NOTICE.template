@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Copyright 2012, JA-SIG, Inc.
+=======
+Copyright 2010, JA-SIG, Inc.
+>>>>>>> upstream/master
 This project includes software developed by Jasig.
 http://www.jasig.org/
 
@@ -16,11 +20,19 @@ specific language governing permissions and limitations
 under the License.
 
 This project includes:
+<<<<<<< HEAD
+=======
+  Fluid Infusion and Skinning System under the New BSD license
+>>>>>>> upstream/master
   jQuery, jQueryUI, and the jQuery Form Plugin under the MIT license
   The famfamfam Silk Icons under the Creative Commons Attribution 3.0 License
     http://www.famfamfam.com/lab/icons/silk/
 
 #GENERATED_NOTICES#
  
+<<<<<<< HEAD
 This project also includes code under copywrite of the following institutions:
   University of Manchester 
+=======
+This project also includes code under copywrite of the following institutions:
+>>>>>>> upstream/master
