@@ -85,7 +85,7 @@
         <aop:scoped-proxy proxy-target-class="false" />
     </bean>
 
-    <import resource="domains.xml"/>
+    <import resource="domains-overlay.xml"/>
     
 </beans>
 
