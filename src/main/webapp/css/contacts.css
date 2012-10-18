@@ -22,13 +22,16 @@
     font-size: 1.0em;
 }
 
-.org-jasig-portlet-contacts .contact-photo {
-    float: left;    
-    padding-right: 0.4em;
-}
-
 .org-jasig-portlet-contacts .contact-photo img {
-    border: 1px solid gray;    
+    height: 100%;
+}
+.org-jasig-portlet-contacts .contact-photo {
+     float: right;
+     background-color: transparent;
+     background-size: contain; 
+     background-repeat: no-repeat; 
+     height:75px; 
+     width:75px;
 }
 
 .org-jasig-portlet-contacts .results-area img { margin: 0 auto 0 auto; text-align: center;}
@@ -43,10 +46,6 @@
 .org-jasig-portlet-contacts div.editcontrols {
     clear:both; 
     float:right;
-}
-
-.org-jasig-portlet-contacts div.contact-domain div.contact:hover {
-    background-color: lightblue;
 }
 
 .org-jasig-portlet-contacts .contact .controls {

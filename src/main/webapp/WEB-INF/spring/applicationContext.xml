@@ -21,13 +21,13 @@
 -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:context="http://www.springframework.org/schema/context"
-  xmlns:mvc="http://www.springframework.org/schema/mvc"
-  xmlns:aop="http://www.springframework.org/schema/aop"
-  xmlns:p="http://www.springframework.org/schema/p"
-  xmlns:util="http://www.springframework.org/schema/util"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -35,9 +35,9 @@
 
     <context:annotation-config />
   
-  <bean id="propertyConfigurer"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          lazy-init="false">
+    <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+        lazy-init="false">
         <property name="locations">
             <list>
                 <value>classpath:portlet.properties</value>
@@ -72,11 +72,11 @@
             <bean class="org.jasig.portlet.contacts.MinimizedStateHandlerInterceptor"/>
         </property>
     </bean>
-<!--
-    <bean class="org.springframework.web.portlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-        <property name="order" value="10"/>
-    </bean>
--->
+    <!--
+        <bean class="org.springframework.web.portlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+            <property name="order" value="10"/>
+        </bean>
+    -->
     
 
     <bean id="modelFactory" class="org.jasig.portlet.contacts.model.impl.ModelPojoFactory"/>

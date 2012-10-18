@@ -1,7 +1,7 @@
 PORTLET_JS_CONTROL = function(opts) {
 
     var nspace = opts.nspace;
-    var baseUrl = opts.baseUrl + "ajax/";
+    var baseUrl = opts.baseUrl;
     var rootID = opts.rootID;
     
     var autocomplete = opts.autocomplete;
@@ -16,19 +16,25 @@ PORTLET_JS_CONTROL = function(opts) {
     
     var selectedDomain = $("li", $id("contact-domains")).index("li[rel='selected']");
     selectedDomain = selectedDomain < 0 ? 0 : selectedDomain;
-    $id("contact-domains").tabs({selected: selectedDomain});
+    $id("contact-domains").tabs({
+        selected: selectedDomain
+    });
     
     
     $(".accordion", opts.rootNode).accordion({ 
         change: function(event, ui) { 
             
+            var domain = $(this).closest(".contact-domain");
             var link = ui.newContent.attr("rel");
                     
             if(link != undefined) {
                 ui.newContent.contents().remove();
                 ui.newContent.append('<img src="'+opts.baseUrl+'/images/loading.gif"/>'); 
                             
-                ui.newContent.load(link + " #content");
+                ui.newContent.load(link + " #content", function(response, status, xhr) {
+                    if (status != "error")
+                        domain.trigger("ContactsLoaded");
+                });
              
             }
         },
@@ -53,11 +59,7 @@ PORTLET_JS_CONTROL = function(opts) {
                     var domainId = escape(searchBox.attr("rel"));
 
                     var url = autocomplete;
-/*
-                    url = url.replace(escape("||FILTER||"), filter);
-                    url = url.replace(escape("||TERM||"), term);
-                    url = url.replace(escape("||DOMAIN||"), domainId);
-*/
+
                     $.getJSON(
                         url,
                         {
@@ -69,7 +71,7 @@ PORTLET_JS_CONTROL = function(opts) {
                             var regex = new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + request.term.replace(/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi, "\\$1") + ")(?![^<>]*>)(?![^&;]+;)", "gi");
                             $.each(data.data, function(index,obj) {
                                 obj.label = obj.label.replace(regex, "<strong>$1</strong>");
-                            });
+                                });
                             response(data.data);
                         }
                     );       
@@ -84,7 +86,7 @@ PORTLET_JS_CONTROL = function(opts) {
             };
             
         }
-    );
+        );
         
         
     // flush autocomplete cache when filter changes
@@ -174,6 +176,54 @@ PORTLET_JS_CONTROL = function(opts) {
         return false;
     });
     
+    $("#"+rootID).delegate(".contact-domain", "ContactsLoaded", function() {
+        $(".results-area", $(this)).each(function(index, el) {
+            if(loadPhotos($(el)))
+                $(el).scroll(function(evnt) {
+                    if (!loadPhotos($(el)))
+                        $(el).unbind(evnt);
+                });
+            
+        });
+        
+    });
+    var lastLoaded = 0;
+    function loadPhotos(resultsArea) {
+        var res = false;
+        $(".contact-photo:empty", resultsArea).each(function(index, el) {
+            res = true;
+            var relPos = resultsArea.outerHeight() +100;
+            var offset = $(el).position().top;
+            if( offset < -100) {
+                return true;
+            } else if ( offset > relPos ) {
+                return false;
+            } else {
+                var img = $("<img/>")
+                .error( function () {
+                    $(this).attr("src", baseUrl + "/images/image_unavailable.jpg");
+                })
+                .load( function () {
+                    $(this).fadeIn();
+                })
+                .attr("src", $(el).attr("rel"))
+                .css("display", "none");
+
+                $(el).append(img);
+            }
+            
+        });
+        
+        return res;
+        
+    }
+    
+/*
+    $("#"+rootID+" .contact-domain").delegate(".contact-photo", "appear", function() {
+        var img = $(this).attr("rel");
+        $(this).attr("style", "background-image: url('"+img+"')");
+    });
+    */
 }
 
                    

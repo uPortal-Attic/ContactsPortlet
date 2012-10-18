@@ -2,6 +2,20 @@
 <rs:resourceURL var="delImg" value="rs/famfamfam/silk/1.3/delete.png"/>
 
 <div class="contact" title="${contact.surname}, ${contact.title} ${contact.firstname}">
+
+    <c:choose>
+        <c:when test="${!empty contact.imageURI}">
+            <div class="contact-photo" rel="${contact.imageURI}" ></div>
+        </c:when>
+        <c:otherwise>
+            <div class="contact-photo">
+                <img src="${BASEURL}/images/image_unavailable.jpg"/>
+            </div>
+        </c:otherwise>
+    </c:choose>
+    
+    
+    
     <strong>${contact.surname}, ${contact.title} ${contact.firstname}</strong><br />
     ${contact.position} - ${contact.department}
     <br />                                     
@@ -23,7 +37,8 @@
         ${contact.primaryAddress.building}, ${contact.primaryAddress.street}<br/>
     </c:if>
 
-
+        <div style="clear: both;"></div>
+        
     <div class="controls">    
         <c:if test="${domain.hasPersist}">
 
@@ -48,4 +63,6 @@
 
         </c:if>
     </div>
+            
+            
 </div>

@@ -15,15 +15,6 @@
 <rs:resourceURL var="scriptPath" value="/js/jquery-ui-1.8.20.custom.min.js"/>
 <script type="text/javascript" language="javascript" src="${scriptPath}"></script>
 
-
-
-<rs:resourceURL var="resourceURL" value="/rs/jquery-ui/jquery.bgiframe.min.js"/>
-<script src="${resourceURL}" type="text/javascript"></script>
-
-<rs:resourceURL var="resourceURL" value="/rs/jquery-ui/ui.autocomplete.js"/>
-<!--<script src="${resourceURL}" type="text/javascript"></script>-->
-
-
 <script type="text/javascript" src="${BASEURL}js/bootstrapper.js"></script>
 
 
