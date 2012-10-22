@@ -49,6 +49,12 @@
         <property name="pushAdapter" ref="ContactsContactsPush"/>
         <property name="name" value="Portlet Contacts"/>
     </bean>
+    
+    <bean id="ImportantPortletDomain" class="org.jasig.portlet.contacts.domains.impl.GenericContactDomain">
+        <property name="pushAdapter" ref="ImportantContactsPush"/>
+        <property name="name" value="World Contacts"/>
+    </bean>
+    
     <bean id="ContactsPortletSearchDomain" class="org.jasig.portlet.contacts.domains.impl.GenericContactDomain">
         <property name="searchAdapter" ref="ContactsContactsSearch"/>
         <property name="name" value="Search Portlet Contacts"/>
@@ -154,6 +160,15 @@
         <property name="dataURIs">
             <list>
                 <value>portletContactList.xml</value>
+            </list>
+        </property>
+        <property name="unmarshaller" ref="contactMarshaller"/>
+    </bean>
+    
+    <bean id="ImportantContactsPush" class="org.jasig.portlet.contacts.adapters.impl.xml.XMLContactAdapter">
+        <property name="dataURIs">
+            <list>
+                <value>imagineContactList.xml</value>
             </list>
         </property>
         <property name="unmarshaller" ref="contactMarshaller"/>

@@ -26,22 +26,21 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jasig.portlet.contacts.control.util.DomainMap;
 import org.jasig.portlet.contacts.domains.ContactDomain;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @RequestMapping("EDIT")
-public class PortletEditController implements ApplicationContextAware {
+@SessionAttributes("domains")
+public class PortletEditController {
 
     private static Log log = LogFactory.getLog(PortletEditController.class);
-    private ApplicationContext appContext;
 
     
     @ModelAttribute("domains")
@@ -94,15 +93,20 @@ public class PortletEditController implements ApplicationContextAware {
             prefs.setValues("domainOn", (String[]) domainOn.toArray(new String[0]));
             prefs.setValues("domainOff", (String[]) domainOff.toArray(new String[0]));
             prefs.store();
+            
+            response.setRenderParameter("saveStatus", "success");
+            
         } catch (Exception ex) {
             log.error("Failed to save user Prefs", ex);
         }
-        response.setPortletMode(PortletMode.VIEW);
+       // response.setPortletMode(PortletMode.VIEW);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String showEditView() {
+    @RequestMapping
+    public String showEditView(RenderRequest request, Model model) {
 
+        model.addAttribute("saved", request.getParameter("saveStatus") != null);
+        
         return "edit";
     }
     
@@ -112,8 +116,4 @@ public class PortletEditController implements ApplicationContextAware {
         contactDomains = domains;  
     }
 
-    @Autowired
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        appContext = applicationContext;
-    }
 }

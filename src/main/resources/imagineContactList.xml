@@ -1,0 +1,64 @@
+<!--
+
+    Licensed to Jasig under one or more contributor license
+    agreements. See the NOTICE file distributed with this work
+    for additional information regarding copyright ownership.
+    Jasig licenses this file to you under the Apache License,
+    Version 2.0 (the "License"); you may not use this file
+    except in compliance with the License. You may obtain a
+    copy of the License at:
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on
+    an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied. See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+<contacts serialization="custom">
+    <unserializable-parents/>
+    <sorted-set>
+        <default/>
+        <org.jasig.portlet.contacts.model.util.ContactComparator/>
+        <int>2</int>
+        <contact>
+            <id>1</id>
+            <title>Mr</title>
+            <firstname>Santa</firstname>
+            <surname>Claus</surname>
+            <initials>SC</initials>
+            <organisation>Christmas</organisation>
+            <department>Logistics</department>
+            <position>Distribution Manager</position>
+            <emailAddresses/>
+            <addresses/>
+            <phoneNumbers/>
+            <imageURI>http://upload.wikimedia.org/wikipedia/commons/thumb/4/42/MerryOldSanta.jpg/200px-MerryOldSanta.jpg</imageURI>
+            <contactSource>imagine</contactSource>
+        </contact>
+        <contact>
+            <id>2</id>
+            <title>Miss</title>
+            <firstname>Tooth</firstname>
+            <surname>Fairy</surname>
+            <initials>TF</initials>
+            <organisation>Health</organisation>
+            <department>Dentistry</department>
+            <position>Acquisitions</position>
+            <emailAddresses/>
+            <addresses/>
+            <phoneNumbers/>
+            <imageURI>http://ia.media-imdb.com/images/M/MV5BMTQ4NjQzMjQxNF5BMl5BanBnXkFtZTcwNTEzMDY4Mg@@._V1._SY317_.jpg</imageURI>
+            <contactSource>imagine</contactSource>
+        </contact>
+    </sorted-set>
+    <contacts>
+        <default>
+            <setId>imagine</setId>
+            <setTitle>Important Contacts</setTitle>
+        </default>
+    </contacts>
+</contacts>

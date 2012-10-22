@@ -36,6 +36,10 @@
     
     <h3 class="portlet-note info-message" role="heading" ><spring:message code="edit.mode.heading"/></h3>
     
+    <c:if test="${saved}">
+        <p class="portlet-msg-success">Preferences Saved</p>
+    </c:if>
+    
     <div  role="region">
     
     <form:form action="${SAVE}" commandName="domains">
@@ -45,7 +49,8 @@
             </c:forEach>
         </ul>
         <div class="editcontrols" >
-            <input type="submit" value="<spring:message code="edit.mode.save"/>" class="portlet-button"/> <a href="${returnLink}" class="portlet-button"><spring:message code="edit.mode.cancel"/></a>
+            <input type="submit" value="<spring:message code="edit.mode.save"/>" class="portlet-button"/> 
+            <a href="${returnLink}" class="portlet-button"><spring:message code="edit.mode.cancel"/></a>
         </div>
             
     </form:form>

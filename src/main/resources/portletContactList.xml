@@ -44,12 +44,12 @@
             <addresses/>
             <phoneNumbers/>
             <imageURI/>
-            <contactSource>Developera</contactSource>
+            <contactSource>Developers</contactSource>
         </contact>
     </sorted-set>
     <contacts>
         <default>
-            <setId>Developera</setId>
+            <setId>Developers</setId>
             <setTitle>Developers</setTitle>
         </default>
     </contacts>
