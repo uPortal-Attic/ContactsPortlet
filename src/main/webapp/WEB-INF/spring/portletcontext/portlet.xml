@@ -37,18 +37,7 @@
     <bean class="org.springframework.web.portlet.mvc.annotation.DefaultAnnotationHandlerMapping">
         <property name="interceptors">
             <list>
-                <bean class="org.jasig.portlet.contacts.context.impl.ContactContextPortletInterceptor">
-                    <property name="portletContextProviders">
-                        <list>
-                            <bean class="org.jasig.portlet.contacts.context.impl.PortalUserInfoContextProvider" scope="request">
-                                <aop:scoped-proxy proxy-target-class="false" />
-                            </bean>
-                            <bean class="org.jasig.portlet.contacts.context.impl.PortalUsernameContextProvider" scope="request">
-                                <aop:scoped-proxy proxy-target-class="false" />
-                            </bean>
-                        </list>
-                    </property>
-                </bean>
+                <bean class="org.jasig.portlet.contacts.context.impl.ResponseProviderPortletInterceptor"/>
                 <bean class="org.jasig.portlet.contacts.MinimizedStateHandlerInterceptor"/>
             </list>
         </property>
@@ -74,6 +63,7 @@
     <bean id="SearchEventController" class="org.jasig.portlet.contacts.control.SearchEventController"/>
     <bean id="ConfigController" class="org.jasig.portlet.contacts.control.ConfigController"/>
 
+    <import resource="portlet-overlay.xml"/>
 
 
 </beans>

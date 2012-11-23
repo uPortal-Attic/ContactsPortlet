@@ -64,7 +64,7 @@ public class SaveContactController {
         
         boolean saved = false;
         
-        for (ContactDomain domainObj : contactDomains)
+        for (ContactDomain domainObj : contactDomains) {
             if (domainObj.getId().equals(domain)) {
                 log.debug("Found domain :: "+domainObj.getId()+" == "+domain);
                 Contact toSave = null;
@@ -98,6 +98,7 @@ public class SaveContactController {
                     
                 break;
             }
+        }
         
         model.put("STATUS", "OK");
         log.debug("SAVED :: "+saved);

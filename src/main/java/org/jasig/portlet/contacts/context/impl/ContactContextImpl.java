@@ -22,10 +22,10 @@ package org.jasig.portlet.contacts.context.impl;
 import java.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.jasig.portlet.contacts.context.ContactContext;
 import org.jasig.portlet.contacts.context.ContextProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -56,56 +56,57 @@ log.debug(context);
     }
 
     public Object get(String key) {
-        prime();
-        return context.get(key);
-        /*
-         * Object out = null; for (ContextProvider provider : contextProviders){
-         * if (provider.provides(key)) out = provider.get(key); }
-         *
-         * return out;
-         */
+        
+        Object out = null; 
+        for (ContextProvider provider : contextProviders){
+            if (provider.provides(key)) {
+                out = provider.get(key);
+                break;
+            } 
+        }
+        return out;
+        
     }
     
     public Map getAll() {
-        prime();
         
         Map obj = new HashMap();
-        obj.putAll(context);
+        for (ContextProvider provider : contextProviders) {
+            try {
+                obj.putAll(provider.getContext());
+            } catch (Exception e) {
+                log.debug(e);
+            }
+        }
         
         return obj;
     }
 
     public boolean provides(String key) {
-        prime();
-        return context.containsKey(key);
-        /*
-         * for (ContextProvider provider : contextProviders){ if
-         * (provider.provides(key)) return true; } return false;
-         */
+        for (ContextProvider provider : contextProviders){ 
+            if (provider.provides(key)) {
+                return true;
+            } 
+        } 
+        return false;
+        
     }
 
     public boolean provides(Collection<String> keys) {
-        prime();
-        return context.keySet().containsAll(keys);
-
-        /*
-         * List<String> keyList = new ArrayList<String>(); keyList.addAll(keys);
-         *
-         *
-         *
-         * for (ContextProvider provider : contextProviders){
-         * keyList.removeAll(provider.keySet()); }
-         *
-         * return keyList.isEmpty();
-         */
+        List<String> keyList = new ArrayList<String>(); 
+        keyList.addAll(keys);
+        for (ContextProvider provider : contextProviders){
+            keyList.removeAll(provider.keySet()); 
+        }
+         
+        return keyList.isEmpty();
+        
     }
     private final List<ContextProvider> contextProviders = new ArrayList<ContextProvider>();
 
     @Autowired(required = false)
     public void setContextProviders(Collection<ContextProvider> providers) {
         contextProviders.addAll(providers);
-
-        prime();
     }
     
     public String toString() {

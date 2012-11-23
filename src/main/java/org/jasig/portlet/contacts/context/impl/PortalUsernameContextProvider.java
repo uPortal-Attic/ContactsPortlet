@@ -19,12 +19,17 @@
 
 package org.jasig.portlet.contacts.context.impl;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import javax.portlet.PortletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.jasig.portlet.contacts.context.ContextProvider;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.portlet.context.PortletRequestAttributes;
 
 /**
  *
@@ -33,25 +38,29 @@ import org.jasig.portlet.contacts.context.ContextProvider;
 public class PortalUsernameContextProvider implements ContextProvider {
 
     public boolean provides(String key) {
-        return userInfo.containsKey(key);
+        return (key.equals("username"));
     }
 
     public Set<String> keySet() {
-        return userInfo.keySet();
+        return new HashSet(Arrays.asList(new String[] {"username"}));
     }
 
     public Object get(String key) {
-        return userInfo.get(key);
+        return getRequest().getRemoteUser();
     }
     public Map<String, Object> getContext() {
-        return userInfo;
+        Map<String, Object> context = new HashMap<String,Object>();
+        context.put("username", get("username"));
+        return context;
     }
     
-    private final Map userInfo = new HashMap<String,String>();
-    
-    @Autowired
-    public void setRequest(PortletRequest request) {
-        String username = request.getRemoteUser().trim();
-        userInfo.put("username", username);
-    }  
+    private PortletRequest getRequest() {
+        RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+        PortletRequest request = null;
+        if (requestAttributes instanceof PortletRequestAttributes) {
+            request = ((PortletRequestAttributes) requestAttributes).getRequest();
+        } 
+        
+        return request;
+    }
 }
