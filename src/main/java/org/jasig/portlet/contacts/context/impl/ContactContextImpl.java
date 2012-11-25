@@ -36,24 +36,6 @@ public class ContactContextImpl implements ContactContext {
     private static Log log = LogFactory.getLog(ContactContextImpl.class);
     private Map<String, Object> context = new HashMap<String, Object>();
 
-    private void prime() {
-
-        if (!contextProviders.isEmpty()) {
-            List<ContextProvider> done = new ArrayList<ContextProvider>();
-            for (ContextProvider provider : contextProviders) {
-                try {
-                    context.putAll(provider.getContext());
-                    done.add(provider);
-                    log.debug(provider.getClass().getCanonicalName() + " : done");
-                } catch (Exception e) {
-                    log.debug("ContextProvider not ready -- ", e);
-                }
-            }
-            contextProviders.removeAll(done);
-log.debug(context);            
-        }
-
-    }
 
     public Object get(String key) {
         
@@ -83,6 +65,7 @@ log.debug(context);
     }
 
     public boolean provides(String key) {
+        log.debug(toString());
         for (ContextProvider provider : contextProviders){ 
             if (provider.provides(key)) {
                 return true;
@@ -93,6 +76,7 @@ log.debug(context);
     }
 
     public boolean provides(Collection<String> keys) {
+        log.debug(toString());
         List<String> keyList = new ArrayList<String>(); 
         keyList.addAll(keys);
         for (ContextProvider provider : contextProviders){
@@ -104,16 +88,22 @@ log.debug(context);
     }
     private final List<ContextProvider> contextProviders = new ArrayList<ContextProvider>();
 
-    @Autowired(required = false)
+    @Autowired(required = true)
     public void setContextProviders(Collection<ContextProvider> providers) {
         contextProviders.addAll(providers);
     }
     
     public String toString() {
+        
         List<String> outList = new ArrayList<String>();
-        for(Map.Entry<String,Object> entry : context.entrySet()) {
-            outList.add(entry.getKey() + "=" + entry.getValue().toString());
+        
+        for (ContextProvider prov : contextProviders) {
+            for (Map.Entry entry : prov.getContext().entrySet()) {
+                outList.add(entry.getKey() + "=" + entry.getValue());
+            }
+            
         }
+        
         
         String out = StringUtils.collectionToDelimitedString(outList,",", "[", "]");
         return out;

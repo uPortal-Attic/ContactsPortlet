@@ -81,18 +81,8 @@
 
     <bean id="modelFactory" class="org.jasig.portlet.contacts.model.impl.ModelPojoFactory"/>
 
-    <bean id="context" class="org.jasig.portlet.contacts.context.impl.ContactContextImpl" scope="globalSession">
-        <aop:scoped-proxy proxy-target-class="false" />
-    </bean>
-
-    <bean class="org.jasig.portlet.contacts.context.impl.PortalUserInfoContextProvider" scope="request">
-        <aop:scoped-proxy proxy-target-class="false" />
-    </bean>
-    <bean class="org.jasig.portlet.contacts.context.impl.PortalUsernameContextProvider" scope="request">
-        <aop:scoped-proxy proxy-target-class="false" />
-    </bean>
-
     <import resource="domains-overlay.xml"/>
+    <import resource="contactContext.xml"/>
     
 </beans>
 
