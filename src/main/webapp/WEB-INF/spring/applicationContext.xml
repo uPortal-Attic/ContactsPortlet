@@ -35,6 +35,11 @@
 
     <context:annotation-config />
   
+    
+    <import resource="domains-overlay.xml"/>
+    <import resource="contactContext.xml"/>
+    
+    
     <bean id="propertyConfigurer"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
         lazy-init="false">
@@ -81,8 +86,6 @@
 
     <bean id="modelFactory" class="org.jasig.portlet.contacts.model.impl.ModelPojoFactory"/>
 
-    <import resource="domains-overlay.xml"/>
-    <import resource="contactContext.xml"/>
     
 </beans>
 
