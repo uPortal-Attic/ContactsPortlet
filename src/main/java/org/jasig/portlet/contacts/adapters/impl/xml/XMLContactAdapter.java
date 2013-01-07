@@ -72,11 +72,12 @@ public class XMLContactAdapter extends AbstractContactAdapter implements PushAda
     public ContactSet getContacts(String id) {
         Set<ContactSet> contacts = getContacts();
         ContactSet contactSet = null;
-        for(ContactSet set : contacts) 
+        for(ContactSet set : contacts) { 
             if (set.getId().equals(id)) {
                 contactSet = set;
                 break;
             }
+        }
         return contactSet;
     }
 
@@ -84,8 +85,9 @@ public class XMLContactAdapter extends AbstractContactAdapter implements PushAda
     public Map<String, String> getGroups() {
         Set<ContactSet> contacts = getContacts();
         Map<String,String> groups = new HashMap<String,String>();
-        for(ContactSet set : contacts)
+        for(ContactSet set : contacts) {
             groups.put(set.getTitle(), set.getId());
+        }
             
         return groups;
     }
@@ -106,10 +108,13 @@ public class XMLContactAdapter extends AbstractContactAdapter implements PushAda
     @Override
     public Contact getByURN(String URN) {
         Set<ContactSet> contacts = getContacts();
-        for(ContactSet set : contacts) 
-            for (Contact contact : set)
-                if (contact.getURN().equals(URN))
+        for(ContactSet set : contacts) { 
+            for (Contact contact : set) {
+                if (contact.getURN().equals(URN)) {
                     return contact;
+                }
+            }
+        }
         return null;
     }
 }

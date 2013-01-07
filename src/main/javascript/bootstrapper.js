@@ -144,10 +144,10 @@ function PORTLET_JS_BOOTSTRAP(jsFile, opts) {
     
     context.jQuery = jQuery.noConflict(true);
     context.jQuery(document).ready(
-    context.jQuery.proxy(function() {
-        this.loadJS(jsFile, {});
-    }, context)
-);
+        context.jQuery.proxy(function() {
+            this.loadJS(jsFile, {});
+        }, context)
+    );
     
     
 

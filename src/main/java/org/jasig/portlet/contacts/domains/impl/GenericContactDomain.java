@@ -199,7 +199,8 @@ public class GenericContactDomain implements ContactDomain {
         if (contact == null && this.getHasPush())
             contact = pushAdapter.getByURN(URN);
         
-        decorator.decorate(contact);
+        if (contact != null)
+            decorator.decorate(contact);
         
         return contact;
         

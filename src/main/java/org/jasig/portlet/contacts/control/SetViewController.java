@@ -27,6 +27,7 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jasig.portlet.contacts.IViewSelector;
 import org.jasig.portlet.contacts.domains.ContactDomain;
 import org.jasig.portlet.contacts.model.Contact;
 import org.jasig.portlet.contacts.model.ContactSet;
@@ -102,7 +103,10 @@ public class SetViewController {
         model.addAttribute("domain", domainObj);
         model.addAttribute("source", setId);
 
-         return "setView";
+         if (viewSelector.isMobile(request))
+            return "setView-jQM";
+        else
+            return "setView";
 
     }
 
@@ -135,7 +139,10 @@ public class SetViewController {
         model.addAttribute("contactList", contacts);
 
         
-        return "setView";
+        if (viewSelector.isMobile(request))
+            return "setView-jQM";
+        else
+            return "setView";
 
     }
     private Set<ContactDomain> contactDomains;
@@ -143,6 +150,14 @@ public class SetViewController {
     @Autowired
     public void setContactDomains(Set<ContactDomain> domains) {
         contactDomains = domains;
+    }
+    
+        private IViewSelector viewSelector;
+    
+    @Autowired(required = true)
+    public void setViewSelector(IViewSelector viewSelector) {
+        this.viewSelector = viewSelector;
+        
     }
 
 }

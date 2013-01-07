@@ -58,6 +58,5 @@ public class ContactSet extends TreeSet<Contact> implements Serializable {
     public ContactSet(ContactComparator comparator) {
         super(comparator);
     }
-    
-    
+        
 }

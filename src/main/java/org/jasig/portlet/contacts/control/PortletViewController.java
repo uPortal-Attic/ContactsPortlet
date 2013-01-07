@@ -115,8 +115,10 @@ public class PortletViewController {
         
         if (urn != null)
             log.debug(urn);
-        
-	return "defaultView";
+        if (viewSelector.isMobile(req))
+            return "defaultMobileView-jQM";
+        else
+            return "defaultView";
 
     }
     

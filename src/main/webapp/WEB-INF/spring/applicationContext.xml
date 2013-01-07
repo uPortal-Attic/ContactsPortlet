@@ -35,20 +35,10 @@
 
     <context:annotation-config />
   
+    <context:property-placeholder order="10" location="classpath:portlet.properties"/> 
     
     <import resource="domains-overlay.xml"/>
     <import resource="contactContext.xml"/>
-    
-    
-    <bean id="propertyConfigurer"
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-        lazy-init="false">
-        <property name="locations">
-            <list>
-                <value>classpath:portlet.properties</value>
-            </list>
-        </property>
-    </bean>
 
     <!-- Message source for this context, loaded from localized "messages_xx" files -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
