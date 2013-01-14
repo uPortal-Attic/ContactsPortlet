@@ -17,9 +17,9 @@ under the License.
 
 This project includes:
   AOP alliance under Public Domain
-  Apache Log4j under The Apache Software License, Version 2.0
   Apache Pluto Portlet Tag Library under The Apache Software License, Version 2.0
   AspectJ runtime under Eclipse Public License - v 1.0
+  cglib-full under Apache License, Version 1.1
   Collections under The Apache Software License, Version 2.0
   Commons BeanUtils under The Apache Software License, Version 2.0
   Commons Codec under The Apache Software License, Version 2.0
@@ -38,36 +38,36 @@ This project includes:
   JAXB2 Basics - Runtime under BSD-Style License
   Jettison under Apache License, Version 2.0
   json-lib under Apache License, Version 2.0
+  jsp-api under Commons Development and Distribution License, Version 1.0
+  jstl under Commons Development and Distribution License, Version 1.0
   JUnit under Common Public License Version 1.0
+  Log4j under The Apache Software License, Version 2.0
   MXP1: Xml Pull Parser 3rd Edition (XPP3) under Indiana University Extreme! Lab Software License, vesion 1.1.1 or Public Domain
   Resource Server API under Apache License Version 2.0
   Resource Server Content under Apache License Version 2.0
   Resource Server Core under Apache License Version 2.0
   Resource Server Utilities under Apache License Version 2.0
+  servlet-api under Commons Development and Distribution License, Version 1.0
   SLF4J API Module under MIT License
+  sojo-optional under Apache License, Version 2.0
   Spring Framework: Mock under The Apache Software License, Version 2.0
   Spring Json View under The Apache Software License, Version 2.0
   Spring LDAP Core under Apache License, Version 2.0
+  spring-aop under The Apache Software License, Version 2.0
+  spring-asm under The Apache Software License, Version 2.0
+  spring-aspects under The Apache Software License, Version 2.0
+  spring-beans under The Apache Software License, Version 2.0
+  spring-context under The Apache Software License, Version 2.0
+  spring-context-support under The Apache Software License, Version 2.0
+  spring-core under The Apache Software License, Version 2.0
+  spring-expression under The Apache Software License, Version 2.0
+  spring-oxm under The Apache Software License, Version 2.0
+  spring-tx under Apache License, Version 2.0
+  spring-web under The Apache Software License, Version 2.0
+  spring-webmvc under The Apache Software License, Version 2.0
+  spring-webmvc-portlet under The Apache Software License, Version 2.0
+  standard under Apache License, Version 2.0
   StAX API under The Apache Software License, Version 2.0
-  Unnamed - cglib:cglib-full:jar:2.0.2 under Apache License, Version 1.1
-  Unnamed - javax.servlet:jsp-api:jar:2.0 under Commons Development and Distribution License, Version 1.0
-  Unnamed - javax.servlet:jstl:jar:1.1.2 under Commons Development and Distribution License, Version 1.0
-  Unnamed - javax.servlet:servlet-api:jar:2.5 under Commons Development and Distribution License, Version 1.0
-  Unnamed - net.sf.sojo:sojo-optional:jar:0.5.0 under Apache License, Version 2.0
-  Unnamed - org.springframework:spring-aop:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - org.springframework:spring-asm:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - org.springframework:spring-aspects:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - org.springframework:spring-beans:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - org.springframework:spring-context-support:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - org.springframework:spring-context:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - org.springframework:spring-core:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - org.springframework:spring-expression:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - org.springframework:spring-oxm:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - org.springframework:spring-tx:jar:3.0.5.RELEASE under Apache License, Version 2.0
-  Unnamed - org.springframework:spring-web:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - org.springframework:spring-webmvc-portlet:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - org.springframework:spring-webmvc:jar:3.1.1.RELEASE under The Apache Software License, Version 2.0
-  Unnamed - taglibs:standard:jar:1.1.2 under Apache License, Version 2.0
   uPortal Search API under Apache License Version 2.0
   XML Pull Parsing API under Public Domain
   XStream Core under BSD style
