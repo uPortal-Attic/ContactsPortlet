@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.portlet.bind.annotation.ResourceMapping;
+import org.springframework.web.util.UriUtils;
 
 /**
  *
@@ -88,7 +89,7 @@ public class SetViewController {
             Model model,
             PortletSession session) throws IOException {
 
-
+        setId = UriUtils.decode(setId, "UTF-8");
         ContactSet contacts = domainObj.getContacts(setId);
         model.addAttribute("contactList", contacts);
 

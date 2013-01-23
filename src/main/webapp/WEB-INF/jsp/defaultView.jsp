@@ -126,9 +126,10 @@
                         <div class="accordion">
                             <c:forEach var="entry" items="${domain.contactGroups}">
 
+                                <str:encodeUrl var="setId">${entry.value}</str:encodeUrl>
 
                                 <portlet:resourceURL id="setView" var="setViewResourceUrl">
-                                    <portlet:param name="set" value="${entry.value}"/>
+                                    <portlet:param name="set" value="${setId}"/>
                                     <portlet:param name="domain" value="${domain.id}"/>
                                     <portlet:param name="nspace" value="${NSPACE}"/>
                                 </portlet:resourceURL>

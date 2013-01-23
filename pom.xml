@@ -168,9 +168,6 @@
             </dependency>
 
 
-
-
-
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
@@ -185,6 +182,11 @@
                 <groupId>taglibs</groupId>
                 <artifactId>standard</artifactId>
                 <version>${jstl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>taglibs</groupId>
+                <artifactId>string</artifactId>
+                <version>1.1.0</version>
             </dependency>
             <!-- PROVIDED -->
 
@@ -338,6 +340,12 @@
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>string</artifactId>
+        </dependency>
+        
         <!-- PROVIDED -->
 
         <dependency>
