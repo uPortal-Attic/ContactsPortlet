@@ -12,4 +12,10 @@
         <version>0.5.0</version>
         <license>Apache License, Version 2.0</license>
     </artifact>
+    <artifact>
+        <groupId>taglibs</groupId>
+        <artifactId>string</artifactId>
+        <version>1.1.0</version>
+        <license>Apache License, Version 2.0</license>
+    </artifact>
 </license-lookup>
