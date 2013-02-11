@@ -40,8 +40,9 @@ PORTLET_JS_CONTROL = function(opts) {
     });
     
     
-    $(".accordion", opts.rootNode).accordion({ 
-        change: function(event, ui) { 
+    function getDataFunc() {
+        
+        return function(event, ui) { 
             
             var domain = $(this).closest(".contact-domain");
             var link = ui.newContent.attr("rel");
@@ -56,6 +57,14 @@ PORTLET_JS_CONTROL = function(opts) {
                 });
              
             }
+        }
+        
+    }
+    
+    $(".accordion", opts.rootNode).accordion({ 
+        change: getDataFunc(),
+        create: function(event, ui) {
+            $(this).accordion("activate", "0");
         },
         collapsible: true,
         autoHeight: false,

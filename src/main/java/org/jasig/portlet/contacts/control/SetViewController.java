@@ -78,8 +78,8 @@ public class SetViewController {
             Model model,
             PortletSession session) throws IOException {
 
-        setId = UriUtils.decode(setId, "UTF-8");
-        ContactSet contacts = domainObj.getContacts(setId);
+        String setIdDecode = UriUtils.decode(setId, "UTF-8");
+        ContactSet contacts = domainObj.getContacts(setIdDecode);
         model.addAttribute("contactList", contacts);
 
         if (domainObj.getHasPersist()) {
@@ -87,8 +87,6 @@ public class SetViewController {
         }
         log.debug(contacts.size() + " CONTACTS found for " + contacts.getTitle());
         log.debug("Contacts set for domain :: " + domainObj.getName());
-        
-        model.addAttribute("source", setId);
 
         model.addAttribute("domain", domainObj);
         model.addAttribute("source", setId);
