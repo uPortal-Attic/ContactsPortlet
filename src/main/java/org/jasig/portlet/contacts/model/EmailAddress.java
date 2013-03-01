@@ -29,13 +29,23 @@ import java.io.Serializable;
  *
  * @author mfgsscw2
  */
-public interface EmailAddress extends Serializable {
-    
-    public static final String WORK_TYPE = "WORK";
-    public static final String HOME_TYPE = "HOME";
-    public static final String TEMP_TYPE = "TEMP";
-    public static final String OTHER_TYPE = "OTHER";
-    
+public interface EmailAddress extends Serializable, TestableContactDependency {
+
+    public enum EmailAddressType {
+        WORK, HOME, TEMP, OTHER;
+
+        public static EmailAddressType getType (String value) {
+            EmailAddressType ret = null;
+            try {
+                return EmailAddressType.valueOf(value);
+            } catch (NullPointerException ex) {
+                return null;
+            } catch (IllegalArgumentException ex) {
+                return null;
+            }
+        }
+    }
+
     public String getLabel();
     public String getType();
     public String getEmailAddress();
@@ -43,5 +53,6 @@ public interface EmailAddress extends Serializable {
     public void setLabel(String label);
     public void setType(String type);
     public void setEmailAddress(String email);
-    
+
+    public String getDisplayType();
 }

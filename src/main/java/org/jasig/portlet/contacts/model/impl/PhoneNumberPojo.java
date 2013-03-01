@@ -23,6 +23,7 @@
  */
 package org.jasig.portlet.contacts.model.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.jasig.portlet.contacts.model.PhoneNumber;
 
 /**
@@ -63,5 +64,19 @@ public class PhoneNumberPojo implements PhoneNumber {
     public void setPhoneNumber(String number) {
         this.number = number;
     }
-    
+
+    @Override
+    public String getDisplayType() {
+        return label != null ? label : type.toString();
+    }
+
+    /**
+     * Usable entries must have something for a number plus a type.
+     *
+     * @return True if populated.
+     */
+    @Override
+    public boolean isPopulated() {
+        return StringUtils.isNotBlank(number) && PhoneType.getType(type) != null;
+    }
 }

@@ -23,6 +23,7 @@
  */
 package org.jasig.portlet.contacts.model.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.jasig.portlet.contacts.model.EmailAddress;
 
 /**
@@ -62,5 +63,19 @@ public class EmailAddressPojo implements EmailAddress {
     public void setType(String type) {
         this.type = type;
     }
-    
+
+    @Override
+    public String getDisplayType() {
+        return label != null ? label : type.toString();
+    }
+
+    /**
+     * Usable entries must have something for an address plus a type.
+     *
+     * @return True if populated.
+     */
+    @Override
+    public boolean isPopulated() {
+        return StringUtils.isNotBlank(address) && EmailAddressType.getType(type) != null;
+    }
 }
