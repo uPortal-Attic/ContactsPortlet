@@ -29,13 +29,23 @@ import java.io.Serializable;
  *
  * @author mfgsscw2
  */
-public interface Address extends Serializable {
-    
-    public static final String WORK_TYPE = "WORK";
-    public static final String HOME_TYPE = "HOME";
-    public static final String TEMP_TYPE = "TEMP";
-    public static final String OTHER_TYPE = "OTHER";
-    
+public interface Address extends Serializable, TestableContactDependency {
+
+    public enum AddressType {
+        WORK, HOME, TEMP, OTHER;
+
+        public static AddressType getType (String value) {
+            AddressType ret = null;
+            try {
+                return AddressType.valueOf(value);
+            } catch (NullPointerException ex) {
+                return null;
+            } catch (IllegalArgumentException ex) {
+                return null;
+            }
+        }
+    }
+
     public String getLabel();
     public String getType();
     
@@ -58,4 +68,6 @@ public interface Address extends Serializable {
     public void setRegion(String region);
     public void setPostCode(String code);
     public void setCountry(String country);
+
+    public String getDisplayType();
 }

@@ -81,10 +81,9 @@ PORTLET_JS_CONTROL = function(opts) {
                 source: function(request, response) {
                     var domain = $(searchBox).closest(".contact-domain");
 
-                    var term = escape(request.term);
-                    var filter = escape($("input[name=filter]:radio:checked", domain).val());
-
-                    var domainId = escape(searchBox.attr("rel"));
+                    var term = request.term;
+                    var filter = $("input[name=filter]:radio:checked", domain).val();
+                    var domainId = searchBox.attr("rel");
 
                     var url = autocomplete;
 

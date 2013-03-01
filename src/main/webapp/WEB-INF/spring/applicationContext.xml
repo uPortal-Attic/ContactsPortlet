@@ -37,7 +37,7 @@
   
     <context:property-placeholder order="10" location="classpath:portlet.properties"/> 
     
-    <import resource="domains-overlay.xml"/>
+    <import resource="domains.xml"/>
     <import resource="contactContext.xml"/>
 
     <!-- Message source for this context, loaded from localized "messages_xx" files -->

@@ -120,12 +120,12 @@ PORTLET_JS_CONTROL = function(opts) {
         var domain = $(this).closest(".setContainer");
         var resultsArea = $("#"+nspace+"contactContainer ul");
         
-        var term = escape($("input[name=searchtext]", domain).val());
-        var filter = escape($("select[name=filter]", domain).val());
+        var term = $("input[name=searchtext]", domain).val();
+        var filter = $("select[name=filter]", domain).val();
         
         var url = $(this).closest(".searchForm").attr("action");
-        url = url.replace(escape("||FILTER||"), filter);
-        url = url.replace(escape("||TERM||"), term);
+        url = url.replace(encodeURIComponent("||FILTER||"), encodeURIComponent(filter));
+        url = url.replace(encodeURIComponent("||TERM||"), encodeURIComponent(term));
         
         
         resultsArea.contents().remove();

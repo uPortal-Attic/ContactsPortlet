@@ -20,12 +20,18 @@
 package org.jasig.portlet.contacts.adapters.impl.ldap;
 
 import java.util.List;
-import java.util.Map;
+
 import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jasig.portlet.contacts.adapters.impl.AbstractSearchAdapter;
+import org.jasig.portlet.contacts.model.Contact;
+import org.jasig.portlet.contacts.model.ContactSet;
+import org.jasig.portlet.contacts.model.ModelObjectFactory;
+import org.jasig.portlet.contacts.model.util.ContactMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.DistinguishedName;
@@ -34,11 +40,6 @@ import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.filter.OrFilter;
 import org.springframework.ldap.filter.WhitespaceWildcardsFilter;
-import org.jasig.portlet.contacts.model.Contact;
-import org.jasig.portlet.contacts.model.ContactSet;
-import org.jasig.portlet.contacts.model.ModelObjectFactory;
-import org.jasig.portlet.contacts.model.util.ContactMapper;
-import org.jasig.portlet.contacts.adapters.impl.AbstractSearchAdapter;
 import org.springframework.util.StringUtils;
 
 /**
@@ -72,8 +73,11 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
     public void setSearchAttribute(String searchAttribute) {
         this.searchAttribute = searchAttribute;
     }
-  
-    
+
+    public void setFilterAttribute(String filterAttribute) {
+        this.filterAttribute = filterAttribute;
+    }
+
     public Contact getByURN(String urn) {
         String[] attr = StringUtils.delimitedListToStringArray(urn, ":");
         
@@ -107,15 +111,14 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         
         ContactSet contactSet = new ContactSet();
         contactSet.setId(searchText+":"+filter);
-        
+
         contactSet.setTitle("Search Results");
         for (Attributes attrs : contactList) {
-            Contact contact = modelFactory.getObjectOfType(Contact.class);
-            mapper.mapToContact(attrs, contact);
+            Contact contact = (Contact) contactMapper.mapFromAttributes(attrs);
             contact.setContactSource("search:"+searchText+":"+filter);
             contactSet.add(contact);
         }
-        
+
         return contactSet;
     }
   
@@ -123,10 +126,10 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         AndFilter andFilter = new AndFilter();
         andFilter.and(new EqualsFilter("objectclass", "person"));
         andFilter.and(new WhitespaceWildcardsFilter(searchAttribute, searchValue));
-logger.debug("SEARCH CONSTRUCT :: "+searchValue+" :: "+searchFilter);
+        logger.debug("SEARCH CONSTRUCT :: "+searchValue+" :: "+searchFilter);
         if(filters != null && searchFilter != null) {            
             List<String> filter = (List<String>) filters.get(searchFilter);
-logger.debug("FILTERS");
+            logger.debug("FILTERS");
             if(filter != null && filter.size() != 0) {
                 logger.debug("Constructing "+searchFilter+" search");
                 OrFilter orFilter = new OrFilter();
@@ -173,6 +176,11 @@ logger.debug("FILTERS");
     @Autowired
     public void setModelObjectFactory(ModelObjectFactory factory){
         modelFactory = factory;
+    }
+
+    private ConfigurableContactAttributesMapper contactMapper;
+    public void setAttributesMapper(ConfigurableContactAttributesMapper contactMapper) {
+        this.contactMapper = contactMapper;
     }
     
     

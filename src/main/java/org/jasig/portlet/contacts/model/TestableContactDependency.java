@@ -23,36 +23,10 @@
  */
 package org.jasig.portlet.contacts.model;
 
-import java.io.Serializable;
-
 /**
  *
- * @author mfgsscw2
+ * @author James Wennmacher (jwennmacher@unicon.net)
  */
-public interface PhoneNumber extends Serializable, TestableContactDependency {
-
-    public enum PhoneType {
-        WORK, HOME, TEMP, OTHER;
-
-        public static PhoneType getType (String value) {
-            PhoneType ret = null;
-            try {
-                return PhoneType.valueOf(value);
-            } catch (NullPointerException ex) {
-                return null;
-            } catch (IllegalArgumentException ex) {
-                return null;
-            }
-        }
-    }
-
-    public String getLabel();
-    public String getType();
-    public String getPhoneNumber();
-    
-    public void setLabel(String label);
-    public void setType(String type);
-    public void setPhoneNumber(String number);
-
-    public String getDisplayType();
+public interface TestableContactDependency {
+    public boolean isPopulated();
 }

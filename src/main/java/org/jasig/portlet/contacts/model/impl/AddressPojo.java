@@ -23,6 +23,7 @@
  */
 package org.jasig.portlet.contacts.model.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.jasig.portlet.contacts.model.Address;
 
 /**
@@ -116,5 +117,22 @@ public class AddressPojo implements Address {
     public void setCountry(String country) {
         this.country = country;
     }
-    
+
+    @Override
+    public String getDisplayType() {
+        return label != null ? label : type.toString();
+    }
+
+    /**
+     * Usable entries must have something for a type, plus at least one of
+     * street, building, locality, region, or country.
+     *
+     * @return True if populated.
+     */
+    @Override
+    public boolean isPopulated() {
+        return AddressType.getType(type) != null && (
+                StringUtils.isNotBlank(street) || StringUtils.isNotBlank(building)
+                || StringUtils.isNotBlank(locality) || StringUtils.isNotBlank(region));
+    }
 }
