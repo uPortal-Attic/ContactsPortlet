@@ -54,6 +54,18 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        <!-- for sojo-optional -->
+        <repository>
+            <id>sojo-3rd-party</id>
+            <name>for sojo</name>
+            <url>http://spring-json.sourceforge.net/repository</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
 
