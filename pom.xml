@@ -14,7 +14,7 @@
 
     <name>Contacts Portlet</name>
     <description>Contacts Portlet</description>
-    <version>1.0.1</version>
+    <version>1.0.4-SNAPSHOT</version>
 	
     <url>https://wiki.jasig.org/display/PLT/Contacts+Portlet</url>
 
@@ -47,6 +47,18 @@
             <id>jasig-3rd-party</id>
             <name>Jasig 3rd Party Repository</name>
             <url>http://developer.jasig.org/repo/content/repositories/3rd-party</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!-- for sojo-optional -->
+        <repository>
+            <id>sojo-3rd-party</id>
+            <name>for sojo</name>
+            <url>http://spring-json.sourceforge.net/repository</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -168,9 +180,6 @@
             </dependency>
 
 
-
-
-
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
@@ -185,6 +194,11 @@
                 <groupId>taglibs</groupId>
                 <artifactId>standard</artifactId>
                 <version>${jstl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>taglibs</groupId>
+                <artifactId>string</artifactId>
+                <version>1.1.0</version>
             </dependency>
             <!-- PROVIDED -->
 
@@ -338,6 +352,12 @@
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>string</artifactId>
+        </dependency>
+        
         <!-- PROVIDED -->
 
         <dependency>

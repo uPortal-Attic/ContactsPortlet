@@ -20,7 +20,6 @@
 package org.jasig.portlet.contacts.control;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.Set;
 import javax.portlet.PortletSession;
 import javax.portlet.ResourceRequest;
@@ -29,7 +28,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jasig.portlet.contacts.IViewSelector;
 import org.jasig.portlet.contacts.domains.ContactDomain;
-import org.jasig.portlet.contacts.model.Contact;
 import org.jasig.portlet.contacts.model.ContactSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +36,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.portlet.bind.annotation.ResourceMapping;
+import org.springframework.web.util.UriUtils;
 
 /**
  *
@@ -69,15 +68,6 @@ public class SetViewController {
         return null;
     }
 
-    private String setupUrls(String source, ContactDomain domain, Contact contact, String url) throws IOException {
-
-        String action = "" + url;
-        action = action.replace(URLEncoder.encode("||DOMAIN||", "utf8"), URLEncoder.encode(domain.getId(), "utf8"));
-        action = action.replace(URLEncoder.encode("||CONTACT||", "utf8"), URLEncoder.encode(contact.getURN(), "utf8"));
-        action = action.replace(URLEncoder.encode("||SOURCE||", "utf8"), URLEncoder.encode(source, "utf8"));
-
-        return action;
-    }
 
     @ResourceMapping("setView")
     public String showDomain(
@@ -88,8 +78,8 @@ public class SetViewController {
             Model model,
             PortletSession session) throws IOException {
 
-
-        ContactSet contacts = domainObj.getContacts(setId);
+        String setIdDecode = UriUtils.decode(setId, "UTF-8");
+        ContactSet contacts = domainObj.getContacts(setIdDecode);
         model.addAttribute("contactList", contacts);
 
         if (domainObj.getHasPersist()) {
@@ -97,8 +87,6 @@ public class SetViewController {
         }
         log.debug(contacts.size() + " CONTACTS found for " + contacts.getTitle());
         log.debug("Contacts set for domain :: " + domainObj.getName());
-        
-        model.addAttribute("source", setId);
 
         model.addAttribute("domain", domainObj);
         model.addAttribute("source", setId);
