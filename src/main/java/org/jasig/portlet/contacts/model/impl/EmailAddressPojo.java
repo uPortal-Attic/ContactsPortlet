@@ -24,6 +24,7 @@
 package org.jasig.portlet.contacts.model.impl;
 
 import org.jasig.portlet.contacts.model.EmailAddress;
+import org.jasig.portlet.contacts.model.util.ContactAttributeType;
 
 /**
  *
@@ -32,7 +33,7 @@ import org.jasig.portlet.contacts.model.EmailAddress;
 public class EmailAddressPojo implements EmailAddress {
 
     private String label = null;
-    private String type = null;
+    private ContactAttributeType type = null;
     private String address = null;
     
     public String toString() {
@@ -56,10 +57,10 @@ public class EmailAddressPojo implements EmailAddress {
     }
 
     public String getType() {
-        return type;
+        return type.toString();
     }
 
-    public void setType(String type) {
+    public void setType(ContactAttributeType type) {
         this.type = type;
     }
     

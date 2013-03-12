@@ -17,13 +17,11 @@
  * under the License.
  */
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.jasig.portlet.contacts.model.impl;
 
 import org.jasig.portlet.contacts.model.PhoneNumber;
+import org.jasig.portlet.contacts.model.util.ContactAttributeType;
 
 /**
  *
@@ -32,7 +30,7 @@ import org.jasig.portlet.contacts.model.PhoneNumber;
 public class PhoneNumberPojo implements PhoneNumber {
 
     private String label = null;
-    private String type = null;
+    private ContactAttributeType type = null;
     private String number = null;
     
     
@@ -45,7 +43,7 @@ public class PhoneNumberPojo implements PhoneNumber {
     }
 
     public String getType() {
-        return type;
+        return type.toString();
     }
 
     public String getPhoneNumber() {
@@ -56,7 +54,7 @@ public class PhoneNumberPojo implements PhoneNumber {
         this.label = label;
     }
 
-    public void setType(String type) {
+    public void setType(ContactAttributeType type) {
         this.type = type;
     }
 

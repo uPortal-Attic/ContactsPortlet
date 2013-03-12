@@ -24,6 +24,7 @@
 package org.jasig.portlet.contacts.model.impl;
 
 import org.jasig.portlet.contacts.model.Address;
+import org.jasig.portlet.contacts.model.util.ContactAttributeType;
 
 /**
  *
@@ -32,7 +33,7 @@ import org.jasig.portlet.contacts.model.Address;
 public class AddressPojo implements Address {
 
     private String label = null;
-    private String type = null;
+    private ContactAttributeType type = null;
     private String internal = null;
     private String building = null;
     private String street = null;
@@ -50,7 +51,7 @@ public class AddressPojo implements Address {
     }
 
     public String getType() {
-        return type;
+        return type.toString();
     }
 
     public String getInternal() {
@@ -85,7 +86,7 @@ public class AddressPojo implements Address {
         this.label = label;
     }
 
-    public void setType(String type) {
+    public void setType(ContactAttributeType type) {
         this.type = type;
     }
 
