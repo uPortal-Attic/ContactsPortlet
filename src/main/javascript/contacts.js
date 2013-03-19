@@ -136,13 +136,13 @@ PORTLET_JS_CONTROL = function(opts) {
 
         var resultsArea = $(".results-area", domain);
 
-        var term = escape($("input[name=searchtext]", domain).val());
-        var filter = escape($("input[name=filter]:radio:checked", domain).val());
+        var term = $("input[name=searchtext]", domain).val();
+        var filter = $("input[name=filter]:radio:checked", domain).val();
 
         var url = $(".searchForm", domain).attr("action");
-        url  = url.replace(escape("||ID||"), "searchDomain");
-        url = url.replace(escape("||FILTER||"), filter);
-        url = url.replace(escape("||TERM||"), term);
+        url  = url.replace(encodeURIComponent("||ID||"), "searchDomain");
+        url = url.replace(encodeURIComponent("||FILTER||"), encodeURIComponent(filter));
+        url = url.replace(encodeURIComponent("||TERM||"), encodeURIComponent(term));
 
 
         resultsArea.contents().remove();
