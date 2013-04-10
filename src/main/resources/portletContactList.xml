@@ -37,7 +37,7 @@
             <emailAddresses>
                 <emailAddress>
                     <label>UoM</label>
-                    <type>Work</type>
+                    <type>WORK</type>
                     <address>christopher.white@manchester.ac.uk</address>
                 </emailAddress>
             </emailAddresses>
