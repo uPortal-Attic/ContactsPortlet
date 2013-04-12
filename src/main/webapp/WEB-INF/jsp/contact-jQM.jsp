@@ -44,13 +44,13 @@
 
     <c:forEach items="${contact.phoneNumbers}" var="phoneNumber">
         <img style="vertical-align:middle" src="${pageContext.request.contextPath}/images/telephone.png" height="16" width="16" alt="<spring:message code="contact.telephone.title"/>" title="<spring:message code="contact.telephone.title"/>"/> 
-        ${ phoneNumber.label }: <a href="tel:${ phoneNumber.phoneNumber }">${ phoneNumber.phoneNumber }</a>
+        ${ phoneNumber.displayType }: <a href="tel:${ phoneNumber.phoneNumber }">${ phoneNumber.phoneNumber }</a>
         <br /> 
     </c:forEach>
 
     <c:forEach items="${contact.emailAddresses}" var="emailAddress">
         <img style="vertical-align:middle" src="${pageContext.request.contextPath}/images/email.png" height="16" width="16" alt="Email" title="<spring:message code="contact.email.title"/>"/>
-             <c:out value="${ emailAddress.label }" default="NULL"/>: <a href="mailto:"><c:out value="${ emailAddress.emailAddress }" default="NULL"/></a><br/>
+             <c:out value="${ emailAddress.displayType }" default="NULL"/>: <a href="mailto:"><c:out value="${ emailAddress.emailAddress }" default="NULL"/></a><br/>
     </c:forEach>
 
 

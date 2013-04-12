@@ -17,24 +17,16 @@
  * under the License.
  */
 
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.jasig.portlet.contacts.model;
-
-import java.io.Serializable;
-import org.jasig.portlet.contacts.model.util.ContactAttributeType;
 
 /**
  *
- * @author mfgsscw2
+ * @author James Wennmacher (jwennmacher@unicon.net)
  */
-public interface PhoneNumber extends Serializable, TestableContactDependency {
-    
-    public String getLabel();
-    public String getType();
-    public String getPhoneNumber();
-    
-    public void setLabel(String label);
-    public void setType(ContactAttributeType type);
-    public void setPhoneNumber(String number);
-
-    public String getDisplayType();
+public interface TestableContactDependency {
+    public boolean isPopulated();
 }

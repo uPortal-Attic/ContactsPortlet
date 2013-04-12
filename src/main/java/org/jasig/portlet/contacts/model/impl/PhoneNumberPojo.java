@@ -20,6 +20,7 @@
 
 package org.jasig.portlet.contacts.model.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.jasig.portlet.contacts.model.PhoneNumber;
 import org.jasig.portlet.contacts.model.util.ContactAttributeType;
 
@@ -43,7 +44,7 @@ public class PhoneNumberPojo implements PhoneNumber {
     }
 
     public String getType() {
-        return type.toString();
+        return type != null ? type.toString() : null;
     }
 
     public String getPhoneNumber() {
@@ -58,8 +59,26 @@ public class PhoneNumberPojo implements PhoneNumber {
         this.type = type;
     }
 
+    public void setType(String typeName) {
+        this.type = ContactAttributeType.getType(typeName);
+    }
+
     public void setPhoneNumber(String number) {
         this.number = number;
     }
     
+    @Override
+    public String getDisplayType() {
+        return label != null ? label : type.toString();
+    }
+
+    /**
+     * Usable entries must have something for a number plus a type.
+     *
+     * @return True if populated.
+     */
+    @Override
+    public boolean isPopulated() {
+        return StringUtils.isNotBlank(number) && getType() != null;
+    }
 }
