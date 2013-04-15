@@ -23,19 +23,19 @@
  */
 package org.jasig.portlet.contacts.adapters.impl.ldap;
 
-import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
-import org.springframework.ldap.core.AttributesMapper;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jasig.portlet.contacts.model.Address;
 import org.jasig.portlet.contacts.model.Contact;
 import org.jasig.portlet.contacts.model.EmailAddress;
 import org.jasig.portlet.contacts.model.ModelObjectFactory;
 import org.jasig.portlet.contacts.model.PhoneNumber;
+import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.util.StringUtils;
 
 /**
@@ -43,6 +43,9 @@ import org.springframework.util.StringUtils;
  * @author mfgsscw2
  */
 public class ConfigurableContactAttributesMapper implements AttributesMapper {
+
+    final static Log logger =  LogFactory.getLog(ConfigurableContactAttributesMapper.class);
+    // Prefix to identify the LDAP attribute name value is instead a default value to apply.
     
     Map<String, Object> config;
     ModelObjectFactory factory;
@@ -77,7 +80,7 @@ public class ConfigurableContactAttributesMapper implements AttributesMapper {
                     String method = "set" + StringUtils.capitalize(key);
                     Contact.class.getMethod(method, String.class).invoke(contact, attrs.get((String)config.get(key)));
                 } catch (Exception ex) {
-                    Logger.getLogger(ConfigurableContactAttributesMapper.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.fatal(ex);
                 }
             }
         }
@@ -92,7 +95,7 @@ public class ConfigurableContactAttributesMapper implements AttributesMapper {
                 String method = "set" + StringUtils.capitalize(key);
                 obj.getClass().getMethod(key, String.class).invoke(obj, getValue(attrs.get((String)config.get(key))));
             } catch (Exception ex) {
-                Logger.getLogger(ConfigurableContactAttributesMapper.class.getName()).log(Level.SEVERE, null, ex);
+                logger.fatal(ex);
             }
         }
         
