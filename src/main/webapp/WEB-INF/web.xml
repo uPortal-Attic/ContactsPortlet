@@ -23,30 +23,23 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <display-name>My Contacts</display-name>
     <description>Contacts list and search</description>
-    <!-- Spring Context start up -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring/applicationContext.xml</param-value>
     </context-param>
     <context-param>
-        <param-name>log4jConfigLocation</param-name>
-        <param-value>/WEB-INF/classes/log4j.xml</param-value>
-    </context-param>
-    <context-param>
         <param-name>webAppRootKey</param-name>
-        <param-value>contactsportlet.root</param-value>
+        <param-value>ContactsPortlet.webapp.root</param-value>
     </context-param>
+    <!-- Must be the first listener so webAppRootKey is setup for logback -->
     <listener>
         <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
     </listener>
+    <!-- Spring Context start up -->
     <listener>
-        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <listener>
-
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
     <servlet>
