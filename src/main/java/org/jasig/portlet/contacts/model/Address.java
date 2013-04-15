@@ -17,10 +17,6 @@
  * under the License.
  */
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.jasig.portlet.contacts.model;
 
 import java.io.Serializable;
@@ -31,7 +27,7 @@ import org.jasig.portlet.contacts.model.util.ContactAttributeType;
  *
  * @author mfgsscw2
  */
-public interface Address extends Serializable {
+public interface Address extends Serializable, TestableContactDependency {
             
     public String getLabel();
     public String getType();
@@ -55,4 +51,6 @@ public interface Address extends Serializable {
     public void setRegion(String region);
     public void setPostCode(String code);
     public void setCountry(String country);
+
+    public String getDisplayType();
 }

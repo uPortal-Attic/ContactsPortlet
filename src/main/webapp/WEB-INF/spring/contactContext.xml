@@ -44,7 +44,6 @@
     <bean class="org.jasig.portlet.contacts.context.impl.PortalUsernameContextProvider" scope="request">
         <aop:scoped-proxy proxy-target-class="false" />
     </bean>
-    
-    
+
     <import resource="contactContext-overlay.xml"/>
 </beans>

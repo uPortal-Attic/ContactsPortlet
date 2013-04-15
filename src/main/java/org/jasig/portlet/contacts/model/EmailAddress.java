@@ -26,7 +26,7 @@ import org.jasig.portlet.contacts.model.util.ContactAttributeType;
  *
  * @author mfgsscw2
  */
-public interface EmailAddress extends Serializable {
+public interface EmailAddress extends Serializable, TestableContactDependency {
     
     public String getLabel();
     public String getType();
@@ -36,4 +36,5 @@ public interface EmailAddress extends Serializable {
     public void setType(ContactAttributeType type);
     public void setEmailAddress(String email);
     
+    public String getDisplayType();
 }
