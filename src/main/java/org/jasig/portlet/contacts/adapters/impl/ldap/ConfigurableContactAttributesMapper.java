@@ -24,7 +24,7 @@
 package org.jasig.portlet.contacts.adapters.impl.ldap;
 
 import java.util.Map;
-
+import java.util.List;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 
