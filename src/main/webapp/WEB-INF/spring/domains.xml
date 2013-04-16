@@ -34,6 +34,15 @@
 
     <context:annotation-config/>
 
+    
+    <!--
+    
+        domains.xml 
+        For !required! domain configurations that will not be overridden by specific implementations or overlays.
+        to contain domain configurations that are compulsary for the system to work in any environment
+        
+    -->
+    
     <!--
         START OF DOMAIN DEFINITIONS
     -->
@@ -43,24 +52,10 @@
         <property name="name" value="Online Directory"/>
     </bean>
     -->
-    <bean id="ContactsPortletDomain" class="org.jasig.portlet.contacts.domains.impl.GenericContactDomain">
-        <property name="pushAdapter" ref="ContactsContactsPush"/>
-        <property name="name" value="Portlet Contacts"/>
-    </bean>
-    <bean id="ImportantPortletDomain" class="org.jasig.portlet.contacts.domains.impl.GenericContactDomain">
-        <property name="pushAdapter" ref="ImportantContactsPush"/>
-        <property name="name" value="World Contacts"/>
-    </bean>
-    <!--
-    <bean id="ContactsPortletSearchDomain" class="org.jasig.portlet.contacts.domains.impl.GenericContactDomain">
-        <property name="searchAdapter" ref="ContactsContactsSearch"/>
-        <property name="name" value="Search Portlet Contacts"/>
-    </bean>
-    -->
     <!--
        END OF DOMAIN DEFINITIONS
     -->
-
+    
     <!--
         START OF ADAPTER DEFINITIONS
     -->
@@ -168,43 +163,6 @@
         <property name="attributesMapper" ref="LdapContactMapper"/>
     </bean>
     -->
-
-    <!--
-    <bean id="ContactsContactsSearch" class="org.jasig.portlet.contacts.adapters.impl.PushSearchAdapter">
-        <property name="pushAdapter" ref="ContactsContactsPush"/>
-        <property name="context" ref="context"/>
-    </bean>
-    -->
-    <bean id="ContactsContactsPush" class="org.jasig.portlet.contacts.adapters.impl.xml.XMLContactAdapter">
-        <property name="dataURIs">
-            <list>
-                <value>portletContactList.xml</value>
-            </list>
-        </property>
-        <property name="unmarshaller" ref="contactMarshaller"/>
-    </bean>
-    
-    <bean id="ImportantContactsPush" class="org.jasig.portlet.contacts.adapters.impl.xml.XMLContactAdapter">
-        <property name="dataURIs">
-            <list>
-                <value>imagineContactList.xml</value>
-            </list>
-        </property>
-        <property name="unmarshaller" ref="contactMarshaller"/>
-    </bean>
-
-    <bean id="contactMarshaller"
-          class="org.springframework.oxm.xstream.XStreamMarshaller">
-        <property name="aliases">
-            <props>
-                <prop key="contacts">org.jasig.portlet.contacts.model.ContactSet</prop>
-                <prop key="contact">org.jasig.portlet.contacts.model.impl.ContactPojo</prop>
-                <prop key="address">org.jasig.portlet.contacts.model.impl.AddressPojo</prop>
-                <prop key="emailAddress">org.jasig.portlet.contacts.model.impl.EmailAddressPojo</prop>
-                <prop key="phoneNumber">org.jasig.portlet.contacts.model.impl.PhoneNumberPojo</prop>
-            </props>
-        </property>
-    </bean>
     <!--
         END OF ADAPTER DEFINITIONS
     -->
