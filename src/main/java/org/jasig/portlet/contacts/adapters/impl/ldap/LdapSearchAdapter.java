@@ -107,14 +107,13 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         if (filter == null)
             filter = "";
 
-        List<Attributes> contactList = getSearchResults(searchString);
+        List<Contact> contactList = getSearchResults(searchString);
 
         ContactSet contactSet = new ContactSet();
         contactSet.setId(searchText+":"+filter);
 
         contactSet.setTitle("Search Results");
-        for (Attributes attrs : contactList) {
-            Contact contact = (Contact) contactMapper.mapFromAttributes(attrs);
+        for (Contact contact : contactList) {
             contact.setContactSource("search:"+searchText+":"+filter);
             contactSet.add(contact);
         }
@@ -142,17 +141,10 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         return andFilter.toString();
     }
 
-    protected List<Attributes> getSearchResults(String search) {
+    protected List<Contact> getSearchResults(String search) {
         SearchControls searchControls = getSearchControls();
         logger.debug("Searching LDAP with search: "+search);
-        //List<Contact> contactList = ldapTemplate.search(DistinguishedName.EMPTY_PATH, search, searchControls, attributesMapper);
-        List<Attributes> contactList = ldapTemplate.search(DistinguishedName.EMPTY_PATH, search, searchControls, new AttributesMapper() {
-
-            @Override
-            public Object mapFromAttributes(Attributes attributes) throws NamingException {
-                return attributes;
-            }
-        });
+        List<Contact> contactList = ldapTemplate.search(DistinguishedName.EMPTY_PATH, search, searchControls, contactMapper);
         return contactList;
     }
 
@@ -178,15 +170,9 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         modelFactory = factory;
     }
 
-    private ConfigurableContactAttributesMapper contactMapper;
-    public void setAttributesMapper(ConfigurableContactAttributesMapper contactMapper) {
+    private AttributesMapper contactMapper;
+    public void setAttributesMapper(AttributesMapper contactMapper) {
         this.contactMapper = contactMapper;
-    }
-
-
-    private ContactMapper mapper;
-    public void setContactMapper(ContactMapper mapper) {
-        this.mapper = mapper;
     }
 
 }

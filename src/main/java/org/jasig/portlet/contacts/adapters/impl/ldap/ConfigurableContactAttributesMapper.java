@@ -42,7 +42,7 @@ import org.springframework.util.StringUtils;
  *
  * @author mfgsscw2
  */
-public class ConfigurableContactAttributesMapper {
+public class ConfigurableContactAttributesMapper implements AttributesMapper {
 
     final static Log logger =  LogFactory.getLog(ConfigurableContactAttributesMapper.class);
     // Prefix to identify the LDAP attribute name value is instead a default value to apply.
@@ -63,6 +63,7 @@ public class ConfigurableContactAttributesMapper {
     @SuppressWarnings("unchecked")
     // todo consider consolidating core of mapFromAttributes and populate into single method
     // todo consider changing collection property names to match method names and using reflection
+    @Override
     public Object mapFromAttributes(Attributes attrs) {
         Contact contact = factory.getObjectOfType(Contact.class);
 
