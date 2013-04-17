@@ -58,11 +58,22 @@
         <property name="name" value="Search Portlet Contacts"/>
     </bean>
     -->
+    
+    <!--
+    <bean id="LdapDomain" class="org.jasig.portlet.contacts.domains.impl.GenericContactDomain">
+        <property name="searchAdapter" ref="LdapSearch"/>
+        <property name="name" value="Online Directory"/>
+    </bean>
+    -->
+    
     <!--
        END OF DOMAIN DEFINITIONS
     -->
 
     
+    <!--
+        START OF ADAPTER DEFINITIONS
+    -->
 
     <!--
     <bean id="ContactsContactsSearch" class="org.jasig.portlet.contacts.adapters.impl.PushSearchAdapter">
@@ -100,6 +111,113 @@
             </props>
         </property>
     </bean>
+    
+    
+    <!--
+    <bean id="LdapContactMapper" class="org.jasig.portlet.contacts.adapters.impl.ldap.ConfigurableContactAttributesMapper">
+        <constructor-arg>
+            < ! - - This is a map of all the property values in a contact, and the LDAP attribute value
+                 or static string value to apply when converting the LDAP attribute set to a Contact pojo.
+                 key = contact property name, value = LDAP attribute name. value should be empty string if no mapping.
+            - - >
+            <map>
+                <entry key="id" value="id"/>
+                <entry key="contactSource" value=""/>
+                <entry key="department" value="department"/>
+                <entry key="firstname" value="givenname"/>
+                <entry key="initials" value=""/>
+                <entry key="organisation" value=""/>
+                <entry key="position" value=""/>
+                <entry key="surname" value="sn"/>
+                <entry key="title" value=""/>
+                <entry key="imageURI" value=""/>
+                < ! - - For phone, email, and address properties the map entry is a list of maps.
+                     Each map defines each object property and the LDAP attribute value
+                     or static string value to apply.
+                - - >
+                <entry key="phone">
+                    <list>
+                        <map>
+                            <entry key="label" value="$default:Work"/>
+                            <entry key="type" value="$default:WORK"/>
+                            <entry key="phoneNumber" value="telephonenumber"/>
+                        </map>
+                        <map>
+                            <entry key="label" value="$default:Other"/>
+                            <entry key="type" value="$default:OTHER"/>
+                            <entry key="phoneNumber" value="mobile"/>
+                        </map>
+                    </list>
+                </entry>
+                <entry key="email">
+                    <list>
+                        <map>
+                            <entry key="label" value="$default:Work"/>
+                            <entry key="type" value="$default:WORK"/>
+                            <entry key="emailAddress" value="mail"/>
+                        </map>
+                    </list>
+                </entry>
+                <entry key="address">
+                    <list>
+                        <map>
+                            <entry key="label" value=""/>
+                            <entry key="type" value=""/>
+                            <entry key="internal" value=""/>
+                            <entry key="building" value=""/>
+                            <entry key="street" value=""/>
+                            <entry key="locality" value=""/>
+                            <entry key="region" value=""/>
+                            <entry key="postCode" value=""/>
+                            <entry key="Country" value=""/>
+                        </map>
+                    </list>
+                </entry>
+            </map>
+        </constructor-arg>
+        <constructor-arg ref="modelFactory"/>
+    </bean>
+
+    <bean id="searchLdapTemplate" class="org.springframework.ldap.core.LdapTemplate">
+        <property name="contextSource" ref="searchDirLdapContext"/>
+    </bean>
+
+    <bean id="searchDirLdapContext" class="org.springframework.ldap.core.support.LdapContextSource">
+        <property name="url" value="${search.ldap.url}"/>
+        <property name="base" value="${search.ldap.base}"/>
+        <property name="pooled" value="false"/>
+        <property name="userDn" value="${search.ldap.binddn}"/>
+        <property name="password" value="${search.ldap.password}"/>
+    </bean>
+
+    <bean id="LdapSearch" class="org.jasig.portlet.contacts.adapters.impl.ldap.LdapSearchAdapter"
+          p:searchAttribute="cn"
+          p:filterAttribute="department">
+        <constructor-arg ref="searchLdapTemplate"/>
+        <property name="filters">
+            <map>
+                <entry key="Staff">
+                    <list>
+                        <value>Staff</value>
+                    </list>
+                </entry>
+                <entry key="Students">
+                    <list>
+                        <value>Undergraduate</value>
+                        <value>Postgraduate</value>
+                    </list>
+                </entry>
+                <entry key="All">
+                    <list/>
+                </entry>
+            </map>
+        </property>
+        <property name="timeLimit" value="5000"/>
+        <property name="context" ref="context"/>
+        <property name="attributesMapper" ref="LdapContactMapper"/>
+    </bean>
+    -->
+    
     <!--
         END OF ADAPTER DEFINITIONS
     -->
