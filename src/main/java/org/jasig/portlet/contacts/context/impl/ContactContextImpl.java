@@ -86,6 +86,7 @@ public class ContactContextImpl implements ContactContext {
         return keyList.isEmpty();
         
     }
+    
     private final List<ContextProvider> contextProviders = new ArrayList<ContextProvider>();
 
     @Autowired(required = true)

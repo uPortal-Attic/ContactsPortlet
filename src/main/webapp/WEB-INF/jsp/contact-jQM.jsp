@@ -37,7 +37,7 @@
     
     
     
-    <strong>${contact.surname}, ${contact.title} ${contact.firstname}</strong><br />
+    <strong>${contact.title} ${contact.firstname} ${contact.surname}</strong><br />
     ${contact.position} - ${contact.department}
     <br />                                     
 
@@ -58,8 +58,6 @@
         ${contact.primaryAddress.building}, ${contact.primaryAddress.street}<br/>
     </c:if>
 
-        <div style="clear: both;"></div>
-        
-            
-            
+    <div style="clear: both;"></div>
+
 </div>

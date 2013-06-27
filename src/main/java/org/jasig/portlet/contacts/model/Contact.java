@@ -187,4 +187,17 @@ public interface Contact extends Serializable {
      */
     public void setImageURI(String uri);
     
+    /**
+     * 
+     * @return displayToGuest - denotes whether contact can be displayed to non-authenticated users
+     */
+    public Boolean getDisplayToGuest();
+    
+    
+    /**
+     * 
+     * @param Boolean representation of the Contacts display to guest setting
+     */
+    public void setDisplayToGuest(Boolean displayToGuest);
+    
 }

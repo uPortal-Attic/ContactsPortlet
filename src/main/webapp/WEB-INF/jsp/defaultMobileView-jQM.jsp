@@ -84,26 +84,24 @@
             </div>
             <c:if test="${ domain.hasSearch }">
                 <div data-role="content" class="portlet-content">        
-                        <portlet:resourceURL id="search" var="searchURL">
-                            <portlet:param name="filter" value="||FILTER||"/>
-                            <portlet:param name="term" value="||TERM||"/>
-                            <portlet:param name="domain" value="${domain.id}"/>
-                            <portlet:param name="nspace" value="${NSPACE}"/>
-                        </portlet:resourceURL>
-                        
-                        <form  action="${searchURL}" class="searchForm" method="post">
-                            <div>
-                                    
-                                    <select name="filter" data-native-menu="false">
-                                        <c:forEach items="${ domain.searchFilters }" var="filter" varStatus="status">
-                                            <option value="${filter}">${filter}</option>
-                                        </c:forEach>
-                                    </select>
-                                    <input class="searchBox" id="${NSPACE}${domainName}Search" type="search" name="searchtext" rel="${domain.id}" size="50"/>
-                                    <button class="searchButton" data-role="button"><spring:message code="search.button.name"/></button>
-                                
-                            </div>
-                        </form>
+                   <portlet:resourceURL id="search" var="searchURL">
+                       <portlet:param name="filter" value="||FILTER||"/>
+                       <portlet:param name="term" value="||TERM||"/>
+                       <portlet:param name="domain" value="${domain.id}"/>
+                       <portlet:param name="nspace" value="${NSPACE}"/>
+                   </portlet:resourceURL>
+                   
+                   <form  action="${searchURL}" class="searchForm" method="post">
+                       <div>
+                          <select name="filter" data-native-menu="false">
+                              <c:forEach items="${ domain.searchFilters }" var="filter" varStatus="status">
+                                  <option value="${filter}">${filter}</option>
+                              </c:forEach>
+                          </select>
+                          <input class="searchBox" id="${NSPACE}${domainName}Search" type="search" name="searchtext" rel="${domain.id}" size="50"/>
+                          <button class="searchButton" data-role="button"><spring:message code="search.button.name"/></button>
+                       </div>
+                   </form>
                 </div>
             </c:if>
             <div data-role="content" class="portlet-content">

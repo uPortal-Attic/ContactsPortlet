@@ -134,10 +134,10 @@ public class GenericContactDomain implements ContactDomain {
     }
 
     @Override
-    public ContactSet search(String searchText) {
-        ContactSet results;
+    public ContactSet search(String searchText, Boolean isGuestUser) {
+    	ContactSet results;
         if (getHasSearch())
-            results = searchAdapter.search(searchText);
+            results = searchAdapter.search(searchText, isGuestUser);
         else
             results = new ContactSet();
         
@@ -147,10 +147,10 @@ public class GenericContactDomain implements ContactDomain {
     }
     
     @Override
-    public ContactSet search(String searchText, String filter) {
-        ContactSet results;
+    public ContactSet search(String searchText, String filter, Boolean isGuestUser) {
+    	ContactSet results;
         if (getHasSearch())
-            results = searchAdapter.search(searchText, filter);
+            results = searchAdapter.search(searchText, filter, isGuestUser);
         else
             results = new ContactSet();
         
@@ -190,12 +190,12 @@ public class GenericContactDomain implements ContactDomain {
     }
     
     @Override
-    public Contact getContact(String URN) {
+    public Contact getContact(String URN, Boolean isGuestUser) {
         
         Contact contact = null;
         
         if (this.getHasSearch())
-            contact = searchAdapter.getByURN(URN);
+            contact = searchAdapter.getByURN(URN, isGuestUser);
         if (contact == null && this.getHasPush())
             contact = pushAdapter.getByURN(URN);
         

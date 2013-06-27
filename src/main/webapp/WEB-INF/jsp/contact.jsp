@@ -58,32 +58,33 @@
         ${contact.primaryAddress.building}, ${contact.primaryAddress.street}<br/>
     </c:if>
 
-        <div style="clear: both;"></div>
+    <div style="clear: both;"></div>
         
-    <div class="controls">    
-        <c:if test="${domain.hasPersist}">
-
-            <portlet:resourceURL id ="persist" var="persistURL">
-                <portlet:param name="domain" value="${domain.id}"/>
-                <portlet:param name="contact" value="${contact.URN}"/>
-                <portlet:param name="source" value="${source}"/>
-                <portlet:param name="persist" value="true"/>
-            </portlet:resourceURL>
-            <a href="${persistURL}" class="persist" title="<spring:message code="contact.save.title"/>"><img src="${addImg}"/></a>                   
-        </c:if>
-        <c:if test="${domain.hasRemove}">
-
-
-            <portlet:resourceURL id="delete" var="deleteURL">
-                <portlet:param name="domain" value="${domain.id}"/>
-                <portlet:param name="contact" value="${contact.URN}"/>
-                <portlet:param name="source" value="${source}"/>
-                <portlet:param name="delete" value="true"/>
-            </portlet:resourceURL>
-            <a href="${deleteURL}" class="delete" title="<spring:message code="contact.delete.title"/>"><img src="${delImg}"/></a>
-
-        </c:if>
-    </div>
-            
+    <c:if test="${!isGuestUser}"> 
+	    <div class="controls">    
+	        <c:if test="${domain.hasPersist}">
+	
+	            <portlet:resourceURL id ="persist" var="persistURL">
+	                <portlet:param name="domain" value="${domain.id}"/>
+	                <portlet:param name="contact" value="${contact.URN}"/>
+	                <portlet:param name="source" value="${source}"/>
+	                <portlet:param name="persist" value="true"/>
+	            </portlet:resourceURL>
+	            <a href="${persistURL}" class="persist" title="<spring:message code="contact.save.title"/>"><img src="${addImg}"/></a>                   
+	        </c:if>
+	        <c:if test="${domain.hasRemove}">
+	
+	
+	            <portlet:resourceURL id="delete" var="deleteURL">
+	                <portlet:param name="domain" value="${domain.id}"/>
+	                <portlet:param name="contact" value="${contact.URN}"/>
+	                <portlet:param name="source" value="${source}"/>
+	                <portlet:param name="delete" value="true"/>
+	            </portlet:resourceURL>
+	            <a href="${deleteURL}" class="delete" title="<spring:message code="contact.delete.title"/>"><img src="${delImg}"/></a>
+	
+	        </c:if>
+	    </div>
+    </c:if>
             
 </div>

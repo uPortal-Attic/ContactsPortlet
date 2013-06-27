@@ -34,17 +34,21 @@ import org.jasig.portlet.contacts.adapters.SearchAdapter;
 public abstract class AbstractSearchAdapter extends AbstractContactAdapter implements SearchAdapter {
     
     protected String searchFilterAttribute = "";
+    
     public void setFilterAttribute(String attribute) {
         searchFilterAttribute = attribute;
     }
+    
     public String getFilterAttribute() {
         return searchFilterAttribute;
     }
     
     protected Map<String,Object> filters = new HashMap<String,Object>();
+    
     public void setFilters(Map<String,Object> filters) {
         this.filters = filters;
     }
+    
     public Map<String,Object> getFilters() {
         return this.filters;
     }

@@ -75,10 +75,13 @@ public class DeleteContactController {
                     //StringTokenizer tokens = new StringTokenizer(contact, ":");
                     String search = tokens[2];
                     String filter = tokens[3];
-                    contacts.addAll(domainObj.search(search,filter));
+                    /**
+                	 * TODO implement isGuestUser 
+                	 */
+                    contacts.addAll(domainObj.search(search,filter, null));
 
                 } else if (source.startsWith("urn:")) {
-                    contacts.add(domainObj.getContact(source));
+                    contacts.add(domainObj.getContact(source, null));
                 } else {
                     contacts.addAll(domainObj.getContacts(source));                    
                 }

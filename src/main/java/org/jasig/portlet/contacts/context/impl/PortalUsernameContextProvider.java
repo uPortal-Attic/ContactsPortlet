@@ -48,6 +48,7 @@ public class PortalUsernameContextProvider implements ContextProvider {
     public Object get(String key) {
         return getRequest().getRemoteUser();
     }
+    
     public Map<String, Object> getContext() {
         Map<String, Object> context = new HashMap<String,Object>();
         context.put("username", get("username"));

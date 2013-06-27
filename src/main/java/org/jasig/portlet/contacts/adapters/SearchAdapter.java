@@ -38,11 +38,19 @@ import org.jasig.portlet.contacts.model.ContactSet;
 public interface SearchAdapter extends ContactAdapter {
 
     
-    public ContactSet search(String searchText);
-    public ContactSet search(String searchText, String filter);
-    public Contact getByURN(String URN);
+    public ContactSet search(String searchText, Boolean isGuestUser);
+    public ContactSet search(String searchText, String filter, Boolean isGuestUser);
+    public Contact getByURN(String URN, Boolean isGuestUser);
     public void setFilters(Map<String,Object> filers);
     public Map<String,Object> getFilters();
     public void setFilterAttribute(String attribute);
     public String getFilterAttribute();
+    
+    /**
+     * Testing
+     */
+    public String getGuestFilterAttribute();
+    public void setGuestFilterAttribute(String guestFilterAttributeName);
+    public String getPublicContactsOnlyValue();
+    public void setPublicContactsOnlyValue(String publicContactsOnlyValue);
 }

@@ -33,10 +33,8 @@ import org.jasig.portlet.contacts.model.ContactSet;
  * @author Chris White <christopher.white@manchester.ac.uk>
  */
 public interface PushAdapter extends ContactAdapter {
-
     
     public Set<ContactSet> getContacts();
-    
     
     public ContactSet getContacts(String id);
     
