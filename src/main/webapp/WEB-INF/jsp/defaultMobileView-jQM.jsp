@@ -83,7 +83,7 @@
                 <h1 class="title">${domain.name}</h1>
             </div>
             <c:if test="${ domain.hasSearch }">
-                <div data-role="content" class="portlet-content">        
+                <div class="portlet-content">        
                    <portlet:resourceURL id="search" var="searchURL">
                        <portlet:param name="filter" value="||FILTER||"/>
                        <portlet:param name="term" value="||TERM||"/>
@@ -91,17 +91,25 @@
                        <portlet:param name="nspace" value="${NSPACE}"/>
                    </portlet:resourceURL>
                    
-                   <form  action="${searchURL}" class="searchForm" method="post">
-                       <div>
-                          <select name="filter" data-native-menu="false">
-                              <c:forEach items="${ domain.searchFilters }" var="filter" varStatus="status">
-                                  <option value="${filter}">${filter}</option>
-                              </c:forEach>
-                          </select>
-                          <input class="searchBox" id="${NSPACE}${domainName}Search" type="search" name="searchtext" rel="${domain.id}" size="50"/>
-                          <button class="searchButton" data-role="button"><spring:message code="search.button.name"/></button>
+                   <!--  domain search form -->
+                   <form  action="${searchURL}" class="searchForm mobile-search-form" method="post">
+                       
+                       <form  action="${searchURL}" class="searchForm" method="post">
+                       <div class="mobile-search-form">
+                          <input class="searchBox mobile-search-box" id="${NSPACE}${domainName}Search" type="search" name="searchtext" rel="${domain.id}" value="Enter Name"/>
+                          <div class="mobile-search-options hidden">
+                          	<select name="filter" data-native-menu="false">
+	                              <c:forEach items="${ domain.searchFilters }" var="filter" varStatus="status">
+	                                  <option value="${filter}">${filter}</option>
+	                              </c:forEach>
+	                          </select>
+	                          <button class="searchButton" data-role="button"><spring:message code="search.button.name"/></button>
+                          </div>
                        </div>
                    </form>
+                       
+                   </form>
+                   
                 </div>
             </c:if>
             <div data-role="content" class="portlet-content">
@@ -126,20 +134,27 @@
     </c:forEach>
 
     <div id="${NSPACE}contactContainer" class="contactList" style="display: none;">
-        <div data-role="header" class="titlebar portlet-titlebar">
+        <div data-role="header" class="titlebar portlet-titlebar searchResultsTitleBar">
             <a href="javascript:;" class="contactBackButton" data-role="button" data-icon="back" data-inline="true">Back</a>
             <h1 class="title"></h1>
         </div>
-        <div data-role="content">
-            <ul data-role="listview" data-inset="false">
-            
+        <div data-role="header" class="titlebar portlet-titlebar contactListTitleBar">
+           	<a href="javascript:;" class="contactListBackButton" data-role="button" data-icon="back" data-inline="true">Back</a>
+           	<h1 class="title detailsHeader"></h1>
+       	</div>
+        <div class="mobile-list-view">
+            <ul data-role="list-view">
+            	
             </ul>
         </div>
+        <div class="mobile-single-contact-view">
+        	
+        </div>
     </div>
-
 
     <p>
         <spring:message code="version.label"/> : ${appversion}
     </p>
+
 </div> <!-- end: portlet-body -->
 

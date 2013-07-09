@@ -19,33 +19,44 @@
 
 /* Contacts CSS */
 
-.org-jasig-portlet-contacts {}
 
 
-.org-jasig-portlet-contacts .contactList ol {
+
+
+.org-jasig-portlet-contacts .clear{clear:both;}
+.org-jasig-portlet-contacts .hidden{display:none;}
+
+.org-jasig-portlet-contacts .contactList ul {
     margin: 0; 
     padding: 0;
 }
 .org-jasig-portlet-contacts .contactList li {
     list-style-type: none;
-    margin: 3px;
-    padding: 0.4em;
-    font-size: 0.9em;
-    overflow: auto;
+    margin: none;
+    font-size: 1em;
+    overflow: hidden;
 }
 
-.org-jasig-portlet-contacts .contactList .contact{
-	border:1px solid #000000;
+.org-jasig-portlet-contacts .contactList .contactListView{
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #f3f3f3 83%, #ededed 100%, #ffffff 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(83%,#f3f3f3), color-stop(100%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f3f3f3 83%,#ededed 100%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#f3f3f3 83%,#ededed 100%,#ffffff 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#f3f3f3 83%,#ededed 100%,#ffffff 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%,#f3f3f3 83%,#ededed 100%,#ffffff 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+	border-bottom:1px solid #DDDDDD;
 }
 
 .org-jasig-portlet-contacts .ui-widget {
     font-size: 1.0em;
 }
 
-.org-jasig-portlet-contacts .contact-photo img {
+.org-jasig-portlet-contacts .contactList .contact .contact-photo img, .org-jasig-portlet-contacts .contactList .contactListView .contact-photo img{
     height: 100%;
 }
-.org-jasig-portlet-contacts .contact-photo {
+.org-jasig-portlet-contacts .contactList .contact .contact-photo{
      float: right;
      background-color: transparent;
      background-size: contain; 
@@ -53,6 +64,22 @@
      height:75px; 
      width:75px;
 }
+
+.org-jasig-portlet-contacts .contactList li .contactListView .contact-photo{
+	float:left;
+	background-color:transparent;
+	background-size: contain; 
+    background-repeat: no-repeat; 
+    height:62px; 
+    width:62px;
+    margin-right:1em;
+}
+
+.org-jasig-portlet-contacts .contactList li .contactListView .contactDetails{float:left; padding-top:.4em;}
+
+.org-jasig-portlet-contacts .contactList li .contactListView .contactDetails .contactName{display:block; font-weight:bold; font-size:1.2em;}
+.org-jasig-portlet-contacts .contactList li .contactListView .contactDetails .contactPosition{display:block;}
+.org-jasig-portlet-contacts .contactList li .contactListView .contactDetails .contactDepartment{display:block;}
 
 .org-jasig-portlet-contacts .results-area img { margin: 0 auto 0 auto; text-align: center;}
 
@@ -72,3 +99,29 @@
     display: block;
     float: right;
 }
+
+/* single contact view styles */
+
+.org-jasig-portlet-contacts .contactDetailsHolder{
+	width:96%;
+	margin:1%;
+	padding:1%;
+	border: 1px solid #DDDDDD;
+	-moz-border-radius: 1em;
+	border-radius: 1em;
+	background-color: #ECECEC;
+}
+
+/* Search Styles */
+.org-jasig-portlet-contacts .ui-input-search{margin:2%;}
+
+@media all and (orientation: portrait){
+	.org-jasig-portlet-contacts .ui-input-search{margin:2%; width:77%;}
+}
+
+@media all and (orientation: landscape){
+	.org-jasig-portlet-contacts .ui-input-search{margin:2%; width:85%;}
+}
+
+
+
