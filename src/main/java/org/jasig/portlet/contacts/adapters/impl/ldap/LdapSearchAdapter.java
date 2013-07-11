@@ -62,9 +62,9 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         this.ldapTemplate = ldapTemplate;
     }
 
-    private Set<CompareFilter> mandatoryFilters = new HashSet<CompareFilter>();
-    public void setMandatoryFilters(Set<CompareFilter> filter) {
-        this.mandatoryFilters = filter;
+    private Set<CompareFilter> ldapSearchFilter = new HashSet<CompareFilter>();
+    public void setLdapSearchFilters(Set<CompareFilter> filter) {
+        this.ldapSearchFilter = filter;
     }
     
     public void setTimeLimit(int timeLimit) {
@@ -131,7 +131,7 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         andFilter.and(new EqualsFilter("objectclass", "person"));
         andFilter.and(new WhitespaceWildcardsFilter(searchAttribute, searchValue));
         
-        for (CompareFilter filter : mandatoryFilters) {
+        for (CompareFilter filter : ldapSearchFilter) {
             andFilter.and(filter);
         }
         
