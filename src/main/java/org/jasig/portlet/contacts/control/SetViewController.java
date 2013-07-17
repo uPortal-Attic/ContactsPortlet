@@ -116,7 +116,6 @@ public class SetViewController {
 
             model.addAttribute("domain", domainObj);
             model.addAttribute("source", "search");
-            model.addAttribute("searchFilter", filter);
             
             String username = request.getRemoteUser();
     		Boolean isGuestUser = true;
@@ -141,7 +140,6 @@ public class SetViewController {
             return "setView";
 
     }
-    
     private Set<ContactDomain> contactDomains;
 
     @Autowired
@@ -149,7 +147,7 @@ public class SetViewController {
         contactDomains = domains;
     }
     
-    private IViewSelector viewSelector;
+        private IViewSelector viewSelector;
     
     @Autowired(required = true)
     public void setViewSelector(IViewSelector viewSelector) {
