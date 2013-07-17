@@ -55,11 +55,12 @@ public class SearchEventController {
     ) {
         
         log.debug("Responding to Search Event");
-       
+    
         final Event event = request.getEvent();
         final SearchRequest searchQuery = (SearchRequest)event.getValue();
         
         final String searchTerms = searchQuery.getSearchTerms();
+        
         final SearchResults searchResults = new SearchResults();
         
         searchResults.setQueryId(searchQuery.getQueryId());
@@ -69,16 +70,7 @@ public class SearchEventController {
             
             if (domain.getHasSearch()) {
                 
-            	String username = request.getRemoteUser();
-            	log.debug("[@@@@@@@@@@@@ SearchEventController @@@@@@@@@@@@@@@]");
-            	Boolean isGuestUser = true;
-        		if(username != null){
-        			isGuestUser = false;
-        		}
-            	log.debug("isGuestUser = " + isGuestUser);
-            	log.debug("[@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@]");
-        		
-                ContactSet contacts = domain.search(searchTerms, isGuestUser);
+                ContactSet contacts = domain.search(searchTerms);
         
                 for (Contact contact: contacts) {
                     

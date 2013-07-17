@@ -59,14 +59,14 @@ public interface ContactDomain {
     public ContactContext getContext();
     
     
-    public ContactSet search(String searchText, Boolean isGuestUser);
-    public ContactSet search(String searchText, String filter, Boolean isGuestUser);
+    public ContactSet search(String searchText);
+    public ContactSet search(String searchText, String filter);
     
     
     public Set<ContactSet> getContacts();
     public ContactSet getContacts(String setId);
     public Map<String,String> getContactGroups();
-    public Contact getContact(String URN, Boolean isGuestUser);
+    public Contact getContact(String URN);
     public List<String> getSearchFilters();
     
     public boolean save(Contact contact);

@@ -48,6 +48,7 @@ import org.springframework.util.StringUtils;
  */
 public class LdapSearchAdapter extends AbstractSearchAdapter {
 
+
     private static Log logger = LogFactory.getLog(LdapSearchAdapter.class);
 
     private int timeLimit = 1000;
@@ -56,9 +57,6 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
 
     private String searchAttribute = "cn";
     private String filterAttribute = "employeeType";
-    
-    private String guestFilterAttribute = null;
-    private String publicContactsOnlyValue = null;
 
     public LdapSearchAdapter (LdapTemplate ldapTemplate) {
         this.ldapTemplate = ldapTemplate;
@@ -80,14 +78,14 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         this.filterAttribute = filterAttribute;
     }
 
-    public Contact getByURN(String urn, Boolean isGuestUser) {
+    public Contact getByURN(String urn) {
         String[] attr = StringUtils.delimitedListToStringArray(urn, ":");
 
         String searchText = attr[2];
         String filter = attr[3];
         String id = attr[4];
 
-        ContactSet contacts = search(searchText, filter, isGuestUser);
+        ContactSet contacts = search(searchText, filter);
 
         for (Contact contact : contacts) {
             if (contact.getId().equals(id))
@@ -98,19 +96,19 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
 
     }
 
-    public ContactSet search(String searchText, Boolean isGuestUser) {
-        return search(searchText, null, isGuestUser);
+    public ContactSet search(String searchText) {
+        return search(searchText, null);
     }
 
-    public ContactSet search(String searchText, String filter, Boolean isGuestUser) {
-    	
-    	String searchString = constructSearch(searchText, filter, isGuestUser);
-        
+    public ContactSet search(String searchText, String filter) {
+
+        String searchString = constructSearch(searchText, filter);
+
         if (filter == null)
             filter = "";
 
         List<Contact> contactList = getSearchResults(searchString);
-                
+
         ContactSet contactSet = new ContactSet();
         contactSet.setId(searchText+":"+filter);
 
@@ -123,21 +121,16 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         return contactSet;
     }
 
-    protected String constructSearch(String searchValue, String searchFilter, Boolean isGuestUser) {
+    protected String constructSearch(String searchValue, String searchFilter) {
         AndFilter andFilter = new AndFilter();
         andFilter.and(new EqualsFilter("objectclass", "person"));
         andFilter.and(new WhitespaceWildcardsFilter(searchAttribute, searchValue));
-        if(isGuestUser != null && isGuestUser.booleanValue()){
-        	if(getGuestFilterAttribute() != null && getPublicContactsOnlyValue() != null){
-        		andFilter.and(new EqualsFilter(getGuestFilterAttribute(), getPublicContactsOnlyValue()));
-        	}
-        }
-        //logger.debug("SEARCH CONSTRUCT :: "+searchValue+" :: "+searchFilter + " :: " + isGuestUser);
+        logger.debug("SEARCH CONSTRUCT :: "+searchValue+" :: "+searchFilter);
         if(filters != null && searchFilter != null) {
             List<String> filter = (List<String>) filters.get(searchFilter);
-            //logger.debug("FILTERS");
+            logger.debug("FILTERS");
             if(filter != null && filter.size() != 0) {
-                //logger.debug("Constructing "+searchFilter+" search");
+                logger.debug("Constructing "+searchFilter+" search");
                 OrFilter orFilter = new OrFilter();
                 for(String filterValue : filter) {
                     orFilter.or(new EqualsFilter(filterAttribute, filterValue));
@@ -147,10 +140,10 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         }
         return andFilter.toString();
     }
-    
+
     protected List<Contact> getSearchResults(String search) {
         SearchControls searchControls = getSearchControls();
-        //logger.debug("Searching LDAP with search: "+search);
+        logger.debug("Searching LDAP with search: "+search);
         List<Contact> contactList = ldapTemplate.search(DistinguishedName.EMPTY_PATH, search, searchControls, contactMapper);
         return contactList;
     }
@@ -172,7 +165,6 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
     }
 
     private ModelObjectFactory modelFactory;
-    
     @Autowired
     public void setModelObjectFactory(ModelObjectFactory factory){
         modelFactory = factory;
@@ -182,25 +174,5 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
     public void setAttributesMapper(AttributesMapper contactMapper) {
         this.contactMapper = contactMapper;
     }
-
-	@Override
-	public String getGuestFilterAttribute() {
-		return this.guestFilterAttribute;
-	}
-
-	@Override
-	public void setGuestFilterAttribute(String guestFilterAttributeName) {
-		this.guestFilterAttribute = guestFilterAttributeName;
-	}
-
-	@Override
-	public String getPublicContactsOnlyValue() {
-		return this.publicContactsOnlyValue;
-	}
-
-	@Override
-	public void setPublicContactsOnlyValue(String publicContactsOnlyValue) {
-		this.publicContactsOnlyValue = publicContactsOnlyValue;
-	}
 
 }

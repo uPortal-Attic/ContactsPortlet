@@ -25,7 +25,6 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jasig.portlet.contacts.context.impl.PortalUsernameContextProvider;
 import org.jasig.portlet.contacts.domains.ContactDomain;
 import org.jasig.portlet.contacts.model.Contact;
 import org.jasig.portlet.contacts.model.ContactSet;
@@ -73,13 +72,12 @@ public class AutoCompleteController {
             @ModelAttribute("domain") ContactDomain domainObj,
             Model model) {
 
-    		String username = request.getRemoteUser();
-    		Boolean isGuestUser = true;
-    		if(username != null){
-    			isGuestUser = false;
-    		}
-    		
-    		ContactSet contacts = domainObj.search(term, filter, isGuestUser);
+
+        log.debug("filter is " + filter);
+
+            log.debug("q is " + term);
+
+            ContactSet contacts = domainObj.search(term, filter);
             
             Map<String, Integer> countedResults = getCountedSearchResults(contacts);
             

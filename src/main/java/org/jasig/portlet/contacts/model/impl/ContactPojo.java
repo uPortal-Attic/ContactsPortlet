@@ -56,8 +56,6 @@ public class ContactPojo implements Contact {
     
     private String contactSource = "";
     
-    private Boolean displayToGuest = Boolean.FALSE;
-    
     public String getURN() {
         String urn = "urn:";
         
@@ -259,14 +257,5 @@ public class ContactPojo implements Contact {
         this.phoneNumbers = numbers;
                 
     }
-	@Override
-	public Boolean getDisplayToGuest() {
-		return this.displayToGuest;
-	}
-	
-	@Override
-	public void setDisplayToGuest(Boolean displayToGuest) {
-		this.displayToGuest = displayToGuest;
-	}
     
 }

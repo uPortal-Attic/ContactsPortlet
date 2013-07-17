@@ -117,20 +117,13 @@ public class SetViewController {
             model.addAttribute("domain", domainObj);
             model.addAttribute("source", "search");
             
-            String username = request.getRemoteUser();
-    		Boolean isGuestUser = true;
-    		if(username != null){
-    			isGuestUser = false;
-    		}
-    		model.addAttribute("isGuestUser", isGuestUser);
-            
-            contacts.addAll(domainObj.search(term, filter, isGuestUser));
+            contacts.addAll(domainObj.search(term, filter));
+
 
             log.debug(contacts.size() + " CONTACTS found for " + contacts.getTitle());
             log.debug("Contacts set for domain :: " + domainObj.getName());
         }
 
-        
         model.addAttribute("contactList", contacts);
 
         

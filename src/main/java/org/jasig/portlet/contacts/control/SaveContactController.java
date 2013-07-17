@@ -75,16 +75,10 @@ public class SaveContactController {
                     //StringTokenizer tokens = new StringTokenizer(contact, ":");
                     String search = tokens[2];
                     String filter = tokens[3];
-                    /**
-                	 * TODO implement isGuestUser 
-                	 */
-                    contacts.addAll(domainObj.search(search,filter, null));
+                    contacts.addAll(domainObj.search(search,filter));
 
                 } else if (source.startsWith("urn:")) {
-                	/**
-                	 * TODO implement isGuestUser 
-                	 */
-                    contacts.add(domainObj.getContact(source, null));
+                    contacts.add(domainObj.getContact(source));
                 } else {
                     contacts.addAll(domainObj.getContacts(source));                    
                 }

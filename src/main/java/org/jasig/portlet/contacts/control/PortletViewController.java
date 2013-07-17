@@ -105,11 +105,7 @@ public class PortletViewController {
             model.addAttribute("activeDomain", domain);
             for (ContactDomain dom : domains) {
                 if (dom.getId().equals(domain)) {
-                	/**
-                	 * TODO implement isGuestUser 
-                	 */
-                	log.debug("######## Calling from PortletViewController ############");
-                    contact = dom.getContact(urn, null);
+                    contact = dom.getContact(urn);
                     break;
                 }
             }

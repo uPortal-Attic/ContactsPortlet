@@ -39,7 +39,7 @@ public class PushSearchAdapter extends AbstractSearchAdapter {
         return new String[0];
     }
 
-    public ContactSet search(String searchText, Boolean isGuestUser) {
+    public ContactSet search(String searchText) {
         String searchTextLower = searchText.toLowerCase().trim();
         ContactSet contacts = new ContactSet();
         
@@ -59,9 +59,9 @@ public class PushSearchAdapter extends AbstractSearchAdapter {
         
     }
     
-    public ContactSet search(String searchText, String filter, Boolean isGuestUser) {
+    public ContactSet search(String searchText, String filter) {
         
-        return search(searchText, isGuestUser);
+        return search(searchText);
         
     }
     
@@ -72,34 +72,10 @@ public class PushSearchAdapter extends AbstractSearchAdapter {
     }
 
     @Override
-    public Contact getByURN(String URN, Boolean isGuestUser) {
+    public Contact getByURN(String URN) {
         
         return pushAdapter.getByURN(URN);
         
     }
-
-	@Override
-	public String getGuestFilterAttribute() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setGuestFilterAttribute(String guestFilterAttributeName) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getPublicContactsOnlyValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setPublicContactsOnlyValue(String publicContactsOnlyValue) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

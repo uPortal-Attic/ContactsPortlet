@@ -46,10 +46,10 @@ public class PortalUserInfoContextProvider implements ContextProvider {
         return getUserInfo();
     }
 
+    
     private Map<String,Object> getUserInfo() {
         return (Map<String, Object>) getRequest().getAttribute(PortletRequest.USER_INFO);
     }
-    
     private PortletRequest getRequest() {
         RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
         PortletRequest request = null;
