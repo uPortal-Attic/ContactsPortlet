@@ -22,55 +22,49 @@
 <rs:resourceURL var="addImg" value="rs/famfamfam/silk/1.3/add.png"/>
 <rs:resourceURL var="delImg" value="rs/famfamfam/silk/1.3/delete.png"/>
 
-<div class="jqm-contact" title="${contact.title} ${contact.firstname} ${contact.surname}">
+<div class="contact" title="${contact.title} ${contact.firstname} ${contact.surname}">
 
-	<div class="jqm-contact-details-holder">
+	<div class="contactDetailsHolder">
 		<c:choose>
 	        <c:when test="${!empty contact.imageURI}">
-	            <div class="contact-photo jqm-contact-image-holder" rel="${contact.imageURI}" ></div>
+	            <div class="contact-photo" rel="${contact.imageURI}" ></div>
 	        </c:when>
 	        <c:otherwise>
-	            <div class="contact-photo jqm-contact-image-holder">
+	            <div class="contact-photo">
 	                <img src="${BASEURL}/images/image_unavailable.jpg"/>
 	            </div>
 	        </c:otherwise>
 	    </c:choose>
 	    <div class="clear"></div>
 	    
-	    <div class="jqm-contact-name">${contact.title} ${contact.firstname} ${contact.surname}</div>
-	    <div class="jqm-contact-position">${contact.position}</div>
-	    <div class="jqm-contact-department">${contact.department}</div>
+	    <div class="contactName">${contact.title} ${contact.firstname} ${contact.surname}</div>
+	    <div class="contactPosition">${contact.position}</div>
+	    <div class="contactDepartment">${contact.department}</div>
 	    
 	    <c:forEach items="${contact.phoneNumbers}" var="phoneNumber">
-	    	<div class="jqm-phone-number">
-		        <img style="vertical-align:middle" src="${pageContext.request.contextPath}/images/telephone.png" height="16" width="16" alt="<spring:message code="contact.telephone.title"/>" title="<spring:message code="contact.telephone.title"/>"/> 
-		        ${ phoneNumber.displayType }: <a href="tel:${ phoneNumber.phoneNumber }">${ phoneNumber.phoneNumber }</a>
-	        </div>
+	        <img style="vertical-align:middle" src="${pageContext.request.contextPath}/images/telephone.png" height="16" width="16" alt="<spring:message code="contact.telephone.title"/>" title="<spring:message code="contact.telephone.title"/>"/> 
+	        ${ phoneNumber.displayType }: <a href="tel:${ phoneNumber.phoneNumber }">${ phoneNumber.phoneNumber }</a>
+	        <br /> 
 	    </c:forEach>
 	
 	    <c:forEach items="${contact.emailAddresses}" var="emailAddress">
-	    	<div class="jqm-email-address">
-		        <img style="vertical-align:middle" src="${pageContext.request.contextPath}/images/email.png" height="16" width="16" alt="Email" title="<spring:message code="contact.email.title"/>"/>
-		        <c:out value="${ emailAddress.displayType }" default="NULL"/>: <a href="mailto:"><c:out value="${ emailAddress.emailAddress }" default="NULL"/></a><br/>
-	        </div>
+	        <img style="vertical-align:middle" src="${pageContext.request.contextPath}/images/email.png" height="16" width="16" alt="Email" title="<spring:message code="contact.email.title"/>"/>
+	             <c:out value="${ emailAddress.displayType }" default="NULL"/>: <a href="mailto:"><c:out value="${ emailAddress.emailAddress }" default="NULL"/></a><br/>
 	    </c:forEach>
 	
 	
 	    <c:if test="${!empty contact.primaryAddress}">
-	    	<div class="jqm-primary-address">
-	        	${contact.primaryAddress.building}, ${contact.primaryAddress.street}
-	        </div>
+	        ${contact.primaryAddress.building}, ${contact.primaryAddress.street}<br/>
 	    </c:if>		
 	</div>
 	
-	<div class="jqm-contact-action-grid">
-		<div class="grid-left">
-			<a href="tel:${ phoneNumber.phoneNumber }" class="jqm-button">Call</a>
+	<div class="contactActionGrid ui-grid-a">
+		<div class="ui-block-a">
+			<a href="tel:${ phoneNumber.phoneNumber }" class="callContactButton" data-role="button" data-inline="true">Call</a>
 		</div>
-		<div class="grid-right">
-			<a href="mailto:<c:out value="${ emailAddress.emailAddress }"/>" class="jqm-button">Email</a>
-		</div>
-		<div class="clear"></div>
+		<div class="ui-block-b">
+			<a href="mailto:<c:out value="${ emailAddress.emailAddress }"/>" class="emailContactButton" data-role="button" data-inline="true">Email</a>
+		</div>	   
 	</div>
 
 	<div class="clear"></div>
