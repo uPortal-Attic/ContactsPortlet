@@ -19,10 +19,10 @@
 
 package org.jasig.portlet.contacts.adapters.impl.ldap;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.naming.NamingException;
-import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
 
 import org.apache.commons.logging.Log;
@@ -31,12 +31,12 @@ import org.jasig.portlet.contacts.adapters.impl.AbstractSearchAdapter;
 import org.jasig.portlet.contacts.model.Contact;
 import org.jasig.portlet.contacts.model.ContactSet;
 import org.jasig.portlet.contacts.model.ModelObjectFactory;
-import org.jasig.portlet.contacts.model.util.ContactMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
+import org.springframework.ldap.filter.CompareFilter;
 import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.filter.OrFilter;
 import org.springframework.ldap.filter.WhitespaceWildcardsFilter;
@@ -62,6 +62,11 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         this.ldapTemplate = ldapTemplate;
     }
 
+    private Set<CompareFilter> ldapSearchFilter = new HashSet<CompareFilter>();
+    public void setLdapSearchFilters(Set<CompareFilter> filter) {
+        this.ldapSearchFilter = filter;
+    }
+    
     public void setTimeLimit(int timeLimit) {
         this.timeLimit = timeLimit;
     }
@@ -125,6 +130,12 @@ public class LdapSearchAdapter extends AbstractSearchAdapter {
         AndFilter andFilter = new AndFilter();
         andFilter.and(new EqualsFilter("objectclass", "person"));
         andFilter.and(new WhitespaceWildcardsFilter(searchAttribute, searchValue));
+        
+        for (CompareFilter filter : ldapSearchFilter) {
+            andFilter.and(filter);
+        }
+        
+        
         logger.debug("SEARCH CONSTRUCT :: "+searchValue+" :: "+searchFilter);
         if(filters != null && searchFilter != null) {
             List<String> filter = (List<String>) filters.get(searchFilter);
