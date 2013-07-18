@@ -148,7 +148,7 @@
             
             
         </div>
-        <p>
+        <p class="version">
             <spring:message code="version.label"/> : ${appversion}
         </p>
     </div> <!-- end: portlet-body -->

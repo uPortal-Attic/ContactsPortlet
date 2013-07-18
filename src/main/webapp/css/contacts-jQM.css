@@ -68,3 +68,6 @@
     display: block;
     float: right;
 }
+.org-jasig-portlet-contacts .version {
+    display: none;
+}
