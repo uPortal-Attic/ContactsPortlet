@@ -98,7 +98,30 @@ public class SetViewController {
 
     }
 
+    @ResourceMapping("getContact")
+    public String getContact(
+            ResourceRequest request,
+            @RequestParam("urn") String urn,
+            @RequestParam("domain") String domain,
+            @ModelAttribute("domain") ContactDomain domainObj,
+            Model model
+    ) {
     
+        ContactSet contacts = new ContactSet();
+        contacts.add(domainObj.getContact(urn));
+        
+        model.addAttribute("domain", domainObj);
+        model.addAttribute("source", "search");
+        model.addAttribute("urn", urn);
+        
+        model.addAttribute("contactList", contacts);
+        
+        if (viewSelector.isMobile(request))
+            return "setView-jQM";
+        else
+            return "setView";
+        
+    }
     @ResourceMapping("search")
     public String searchDomain(
             ResourceRequest request,

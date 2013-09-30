@@ -117,10 +117,21 @@
 	padding:1em;
 }
 
+
+.org-jasig-portlet-contacts .jqm-contact .contact-photo{
+	float:left;
+	background-color:transparent;
+	background-size: contain; 
+    background-repeat: no-repeat; 
+    height:124px; 
+    width:124px;
+    margin-right:1em;
+}
 .org-jasig-portlet-contacts .contact-photo.jqm-contact-image-holder > img {
 	float:left;
 	border-radius: 1em;
 	-moz-border-radius: 1em;
+        height: 100%;
 }
 
 /* mobile contact call to action styeles */

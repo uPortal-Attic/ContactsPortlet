@@ -25,9 +25,8 @@
 
 <div class="contactListView" title="${contact.title} ${contact.firstname} ${contact.surname}">
 	
-	<portlet:resourceURL id="search" var="searchURL">
-        <portlet:param name="filter" value="${searchFilter}"/>
-        <portlet:param name="term" value="${contact.firstname} ${contact.surname}"/>
+	<portlet:resourceURL id="getContact" var="searchURL">
+        <portlet:param name="urn" value="${contact.URN}"/>
         <portlet:param name="domain" value="${domain.id}"/>
         <portlet:param name="nspace" value="${NSPACE}"/>
     </portlet:resourceURL>

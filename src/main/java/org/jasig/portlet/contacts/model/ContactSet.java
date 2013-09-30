@@ -31,7 +31,7 @@ import org.jasig.portlet.contacts.model.util.ContactComparator;
  *
  * @author chris
  */
-public class ContactSet extends TreeSet<Contact> implements Serializable {
+public class ContactSet extends TreeSet<Contact> implements Serializable, Comparable<ContactSet> {
     
     private String setId;
     private String setTitle;
@@ -57,6 +57,17 @@ public class ContactSet extends TreeSet<Contact> implements Serializable {
     
     public ContactSet(ContactComparator comparator) {
         super(comparator);
+    }
+
+    @Override
+    public int compareTo(ContactSet o) {
+        int compare = setTitle.compareTo(o.getTitle());
+        if (compare == 0)
+            compare = setId.compareTo(o.setId);
+        if (compare == 0)
+            compare = this.size() - o.size();
+        
+        return compare;
     }
         
 }
