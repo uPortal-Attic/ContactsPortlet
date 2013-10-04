@@ -37,7 +37,7 @@
     <h3 class="portlet-note info-message" role="heading" ><spring:message code="edit.mode.heading"/></h3>
     
     <c:if test="${saved}">
-        <p class="portlet-msg-success">Preferences Saved</p>
+        <p class="portlet-msg-success"><spring:message code="edit.mode.success"/></p>
     </c:if>
     
     <div  role="region">
