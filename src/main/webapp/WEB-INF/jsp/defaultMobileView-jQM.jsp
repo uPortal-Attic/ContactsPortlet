@@ -96,7 +96,7 @@
                        
                        <form  action="${searchURL}" class="searchForm" method="post">
                        <div class="mobile-search-form">
-                          <input class="searchBox mobile-search-box" id="${NSPACE}${domainName}Search" type="search" name="searchtext" rel="${domain.id}" value="Enter Name"/>
+                          <input class="searchBox mobile-search-box" id="${NSPACE}${domainName}Search" type="search" name="searchtext" rel="${domain.id}" value="<spring:message code="search.input.name"/>"/>
                           <div class="mobile-search-options hidden">
                           	<select name="filter" data-native-menu="false">
 	                              <c:forEach items="${ domain.searchFilters }" var="filter" varStatus="status">
