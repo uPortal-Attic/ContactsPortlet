@@ -36,6 +36,10 @@
     <listener>
         <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
     </listener>
+    <!-- Needed to remove JMX registration and allow for classloader GC -->
+    <listener>
+        <listener-class>ch.qos.logback.classic.selector.servlet.ContextDetachingSCL</listener-class>
+    </listener>
     <!-- Spring Context start up -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
