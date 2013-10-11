@@ -94,7 +94,7 @@
                    <!--  domain search form -->
                    <form  action="${searchURL}" class="searchForm mobile-search-form" method="post">
                        
-                       <form  action="${searchURL}" class="searchForm" method="post">
+                       <form  action="${searchURL}" class="searchForm form-inline" method="post">
                        <div class="mobile-search-form">
                           <input class="searchBox mobile-search-box" id="${NSPACE}${domainName}Search" type="search" name="searchtext" rel="${domain.id}" value="Enter Name"/>
                           <div class="mobile-search-options hidden">
