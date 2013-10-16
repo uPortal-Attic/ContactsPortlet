@@ -79,7 +79,7 @@
         <div id="${NSPACE}${domainName}" class="setContainer" style="display: none;">
         
             <div data-role="header" class="titlebar portlet-titlebar">
-                <a href="javascript:;" class="backButton" data-role="button" data-icon="back" data-inline="true">Back</a>
+                <a href="javascript:;" class="backButton" data-role="button" data-icon="back" data-inline="true"><spring:message code="back"/></a>
                 <h1 class="title">${domain.name}</h1>
             </div>
             <c:if test="${ domain.hasSearch }">
@@ -96,7 +96,7 @@
                        
                        <form  action="${searchURL}" class="searchForm form-inline" method="post">
                        <div class="mobile-search-form">
-                          <input class="searchBox mobile-search-box" id="${NSPACE}${domainName}Search" type="search" name="searchtext" rel="${domain.id}" value="Enter Name"/>
+                          <input class="searchBox mobile-search-box" id="${NSPACE}${domainName}Search" type="search" name="searchtext" rel="${domain.id}" value="<spring:message code="search.input.name"/>"/>
                           <div class="mobile-search-options hidden">
                           	<select name="filter" data-native-menu="false">
 	                              <c:forEach items="${ domain.searchFilters }" var="filter" varStatus="status">
@@ -135,11 +135,11 @@
 
     <div id="${NSPACE}contactContainer" class="contactList" style="display: none;">
         <div data-role="header" class="titlebar portlet-titlebar searchResultsTitleBar">
-            <a href="javascript:;" class="contactBackButton" data-role="button" data-icon="back" data-inline="true">Back</a>
+            <a href="javascript:;" class="contactBackButton" data-role="button" data-icon="back" data-inline="true"><spring:message code="back"/></a>
             <h1 class="title"></h1>
         </div>
         <div data-role="header" class="titlebar portlet-titlebar contactListTitleBar">
-           	<a href="javascript:;" class="contactListBackButton" data-role="button" data-icon="back" data-inline="true">Back</a>
+           	<a href="javascript:;" class="contactListBackButton" data-role="button" data-icon="back" data-inline="true"><spring:message code="back"/></a>
            	<h1 class="title detailsHeader"></h1>
        	</div>
         <div class="mobile-list-view">

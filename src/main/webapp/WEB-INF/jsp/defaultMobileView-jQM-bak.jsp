@@ -79,7 +79,7 @@
         <div id="${NSPACE}${domainName}" class="setContainer" style="display: none;">
         
             <div data-role="header" class="titlebar portlet-titlebar">
-                <a href="javascript:;" class="backButton" data-role="button" data-icon="back" data-inline="true">Back</a>
+                <a href="javascript:;" class="backButton" data-role="button" data-icon="back" data-inline="true"><spring:message code="back"/></a>
                 <h1 class="title">${domain.name}</h1>
             </div>
             <c:if test="${ domain.hasSearch }">
@@ -127,7 +127,7 @@
 
     <div id="${NSPACE}contactContainer" class="contactList" style="display: none;">
         <div data-role="header" class="titlebar portlet-titlebar">
-            <a href="javascript:;" class="contactBackButton" data-role="button" data-icon="back" data-inline="true">Back</a>
+            <a href="javascript:;" class="contactBackButton" data-role="button" data-icon="back" data-inline="true"><spring:message code="back"/></a>
             <h1 class="title"></h1>
         </div>
         <div>
