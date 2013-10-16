@@ -65,10 +65,10 @@
 	
 	<div class="jqm-contact-action-grid">
 		<div class="grid-left">
-			<a href="tel:${ phoneNumber.phoneNumber }" class="jqm-button">Call</a>
+			<a href="tel:${ contact.primaryPhoneNumber.phoneNumber }" class="jqm-button">Call</a>
 		</div>
 		<div class="grid-right">
-			<a href="mailto:<c:out value="${ emailAddress.emailAddress }"/>" class="jqm-button">Email</a>
+			<a href="mailto:<c:out value="${ contact.primaryEmailAddress.emailAddress }"/>" class="jqm-button">Email</a>
 		</div>
 		<div class="clear"></div>
 	</div>
