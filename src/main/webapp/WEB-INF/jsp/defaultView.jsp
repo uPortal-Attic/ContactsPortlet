@@ -61,7 +61,7 @@
 
 <div id="${NSPACE}Root" class="org-jasig-portlet-contacts fl-widget portlet" role="section">
     <div class="fl-widget-content portlet-body" role="main">
-        
+
         <div id="${NSPACE}contact-domains">
             <ul>
                 <c:forEach items="${domains}" var="domain">
@@ -74,11 +74,11 @@
                             <li><a href="#${NSPACE}${domainName}">${domain.name}</a></li>
                         </c:otherwise>
                     </c:choose>
-                    
+
                 </c:forEach>
             </ul>
-           
-            
+
+
             <c:forEach items="${domains}" var="domain">
                 <c:set var="domainName" value="${ fn:replace(domain.name,' ','') }"/>
 
@@ -86,15 +86,15 @@
 
                     <c:if test="${ domain.hasSearch }">
 
-                        
+
                         <portlet:resourceURL id="search" var="searchURL">
                             <portlet:param name="filter" value="||FILTER||"/>
                             <portlet:param name="term" value="||TERM||"/>
                             <portlet:param name="domain" value="${domain.id}"/>
                             <portlet:param name="nspace" value="${NSPACE}"/>
                         </portlet:resourceURL>
-                        
-                        <form  action="${searchURL}" class="searchForm" method="post">
+
+                        <form  action="${searchURL}" class="searchForm form-inline" method="post">
                             <p>
                                 <c:forEach items="${ domain.searchFilters }" var="filter" varStatus="status">
                                     <input type="radio" name="filter" value="${filter}" <c:if test="${ status.index == 0 }">checked="checked"</c:if> /> ${filter}&nbsp;&nbsp;&nbsp;&nbsp;
@@ -102,16 +102,16 @@
                             </p>
                             <p>
                                 <input class="searchBox" id="${NSPACE}${domainName}Search" type="text" name="searchtext" rel="${domain.id}" size="50"/>
-                                
+
                                 <input type="button" value="<spring:message code="search.button.name"/>" class="searchButton"/>
                             </p>
                         </form>
-                        
+
                     </c:if>
 
                     <div class="results-area ui-widget">
                             <%-- results loaded here --%>
-                            
+
                         <c:if test="${ domain.id == activeDomain && selectedContact != null }" >
                             <c:set var="contact" value="${selectedContact}"/>
                             <c:set var="source" value="${selectedContact.URN}"/>
@@ -121,7 +121,7 @@
                         </c:if>
 
                     </div>
-                    
+
                     <c:if test="${ domain.hasPush }">
                         <div class="accordion">
                             <c:forEach var="entry" items="${domain.contactGroups}">
@@ -143,10 +143,10 @@
 
                     </c:if>
 
-                </div>    
+                </div>
             </c:forEach>
-            
-            
+
+
         </div>
         <p>
             <spring:message code="version.label"/> : ${appversion}

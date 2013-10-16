@@ -46,7 +46,7 @@
     </form:form>
 
     <c:if test="${activeSaved}">
-        <p class="portlet-msg-success">Availability Saved!</p>
+        <p class="portlet-msg-success"><spring:message code="config.mode.active.success"/></p>
     </c:if>
     
 
@@ -68,10 +68,10 @@
     </form:form>
 
     <c:if test="${defaultSaved}">
-        <p class="portlet-msg-success">Defaults Saved!</p>
+        <p class="portlet-msg-success"><spring:message code="config.mode.default.success"/></p>
     </c:if>
     
 
     <portlet:renderURL portletMode="VIEW" var="returnLink"/>
-    <p><a href="${returnLink}" class="portlet-button">Finish</a></p>
+    <p><a href="${returnLink}" class="portlet-button"><spring:message code="return"/></a></p>
 </div>
