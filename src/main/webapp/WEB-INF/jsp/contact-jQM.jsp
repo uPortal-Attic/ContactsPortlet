@@ -65,10 +65,10 @@
 	
 	<div class="jqm-contact-action-grid">
 		<div class="grid-left">
-			<a href="tel:${ phoneNumber.phoneNumber }" class="jqm-button">Call</a>
+			<a href="tel:${ phoneNumber.phoneNumber }" class="jqm-button"><spring:message code="contact.call"/></a>
 		</div>
 		<div class="grid-right">
-			<a href="mailto:<c:out value="${ emailAddress.emailAddress }"/>" class="jqm-button">Email</a>
+			<a href="mailto:<c:out value="${ emailAddress.emailAddress }"/>" class="jqm-button"><spring:message code="contact.email"/></a>
 		</div>
 		<div class="clear"></div>
 	</div>
