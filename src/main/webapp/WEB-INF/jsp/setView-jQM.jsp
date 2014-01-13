@@ -24,23 +24,11 @@
 
 <c:set var="BASEURL"><c:url value="/"/></c:set>
 
-<c:choose>
-	<c:when test="${fn:length(contactList) > 1}">
-		<c:forEach var="contact" items="${contactList}">
-		    <li class="contactListViewLi">
-		        <jsp:directive.include file="/WEB-INF/jsp/contactListView-jQM.jsp"/>
-		    </li>
-		</c:forEach>
-	</c:when>
-	<c:otherwise>
-			<c:forEach var="contact" items="${contactList}">
-				<ul>
-					<li>
-				        <jsp:directive.include file="/WEB-INF/jsp/contact-jQM.jsp"/>
-				    </li>
-				</ul>
-			</c:forEach>
-	</c:otherwise>
-</c:choose>
+    
+    <c:forEach var="contact" items="${contactList}">
 
-            
+        <li>
+            <jsp:directive.include file="/WEB-INF/jsp/contact-jQM.jsp"/>
+        </li>
+
+    </c:forEach>

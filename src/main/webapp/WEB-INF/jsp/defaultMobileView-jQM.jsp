@@ -147,14 +147,9 @@
             	
             </ul>
         </div>
-        <div class="mobile-single-contact-view">
-        	
-        </div>
     </div>
 
-    <p>
-        <spring:message code="version.label"/> : ${appversion}
-    </p>
+  
 
 </div> <!-- end: portlet-body -->
 

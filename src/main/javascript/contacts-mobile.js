@@ -22,172 +22,164 @@ PORTLET_JS_CONTROL = function(opts) {
     var nspace = opts.nspace;
     var baseUrl = opts.baseUrl;
     var rootID = opts.rootID;
-    
+
     var autocomplete = opts.autocomplete;
-    
+
     var messages = opts.messages;
-    
+
     var context = this;
-    
+
     var $ = this.jQuery;
     var $id = context.$id;
     var $class = context.$class;
-    
+
     /*
-    var selectedDomain = $("li", $id("contact-domains")).index("li[rel='selected']");
-    selectedDomain = selectedDomain < 0 ? 0 : selectedDomain;
-    $id("contact-domains").tabs({
-        selected: selectedDomain
-    });
-    */
-    
+     var selectedDomain = $("li", $id("contact-domains")).index("li[rel='selected']");
+     selectedDomain = selectedDomain < 0 ? 0 : selectedDomain;
+     $id("contact-domains").tabs({
+     selected: selectedDomain
+     });
+     */
+
     $(".contactDomain a").click(function() {
-        $("#"+nspace+"domainsContainer").hide();
-        $('#'+$(this).attr("rel")).show();
+        $("#" + nspace + "domainsContainer").hide();
+        $('#' + $(this).attr("rel")).show();
     });
-    
+
     $(".contactSet a").click(function() {
         $(".setContainer").hide();
         var domain = $(this).closest(".contact-domain");
-        $("#"+nspace+"contactContainer ul").empty();
-        $("#"+nspace+"contactContainer div[data-role=header] h1").html($(this).text());
-        $("#"+nspace+"contactContainer ul").load($(this).attr("rel"), function() {
-            $("#"+nspace+"contactContainer ul").listview({});
-            $("#"+nspace+"contactContainer").trigger("ContactsLoaded");
+        $("#" + nspace + "contactContainer ul").empty();
+        $("#" + nspace + "contactContainer div[data-role=header] h1").html($(this).text());
+        $("#" + nspace + "contactContainer ul").load($(this).attr("rel"), function() {
+            $("#" + nspace + "contactContainer ul").listview({});
+            $("#" + nspace + "contactContainer").trigger("ContactsLoaded");
             $(document).trigger('mobileinit');
         });
-        $("#"+nspace+"contactContainer").show();
-        
+        $("#" + nspace + "contactContainer").show();
+
     });
-    
+
     $(".setContainer .backButton").click(function() {
         $(".setContainer").hide();
-        $("#"+nspace+"domainsContainer").show();
+        $("#" + nspace + "domainsContainer").show();
     });
-    
-    $("#"+nspace+"contactContainer .contactBackButton").click(function(){
-        $("#"+nspace+"contactContainer").hide();
-        $("#"+nspace+"domainsContainer").show();
+
+    $("#" + nspace + "contactContainer .contactBackButton").click(function() {
+        $("#" + nspace + "contactContainer").hide();
+        $("#" + nspace + "domainsContainer").show();
     });
- 
-    $("#"+nspace+"contactContainer .contactListBackButton").click(function(){
-    	$("#"+nspace+"contactContainer .contactListTitleBar").hide();
-        $("#"+nspace+"contactContainer .mobile-single-contact-view").hide();
-        $("#"+nspace+"contactContainer .searchResultsTitleBar").show();
-        $("#"+nspace+"contactContainer .mobile-list-view").show();
+
+    $("#" + nspace + "contactContainer .contactListBackButton").click(function() {
+        $("#" + nspace + "contactContainer .contactListTitleBar").hide();
+        $("#" + nspace + "contactContainer .searchResultsTitleBar").show();
+        $("#" + nspace + "contactContainer .mobile-list-view").show();
     });
-    
-    $("#"+rootID).delegate("#"+nspace+"contactContainer", "ContactsLoaded", function() {
+
+    $("#" + rootID).delegate("#" + nspace + "contactContainer", "ContactsLoaded", function() {
         $("ul", $(this)).each(function(index, el) {
-            if(loadPhotos($(el)))
+            if (loadPhotos($(el)))
                 $(el).scroll(function(evnt) {
                     if (!loadPhotos($(el)))
                         $(el).unbind(evnt);
                 });
         });
-        
+
     });
     var lastLoaded = 0;
     function loadPhotos(resultsArea) {
         var res = false;
-        
+
         $(".contact-photo:empty", resultsArea).each(function(index, el) {
             res = true;
-            var relPos = resultsArea.outerHeight() +100;
+            var relPos = resultsArea.outerHeight() + 100;
             var offset = $(el).position().top;
-            if( offset < -100) {
+            if (offset < -100) {
                 return true;
-            } else if ( offset > relPos ) {
+            } else if (offset > relPos) {
                 return false;
             } else {
                 var img = $("<img/>")
-                .error( function () {
-                    $(this).attr("src", baseUrl + "/images/image_unavailable.jpg");
-                })
-                .load( function () {
-                    $(this).fadeIn();
-                })
-                .attr("src", $(el).attr("rel"))
-                .css("display", "none");
+                        .error(function() {
+                            $(this).attr("src", baseUrl + "/images/image_unavailable.jpg");
+                        })
+                        .load(function() {
+                            $(this).fadeIn();
+                        })
+                        .attr("src", $(el).attr("rel"))
+                        .css("display", "none");
 
                 $(el).append(img);
             }
-            
+
         });
-        
+
         return res;
-        
+
     }
 
 
-    $("#"+rootID+" .searchButton").click(function () {
+    $("#" + rootID + " .searchButton").click(function() {
 
-		var domain = $(this).closest(".setContainer");
-		var resultsArea = $("#"+nspace+"contactContainer ul");
+        var domain = $(this).closest(".setContainer");
+        var resultsArea = $("#" + nspace + "contactContainer ul");
 
-		var term = $("input[name=searchtext]", domain).val();
-		var filter = $("select[name=filter]", domain).val();
+        var term = $("input[name=searchtext]", domain).val();
+        var filter = $("select[name=filter]", domain).val();
 
-		var url = $(this).closest(".searchForm").attr("action");
-		url = url.replace(encodeURIComponent("||FILTER||"), encodeURIComponent(filter));
-		url = url.replace(encodeURIComponent("||TERM||"), encodeURIComponent(term));
-        
+        var url = $(this).closest(".searchForm").attr("action");
+        url = url.replace(encodeURIComponent("||FILTER||"), encodeURIComponent(filter));
+        url = url.replace(encodeURIComponent("||TERM||"), encodeURIComponent(term));
+
         resultsArea.contents().remove();
 
         resultsArea.load(url, function() {
             //domain.trigger("ContactsLoaded");
             domain.hide();
-            $("#"+nspace+"contactContainer div[data-role=header] h1").html("Search "+filter+" : "+term);
-            $("#"+nspace+"contactContainer").trigger("ContactsLoaded");
-            $("#"+nspace+"contactContainer").trigger("RegisterContacts");
+            $("#" + nspace + "contactContainer div[data-role=header] h1").html("Search " + filter + " : " + term);
+            $("#" + nspace + "contactContainer").trigger("ContactsLoaded");
+            $("#" + nspace + "contactContainer").trigger("RegisterContacts");
             //show the results pane
-            $("#"+nspace+"contactContainer").show();
+            $("#" + nspace + "contactContainer").show();
             //hide all single view and navigation elements
-    		$("#"+nspace+"contactContainer .mobile-single-contact-view").hide();
-    		$("#"+nspace+"contactContainer .contactListTitleBar").hide();
-        });        
-        
+            $("#" + nspace + "contactContainer .contactListTitleBar").hide();
+        });
+
         return false;
     });
-    
-   $("#"+rootID+" .searchBox").focus(function(){
-	   this.value="";
-	   $("#"+rootID+" .mobile-search-options").show("slideDown");
-   });
-   
-   $(window).bind('orientationchange', function(){
-	   if($.event.special.orientationchange.orientation() == "portrait"){
-		   $("#"+rootID+" .ui-input-search").css("width","77%");
-	   }else{
-		   $("#"+rootID+" .ui-input-search").css("width","85%");
-	   }
-   });
-   
-   $("#"+rootID).delegate("#"+nspace+"contactContainer", "RegisterContacts", function() {
-       $(".contactDetailsLink").each(function(){
-    	   $(this).bind('click', function(){
-    		   var url = $(this).attr('rel');
-    		   var resultsArea = $("#"+nspace+"contactContainer .mobile-single-contact-view");
-    		   
-    		   resultsArea.load(url, function(){
-    			   $("#"+nspace+"contactContainer .searchResultsTitleBar").hide();
-    			   $("#"+nspace+"contactContainer .mobile-list-view").hide();
-    			   $("#"+nspace+"contactContainer").trigger("ContactsLoaded");
-    			   $("#"+nspace+"contactContainer .contactListTitleBar h1").html("Viewing Contact Details");
-    			   $("#"+nspace+"contactContainer .contactListTitleBar").show();
-    			   resultsArea.show();
-    		   });
-    	   });
-       });
-   });
-    
-	
-/*
-    $("#"+rootID+" .contact-domain").delegate(".contact-photo", "appear", function() {
-        var img = $(this).attr("rel");
-        $(this).attr("style", "background-image: url('"+img+"')");
+
+    $("#" + rootID + " .searchBox").focus(function() {
+        this.value = "";
+        $("#" + rootID + " .mobile-search-options").show("slideDown");
     });
-    */
+
+    $(window).bind('orientationchange', function() {
+        if ($.event.special.orientationchange.orientation() == "portrait") {
+            $("#" + rootID + " .ui-input-search").css("width", "77%");
+        } else {
+            $("#" + rootID + " .ui-input-search").css("width", "85%");
+        }
+    });
+
+    $("#" + rootID).delegate("#" + nspace + "contactContainer", "RegisterContacts", function() {
+        $(".contactDetailsLink").each(function() {
+            $(this).bind('click', function() {
+                var url = $(this).attr('rel');
+                var resultsArea = $("#" + nspace + "contactContainer .mobile-single-contact-view");
+
+                resultsArea.load(url, function() {
+                    $("#" + nspace + "contactContainer .searchResultsTitleBar").hide();
+                    $("#" + nspace + "contactContainer .mobile-list-view").hide();
+                    $("#" + nspace + "contactContainer").trigger("ContactsLoaded");
+                    $("#" + nspace + "contactContainer .contactListTitleBar h1").html("Viewing Contact Details");
+                    $("#" + nspace + "contactContainer .contactListTitleBar").show();
+                    resultsArea.show();
+                });
+            });
+        });
+    });
+
+
 };
 
-                   
+
