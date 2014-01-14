@@ -33,22 +33,16 @@ PORTLET_JS_CONTROL = function(opts) {
     var $id = context.$id;
     var $class = context.$class;
 
-    /*
-     var selectedDomain = $("li", $id("contact-domains")).index("li[rel='selected']");
-     selectedDomain = selectedDomain < 0 ? 0 : selectedDomain;
-     $id("contact-domains").tabs({
-     selected: selectedDomain
-     });
-     */
-
     $(".contactDomain a").click(function() {
         $("#" + nspace + "domainsContainer").hide();
         $('#' + $(this).attr("rel")).show();
     });
 
     $(".contactSet a").click(function() {
-        $(".setContainer").hide();
-        var domain = $(this).closest(".contact-domain");
+//        $(".domainsContainer").hide();
+
+        $("#"+nspace+"setsContainer").hide();
+        
         $("#" + nspace + "contactContainer ul").empty();
         $("#" + nspace + "contactContainer div[data-role=header] h1").html($(this).text());
         $("#" + nspace + "contactContainer ul").load($(this).attr("rel"), function() {
@@ -65,15 +59,13 @@ PORTLET_JS_CONTROL = function(opts) {
         $("#" + nspace + "domainsContainer").show();
     });
 
-    $("#" + nspace + "contactContainer .contactBackButton").click(function() {
-        $("#" + nspace + "contactContainer").hide();
-        $("#" + nspace + "domainsContainer").show();
-    });
-
     $("#" + nspace + "contactContainer .contactListBackButton").click(function() {
-        $("#" + nspace + "contactContainer .contactListTitleBar").hide();
-        $("#" + nspace + "contactContainer .searchResultsTitleBar").show();
-        $("#" + nspace + "contactContainer .mobile-list-view").show();
+        $("#" + nspace + "contactContainer").hide();
+        $("#" + nspace + "setsContainer").show();
+        if ($("#" + nspace + "setsContainer > *:visible").length === 0) {
+            $("#" + nspace + "domainsContainer").show();
+        }
+            
     });
 
     $("#" + rootID).delegate("#" + nspace + "contactContainer", "ContactsLoaded", function() {
@@ -134,15 +126,13 @@ PORTLET_JS_CONTROL = function(opts) {
         resultsArea.contents().remove();
 
         resultsArea.load(url, function() {
-            //domain.trigger("ContactsLoaded");
-            domain.hide();
+            $('#'+nspace+'setsContainer').hide();
             $("#" + nspace + "contactContainer div[data-role=header] h1").html("Search " + filter + " : " + term);
             $("#" + nspace + "contactContainer").trigger("ContactsLoaded");
             $("#" + nspace + "contactContainer").trigger("RegisterContacts");
             //show the results pane
             $("#" + nspace + "contactContainer").show();
-            //hide all single view and navigation elements
-            $("#" + nspace + "contactContainer .contactListTitleBar").hide();
+            
         });
 
         return false;

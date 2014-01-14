@@ -74,6 +74,7 @@
         </div>
     </div>
         
+        <div id="${NSPACE}setsContainer">
     <c:forEach items="${domains}" var="domain">
         <c:set var="domainName" value="${ fn:replace(domain.name,' ','') }"/>
         <div id="${NSPACE}${domainName}" class="setContainer" style="display: none;">
@@ -132,12 +133,10 @@
         </div>
         
     </c:forEach>
-
-    <div id="${NSPACE}contactContainer" class="contactList" style="display: none;">
-        <div data-role="header" class="titlebar portlet-titlebar searchResultsTitleBar">
-            <a href="javascript:;" class="contactBackButton" data-role="button" data-icon="back" data-inline="true"><spring:message code="back"/></a>
-            <h1 class="title"></h1>
         </div>
+    
+    <div id="${NSPACE}contactContainer" class="contactList" style="display: none;">
+
         <div data-role="header" class="titlebar portlet-titlebar contactListTitleBar">
            	<a href="javascript:;" class="contactListBackButton" data-role="button" data-icon="back" data-inline="true"><spring:message code="back"/></a>
            	<h1 class="title detailsHeader"></h1>
